@@ -134,8 +134,8 @@ export default async function RootLayout({ children }) {
   const customHtmlTags = settings.custom_html_tags || '';
 
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable} ${activeThemeClass}`}>
-      <head>
+    <html lang="en" className={`${inter.variable} ${outfit.variable} ${activeThemeClass}`} suppressHydrationWarning>
+      <head suppressHydrationWarning>
         {customHtmlTags && (
           <script
             id="custom-html-tags-injector"
@@ -160,7 +160,7 @@ export default async function RootLayout({ children }) {
           />
         )}
       </head>
-      <body className="font-body antialiased">
+      <body className="font-body antialiased" suppressHydrationWarning>
         <CartProvider>
           {children}
           <CartDrawer />

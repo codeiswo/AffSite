@@ -47,9 +47,11 @@ export default function AdminLayout({ children }) {
   const [siteName, setSiteName] = useState('FiltersPro');
   const [siteLogo, setSiteLogo] = useState('');
   const [lang, setLang] = useState('zh');
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
+    setMounted(true);
     // Sync language selection
     const storedLang = localStorage.getItem('admin_lang') || 'zh';
     setLang(storedLang);
@@ -94,6 +96,14 @@ export default function AdminLayout({ children }) {
   // Don't show admin layout on login page
   if (pathname === '/admin/login') {
     return <>{children}</>;
+  }
+
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
   }
 
   return (
