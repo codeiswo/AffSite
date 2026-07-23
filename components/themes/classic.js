@@ -447,11 +447,22 @@ export function ProductListPage({ products = [], categories = [], brands = [], s
 // ============================================
 // 3. PRODUCT DETAIL PAGE (Outbound Partner Link)
 // ============================================
-export function ProductDetailPage({ product, relatedProducts = [] }) {
+export function ProductDetailPage({ product = {}, relatedProducts = [] }) {
   const [copied, setCopied] = useState(false);
-  const gallery = Array.isArray(product.gallery) ? product.gallery : (typeof product.gallery === 'string' ? JSON.parse(product.gallery || '[]') : []);
+
+  let gallery = [];
+  try {
+    if (Array.isArray(product.gallery)) gallery = product.gallery;
+    else if (typeof product.gallery === 'string' && product.gallery.trim()) gallery = JSON.parse(product.gallery);
+  } catch (_) { gallery = []; }
+
   const allImages = [product.image_url, ...gallery].filter(Boolean);
-  const features = Array.isArray(product.features) ? product.features : (typeof product.features === 'string' ? JSON.parse(product.features || '[]') : []);
+
+  let features = [];
+  try {
+    if (Array.isArray(product.features)) features = product.features;
+    else if (typeof product.features === 'string' && product.features.trim()) features = JSON.parse(product.features);
+  } catch (_) { features = []; }
 
   const discount = product.compare_price ? Math.round((1 - product.price / product.compare_price) * 100) : 0;
   const affiliateUrl = product.affiliate_link || '#';
