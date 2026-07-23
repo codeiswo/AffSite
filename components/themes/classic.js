@@ -13,10 +13,63 @@ import { formatPrice } from '@/lib/utils';
 // 1. HOMEPAGE
 // ============================================
 export function Homepage({ settings, featuredProducts }) {
+  const [calcSpend, setCalcSpend] = useState(500);
+  const [calcRate, setCalcRate] = useState(12); // 12%
+  const [calcStore, setCalcStore] = useState('Nike');
+  const [copiedCode, setCopiedCode] = useState('');
+
+  const stores = [
+    { name: 'Burberry', rate: 15, coupon: 'LUXURY15', desc: '15% Rebate + $50 Voucher' },
+    { name: 'Nike', rate: 12, coupon: 'NIKE20', desc: '12% Rebate + $20 Off' },
+    { name: 'ZARA', rate: 10, coupon: 'SUMMER10', desc: '10% Rebate + Free Shipping' },
+    { name: 'Sony', rate: 8, coupon: 'TECH30', desc: '8% Rebate + $30 Off' },
+    { name: "Levi's", rate: 14, coupon: 'DENIM14', desc: '14% Rebate + Extra 10%' },
+  ];
+
+  const estimatedRebate = Math.round(calcSpend * (calcRate / 100));
+
+  const handleCopy = (code) => {
+    setCopiedCode(code);
+    navigator.clipboard.writeText(code);
+    setTimeout(() => setCopiedCode(''), 2500);
+  };
+
   return (
     <>
       <Hero settings={settings} />
       <BrandWall />
+
+      {/* Category Pills Quick Bar */}
+      <section className="py-6 bg-white dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800">
+        <div className="container-custom">
+          <div className="flex items-center justify-between gap-4 overflow-x-auto pb-2 scrollbar-none">
+            {[
+              { name: 'All Categories', href: '/products', icon: Grid3X3, count: '1,500+ Deals', active: true },
+              { name: 'Apparel & Fashion (服装)', href: '/products?category=apparel', icon: ShoppingBag, count: '650+ Deals' },
+              { name: 'Electronics & Tech (数码)', href: '/products?category=digital', icon: Sparkles, count: '320+ Deals' },
+              { name: 'Home & Living (家居)', href: '/products?category=home', icon: Shield, count: '240+ Deals' },
+              { name: 'Services & Software (服务)', href: '/products?category=services', icon: Tag, count: '180+ Deals' },
+              { name: 'Beauty & Skincare (美妆)', href: '/products?category=beauty', icon: Percent, count: '150+ Deals' },
+            ].map((cat) => (
+              <Link
+                key={cat.name}
+                href={cat.href}
+                className={`flex items-center gap-2.5 px-5 py-2.5 rounded-2xl shrink-0 text-sm font-semibold transition-all duration-300 ${
+                  cat.active
+                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30'
+                    : 'bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600'
+                }`}
+              >
+                <cat.icon className="w-4 h-4" />
+                <span>{cat.name}</span>
+                <span className={`text-[10px] px-2 py-0.5 rounded-full ${cat.active ? 'bg-white/20 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'}`}>
+                  {cat.count}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Featured Products */}
       <section className="section-padding bg-surface dark:bg-surface-dark">
@@ -47,6 +100,105 @@ export function Homepage({ settings, featuredProducts }) {
               Explore All Deals & Coupons
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Rebate Savings Calculator */}
+      <section className="section-padding bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900 text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div className="absolute top-1/3 right-10 w-96 h-96 rounded-full bg-indigo-500 blur-3xl" />
+          <div className="absolute bottom-10 left-10 w-96 h-96 rounded-full bg-purple-500 blur-3xl" />
+        </div>
+
+        <div className="container-custom relative z-10">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-amber-300 text-xs font-bold uppercase tracking-wider mb-4">
+                <Sparkles className="w-4 h-4" />
+                INSTANT REBATE CALCULATOR
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white mb-4">
+                Calculate Your Cashback Savings
+              </h2>
+              <p className="text-indigo-200 text-base max-w-xl mx-auto">
+                See how much money you can save on your next shopping order with our partner merchants.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white/5 backdrop-blur-xl border border-white/15 p-8 sm:p-10 rounded-3xl shadow-2xl">
+              {/* Controls */}
+              <div className="lg:col-span-7 space-y-6">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-sm font-semibold text-indigo-200">1. Select Target Merchant Store</label>
+                    <span className="text-xs font-bold text-amber-300">{calcRate}% Cash Rebate</span>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                    {stores.map((st) => (
+                      <button
+                        key={st.name}
+                        onClick={() => {
+                          setCalcStore(st.name);
+                          setCalcRate(st.rate);
+                        }}
+                        className={`px-4 py-3 rounded-2xl border text-left transition-all cursor-pointer ${
+                          calcStore === st.name
+                            ? 'bg-indigo-600 border-indigo-400 text-white shadow-lg'
+                            : 'bg-white/5 border-white/10 text-indigo-100 hover:bg-white/10'
+                        }`}
+                      >
+                        <p className="font-bold text-sm">{st.name}</p>
+                        <p className="text-[11px] text-indigo-200">{st.rate}% Rebate</p>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-sm font-semibold text-indigo-200">2. Estimated Shopping Spend Amount</label>
+                    <span className="text-lg font-mono font-extrabold text-amber-300">${calcSpend}</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="50"
+                    max="2000"
+                    step="50"
+                    value={calcSpend}
+                    onChange={(e) => setCalcSpend(Number(e.target.value))}
+                    className="w-full h-3 bg-white/20 rounded-lg appearance-none cursor-pointer accent-amber-400"
+                  />
+                  <div className="flex justify-between text-xs text-indigo-300 mt-1 font-mono">
+                    <span>$50</span>
+                    <span>$500</span>
+                    <span>$1,000</span>
+                    <span>$2,000</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Result Output Card */}
+              <div className="lg:col-span-5 bg-gradient-to-br from-indigo-600 to-purple-700 p-8 rounded-2xl text-center space-y-4 shadow-xl border border-white/20">
+                <p className="text-xs font-bold uppercase tracking-widest text-indigo-200">ESTIMATED CASHBACK RETURN</p>
+                <div className="text-5xl sm:text-6xl font-extrabold text-amber-300 font-mono tracking-tight">
+                  +${estimatedRebate}
+                </div>
+                <p className="text-xs text-white/90 leading-relaxed">
+                  Earn <span className="font-bold text-amber-300">{calcRate}% cashback</span> on your <span className="font-bold text-white">${calcSpend}</span> order at <span className="font-bold text-white">{calcStore}</span>.
+                </p>
+
+                <div className="pt-2">
+                  <Link
+                    href="/products"
+                    className="inline-flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-xl bg-white text-indigo-950 font-bold text-sm shadow-lg hover:bg-amber-300 transition-colors"
+                  >
+                    Claim {calcStore} Rebate Deal
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

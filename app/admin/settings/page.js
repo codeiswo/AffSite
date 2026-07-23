@@ -38,7 +38,7 @@ const settingsTranslations = {
     tagline: '网站标语 (Tagline)',
     siteUrl: '网站链接 (Site URL)',
     contactEmail: '客服/联系邮箱 (Contact Email)',
-    themeLabel: '网站主题/布局皮肤 (Website Theme)',
+    themeLabel: '网站主营类目/核心主题 (Website Category / Theme)',
     
     // Hero block
     heroTitle: '首页 Banner 自定义 (Hero Area)',
@@ -412,16 +412,16 @@ export default function AdminSettingsPage() {
               onChange={e => updateSetting('site_theme', e.target.value)}
               className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-sm text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-accent/50"
             >
-              <option value="default">{lang === 'zh' ? '水之律动 (Classic Blue)' : 'Classic Blue (Water)'}</option>
-              <option value="nordic">{lang === 'zh' ? '极简北欧 (Nordic Minimalist)' : 'Nordic Minimalist (White)'}</option>
-              <option value="cyberpunk">{lang === 'zh' ? '暗黑赛博 (Cyberpunk Neon)' : 'Cyberpunk Neon (Dark)'}</option>
-              <option value="luxury">{lang === 'zh' ? '奢华黑金 (Luxury Gold & Black)' : 'Luxury Gold & Black'}</option>
-              <option value="organic">{lang === 'zh' ? '自然环保 (Organic Earth)' : 'Organic Earth (Green/Cream)'}</option>
-              <option value="editorial">{lang === 'zh' ? '报纸杂志 (Editorial Review)' : 'Editorial Review (Serif)'}</option>
-              <option value="vibrant">{lang === 'zh' ? '活力暖橙 (Vibrant Orange)' : 'Vibrant Orange (Eco)'}</option>
-              <option value="futuristic">{lang === 'zh' ? '未来科技 (Futuristic Neon Edge)' : 'Futuristic Glassmorphism'}</option>
-              <option value="bold">{lang === 'zh' ? '极简红黑 (Bold High-Contrast Red)' : 'Bold High-Contrast Red'}</option>
-              <option value="trust">{lang === 'zh' ? '专业信赖 (Corporate Slate Blue)' : 'Corporate Slate Blue (Trust)'}</option>
+              <option value="apparel">{lang === 'zh' ? '服装美妆 (Apparel & Fashion) - 默认' : 'Apparel & Fashion (Default)'}</option>
+              <option value="home">{lang === 'zh' ? '家居生活 (Home & Living)' : 'Home & Living'}</option>
+              <option value="digital">{lang === 'zh' ? '数码3C (Electronics & Digital)' : 'Electronics & Digital'}</option>
+              <option value="services">{lang === 'zh' ? '软件服务 (Services & Subscriptions)' : 'Services & Subscriptions'}</option>
+              <option value="sports">{lang === 'zh' ? '户外运动 (Sports & Outdoors)' : 'Sports & Outdoors'}</option>
+              <option value="beauty">{lang === 'zh' ? '美妆护肤 (Beauty & Skincare)' : 'Beauty & Skincare'}</option>
+              <option value="baby">{lang === 'zh' ? '母婴玩具 (Mother & Baby)' : 'Mother & Baby'}</option>
+              <option value="auto">{lang === 'zh' ? '汽车配件 (Automotive & Accessories)' : 'Automotive & Accessories'}</option>
+              <option value="jewelry">{lang === 'zh' ? '珠宝手表 (Watches & Jewelry)' : 'Watches & Jewelry'}</option>
+              <option value="food">{lang === 'zh' ? '食品饮料 (Food & Groceries)' : 'Food & Groceries'}</option>
             </select>
           </div>
         </div>
