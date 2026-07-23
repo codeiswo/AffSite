@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X, ChevronDown, Moon, Sun, ShoppingBag } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import { useCart } from './cart-context';
 import { getThemeArchetype } from '@/lib/theme';
 import siteSettings from "@/config/site-settings.json";
 
@@ -44,7 +43,6 @@ export default function Navbar({ settings = {} }) {
   const [isDark, setIsDark] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [dynamicNav, setDynamicNav] = useState(defaultNavigation);
-  const { cartCount, setIsCartOpen } = useCart();
 
   const pathname = usePathname();
   const theme = settings.site_theme || settings.theme || 'default';
@@ -242,34 +240,6 @@ export default function Navbar({ settings = {} }) {
               {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
 
-            {/* Cart Icon Toggle */}
-            <button
-              onClick={() => setIsCartOpen(true)}
-              id="navbar-cart-toggle"
-              className={`w-10 h-10 rounded-full relative flex items-center justify-center transition-all duration-300 active:scale-95 ${
-                showScrolledStyle
-                  ? 'text-gray-600 hover:text-primary hover:bg-gray-100 dark:text-gray-400 dark:hover:text-accent dark:hover:bg-white/10'
-                  : 'text-white/80 hover:text-white hover:bg-white/10'
-              }`}
-              aria-label="Open cart"
-            >
-              <ShoppingBag className="w-5 h-5" />
-              {cartCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-rose-500 text-[10px] font-bold text-white flex items-center justify-center leading-none shadow-md ring-2 ring-white dark:ring-gray-900 animate-pulse">
-                  {cartCount}
-                </span>
-              )}
-            </button>
-
-            {/* CTA Button */}
-            <Link
-              href="/products"
-              id="nav-shop-now"
-              className="hidden sm:inline-flex items-center justify-center text-sm font-semibold px-5 py-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-md hover:shadow-lg transition-all duration-300 active:scale-95"
-            >
-              Shop Now
-            </Link>
-
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -343,15 +313,6 @@ export default function Navbar({ settings = {} }) {
                 </div>
               );
             })}
-            <div className="pt-3 px-4">
-              <Link
-                href="/products"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="btn-primary w-full text-center text-sm"
-              >
-                Shop Now
-              </Link>
-            </div>
           </div>
         </div>
       )}
