@@ -111,10 +111,11 @@ export default function AdminProductsPage() {
   const [search, setSearch] = useState('');
   const [showForm, setShowForm] = useState(searchParams.get('new') === '1');
   const [editingProduct, setEditingProduct] = useState(null);
-  const [lang, setLang] = useState('zh');
+  const [categoriesList, setCategoriesList] = useState([]);
+
   const [form, setForm] = useState({
     title: '', slug: '', description: '', content: '', price: '', compare_price: '',
-    category: 'apparel', brand: '', sku: '', image_url: '', affiliate_link: '',
+    category: 'womens-clothing', brand: '', sku: '', image_url: '', affiliate_link: '',
     features: '', compatible_models: '', meta_title: '', meta_description: '',
     is_featured: false, is_active: true,
   });
@@ -126,6 +127,16 @@ export default function AdminProductsPage() {
     p.brand?.toLowerCase().includes(search.toLowerCase())
   );
 
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch('/api/categories');
+      const data = await res.json();
+      if (data.success && Array.isArray(data.categories)) {
+        setCategoriesList(data.categories);
+      }
+    } catch (_) {}
+  };
+
   const fetchProducts = async () => {
     try {
       const res = await fetch('/api/products?all=1');
@@ -135,6 +146,10 @@ export default function AdminProductsPage() {
     } catch { /* ignore */ }
     setLoading(false);
   };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   const handleSelectProduct = (id) => {
     setSelectedProductIds(prev => 
@@ -317,17 +332,23 @@ export default function AdminProductsPage() {
             <div>
               <label className="block text-xs font-medium text-gray-500 mb-1">{t.categoryLabel}</label>
               <select value={form.category} onChange={e => setForm({ ...form, category: e.target.value })}
-                className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-sm text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-accent/50">
-                <option value="apparel">服装 (Apparel & Fashion)</option>
-                <option value="digital">数码 (Electronics & Digital)</option>
-                <option value="home">家居 (Home & Living)</option>
-                <option value="services">服务 (Services & Subscriptions)</option>
-                <option value="beauty">美妆 (Beauty & Personal Care)</option>
-                <option value="baby">母婴 (Baby & Toys)</option>
-                <option value="sports">运动 (Sports & Outdoors)</option>
-                <option value="food">食品 (Food & Beverages)</option>
-                <option value="auto">汽车 (Automotive & Accessories)</option>
-                <option value="pets">宠物 (Pet Supplies)</option>
+                className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-sm text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-accent/50 cursor-pointer">
+                {categoriesList.length > 0 ? (
+                  categoriesList.map(cat => (
+                    <option key={cat.id || cat.slug} value={cat.slug}>
+                      {cat.parent_id ? `  └ ${cat.name}` : `📁 ${cat.name}`}
+                    </option>
+                  ))
+                ) : (
+                  <>
+                    <option value="womens-clothing">女装服饰 (Women's Apparel)</option>
+                    <option value="mens-clothing">男装精品 (Men's Clothing)</option>
+                    <option value="shoes-sneakers">时尚鞋靴 (Shoes & Sneakers)</option>
+                    <option value="bags-accessories">箱包配饰 (Bags & Accessories)</option>
+                    <option value="beauty-skincare">美妆护肤 (Beauty & Skincare)</option>
+                    <option value="jewelry-watches">珠宝手表 (Jewelry & Watches)</option>
+                  </>
+                )}
               </select>
             </div>
             <div>

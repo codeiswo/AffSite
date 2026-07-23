@@ -5,12 +5,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard, Layout, Package, FileText, ArrowLeftRight, Settings,
-  Menu, X, ShoppingBag, LogOut, ChevronRight, Globe
+  Menu, X, ShoppingBag, LogOut, ChevronRight, Globe, Tag
 } from 'lucide-react';
 
 const sidebarNav = [
   { key: 'dashboard', href: '/admin', icon: LayoutDashboard },
   { key: 'modules', href: '/admin/modules', icon: Layout },
+  { key: 'categories', href: '/admin/categories', icon: Tag },
   { key: 'products', href: '/admin/products', icon: Package },
   { key: 'orders', href: '/admin/orders', icon: ShoppingBag },
   { key: 'pages', href: '/admin/pages', icon: FileText },
@@ -22,6 +23,7 @@ const layoutTranslations = {
   zh: {
     dashboard: '仪表盘',
     modules: '自定义首页',
+    categories: '分类管理',
     products: '商品管理',
     orders: '订单管理',
     pages: '自定义页面',
@@ -34,6 +36,7 @@ const layoutTranslations = {
   en: {
     dashboard: 'Dashboard',
     modules: 'Homepage Layout',
+    categories: 'Categories',
     products: 'Products',
     orders: 'Orders',
     pages: 'Pages',

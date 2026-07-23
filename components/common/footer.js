@@ -1,19 +1,50 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ShoppingBag, Mail, Facebook, Twitter, Instagram, Youtube, ArrowRight, Tag } from 'lucide-react';
 import siteSettings from "@/config/site-settings.json";
 
-export default function Footer({ settings = {} }) {
+const defaultCategories = [
+  { name: "Women's Clothing (女装服饰)", href: '/products?category=womens-clothing' },
+  { name: "Men's Clothing (男装精品)", href: '/products?category=mens-clothing' },
+  { name: 'Shoes & Sneakers (时尚鞋靴)', href: '/products?category=shoes-sneakers' },
+  { name: 'Bags & Accessories (箱包配饰)', href: '/products?category=bags-accessories' },
+  { name: 'Beauty & Skincare (美妆护肤)', href: '/products?category=beauty-skincare' },
+  { name: 'Jewelry & Watches (珠宝手表)', href: '/products?category=jewelry-watches' },
+  { name: 'All Cashback Deals', href: '/products' },
+];
+
+export default function Footer({ settings = {}, categories: passedCategories }) {
   const currentYear = new Date().getFullYear();
+  const [categoriesList, setCategoriesList] = useState(defaultCategories);
+
+  useEffect(() => {
+    if (Array.isArray(passedCategories) && passedCategories.length > 0) {
+      const formatted = passedCategories.map(c => ({
+        name: c.name,
+        href: `/products?category=${c.slug}`
+      }));
+      setCategoriesList([...formatted, { name: 'All Cashback Deals', href: '/products' }]);
+    } else {
+      async function loadCats() {
+        try {
+          const res = await fetch('/api/categories');
+          const data = await res.json();
+          if (data.success && Array.isArray(data.categories) && data.categories.length > 0) {
+            const formatted = data.categories.slice(0, 6).map(c => ({
+              name: c.name,
+              href: `/products?category=${c.slug}`
+            }));
+            setCategoriesList([...formatted, { name: 'All Cashback Deals', href: '/products' }]);
+          }
+        } catch (_) {}
+      }
+      loadCats();
+    }
+  }, [passedCategories]);
 
   const footerLinks = {
-    categories: [
-      { name: 'Apparel & Fashion (服装)', href: '/products?category=apparel' },
-      { name: 'Electronics & Tech (数码)', href: '/products?category=digital' },
-      { name: 'Home & Living (家居)', href: '/products?category=home' },
-      { name: 'Beauty & Accessories (美妆)', href: '/products?category=beauty' },
-      { name: 'Sports & Outdoors (运动)', href: '/products?category=sports' },
-      { name: 'All Cashback Deals', href: '/products' },
-    ],
     brands: [
       { name: 'Nike Deals & Rebates', href: '/products?brand=Nike' },
       { name: 'ZARA Promo Coupons', href: '/products?brand=ZARA' },
@@ -87,7 +118,7 @@ export default function Footer({ settings = {} }) {
               )}
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Curated cashback deals, promo codes, and discounts across Apparel, Electronics, Home & Services. Shop partner merchants and earn instant rebates.
+              Curated cashback deals, promo codes, and discounts across Fashion, Electronics, Home & Services. Shop partner merchants and earn instant rebates.
             </p>
             <div className="flex gap-3">
               {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
@@ -102,11 +133,11 @@ export default function Footer({ settings = {} }) {
             </div>
           </div>
 
-          {/* Categories */}
+          {/* Dynamic Categories */}
           <div>
             <h3 className="text-white font-heading font-semibold text-sm uppercase tracking-wider mb-4">Categories</h3>
             <ul className="space-y-2.5">
-              {footerLinks.categories.map((link) => (
+              {categoriesList.map((link) => (
                 <li key={link.name}>
                   <Link href={link.href} className="text-sm text-gray-400 hover:text-indigo-400 transition-colors duration-300">
                     {link.name}
