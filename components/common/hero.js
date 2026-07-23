@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowRight, ShieldCheck, Tag, Sparkles, Percent, ShoppingBag } from 'lucide-react';
+import { getThemeConfig } from '@/lib/theme';
 
 export default function Hero({ settings = {} }) {
   const heroRef = useRef(null);
@@ -23,9 +24,11 @@ export default function Hero({ settings = {} }) {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const heroDesc = settings.hero_description || 'Curated fashion cashback deals & exclusive coupons from top partner brands. Save big on Apparel, Electronics, Home & Lifestyle.';
+  const themeConfig = getThemeConfig(settings.site_theme || 'default');
+  const heroDesc = settings.hero_description || themeConfig.heroSubtitle;
   const btnText = settings.hero_button_text || 'Explore Cashback Deals';
   const btnUrl = settings.hero_button_url || '/products';
+  const badgeText = themeConfig.badge || '🔥 Up to 70% Off + Instant Cashback Rebates';
 
   const renderTitle = () => {
     if (settings.hero_title) {
@@ -45,17 +48,7 @@ export default function Hero({ settings = {} }) {
       return settings.hero_title;
     }
     
-    return (
-      <>
-        Exclusive Fashion{' '}
-        <span className="relative inline-block">
-          <span className="relative z-10">Cashback Deals</span>
-          <span className="absolute -bottom-2 left-0 w-full h-3 bg-accent/30 rounded-full" />
-        </span>
-        <br />
-        & Verified Promo Codes
-      </>
-    );
+    return themeConfig.heroTitle;
   };
 
   return (
@@ -105,7 +98,7 @@ export default function Hero({ settings = {} }) {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-sm mb-8 animate-fade-in shadow-lg">
             <Sparkles className="w-4 h-4 text-amber-300" />
-            <span className="font-semibold tracking-wide">🔥 Up to 70% Off + Instant Cashback Rebates</span>
+            <span className="font-semibold tracking-wide">{badgeText}</span>
           </div>
 
           {/* Main heading */}

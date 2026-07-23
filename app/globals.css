@@ -56,82 +56,134 @@
   /* 10-THEMES DESIGN SYSTEM TOKENS DECLARATIONS             */
   /* ======================================================== */
 
-  /* 2. Nordic Minimalist Theme (nordic) */
-  .theme-nordic {
-    --background: 0 0% 98%;
+  /* 2. Nordic Minimalist & Home Theme (nordic, home, baby, food) */
+  .theme-nordic, .theme-home, .theme-baby, .theme-food {
+    --background: 40 20% 97%;
     --foreground: 220 20% 12%;
     --card: 0 0% 100%;
     --card-foreground: 220 20% 12%;
-    --primary: 0 0% 15%;
-    --secondary: 0 0% 30%;
-    --accent: 0 0% 25%;
-    --border: 220 15% 94%;
-    --ring: 0 0% 15%;
-    --gold: 30 10% 50%;
+    --primary: 150 25% 35%;
+    --secondary: 150 20% 85%;
+    --accent: 150 30% 45%;
+    --border: 40 15% 90%;
+    --ring: 150 25% 35%;
+    --gold: 35 40% 45%;
   }
-  .theme-nordic.dark {
-    --background: 220 15% 10%;
-    --foreground: 0 0% 90%;
+  .theme-nordic.dark, .theme-home.dark, .theme-baby.dark, .theme-food.dark {
+    --background: 220 15% 9%;
+    --foreground: 0 0% 92%;
     --card: 220 15% 12%;
-    --card-foreground: 0 0% 90%;
-    --primary: 0 0% 85%;
-    --secondary: 0 0% 70%;
-    --accent: 0 0% 75%;
+    --card-foreground: 0 0% 92%;
+    --primary: 150 30% 60%;
+    --secondary: 220 15% 18%;
+    --accent: 150 30% 60%;
     --border: 220 15% 16%;
-    --ring: 0 0% 85%;
-    --gold: 30 10% 60%;
+    --ring: 150 30% 60%;
+    --gold: 35 40% 55%;
   }
 
-  /* 3. Cyberpunk Dark Neon Theme (cyberpunk) */
-  .theme-cyberpunk {
-    --background: 260 60% 4%;
-    --foreground: 180 100% 92%;
-    --card: 260 50% 8%;
-    --card-foreground: 180 100% 92%;
-    --primary: 320 100% 55%;
-    --secondary: 180 100% 50%;
-    --accent: 180 100% 50%;
-    --border: 260 30% 20%;
-    --ring: 320 100% 55%;
-    --gold: 55 100% 55%;
+  /* 3. Digital & Cyberpunk Theme (digital, cyberpunk, futuristic, bold, auto) */
+  .theme-digital, .theme-cyberpunk, .theme-futuristic, .theme-bold, .theme-auto {
+    --background: 220 40% 3%;
+    --foreground: 190 100% 95%;
+    --card: 220 35% 6%;
+    --card-foreground: 190 100% 95%;
+    --primary: 190 100% 50%;
+    --secondary: 270 90% 60%;
+    --accent: 190 100% 50%;
+    --border: 220 25% 15%;
+    --ring: 190 100% 50%;
+    --gold: 320 100% 60%;
   }
-  .theme-cyberpunk.dark {
-    --background: 260 60% 4%;
-    --foreground: 180 100% 92%;
-    --card: 260 50% 8%;
-    --card-foreground: 180 100% 92%;
-    --primary: 320 100% 55%;
-    --secondary: 180 100% 50%;
-    --accent: 180 100% 50%;
-    --border: 260 30% 20%;
-    --ring: 320 100% 55%;
-    --gold: 55 100% 55%;
+  .theme-digital.dark, .theme-cyberpunk.dark, .theme-futuristic.dark, .theme-bold.dark, .theme-auto.dark {
+    --background: 220 40% 3%;
+    --foreground: 190 100% 95%;
+    --card: 220 35% 6%;
+    --card-foreground: 190 100% 95%;
+    --primary: 190 100% 50%;
+    --secondary: 270 90% 60%;
+    --accent: 190 100% 50%;
+    --border: 220 25% 15%;
+    --ring: 190 100% 50%;
+    --gold: 320 100% 60%;
   }
 
-  /* 4. Luxury Gold & Black Theme (luxury) */
-  .theme-luxury {
-    --background: 0 0% 5%;
-    --foreground: 40 10% 90%;
-    --card: 0 0% 8%;
-    --card-foreground: 40 10% 90%;
-    --primary: 40 50% 55%;
-    --secondary: 0 0% 12%;
-    --accent: 40 50% 55%;
-    --border: 0 0% 14%;
-    --ring: 40 50% 55%;
-    --gold: 40 50% 55%;
+  /* 4. Services & Software Theme (services) */
+  .theme-services {
+    --background: 245 40% 98%;
+    --foreground: 245 40% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 245 40% 12%;
+    --primary: 250 80% 58%;
+    --secondary: 220 90% 55%;
+    --accent: 250 80% 58%;
+    --border: 245 20% 91%;
+    --ring: 250 80% 58%;
+    --gold: 40 80% 50%;
   }
-  .theme-luxury.dark {
+  .theme-services.dark {
+    --background: 245 35% 7%;
+    --foreground: 245 20% 92%;
+    --card: 245 30% 10%;
+    --card-foreground: 245 20% 92%;
+    --primary: 250 85% 65%;
+    --secondary: 220 85% 60%;
+    --accent: 250 85% 65%;
+    --border: 245 20% 16%;
+    --ring: 250 85% 65%;
+    --gold: 40 80% 55%;
+  }
+
+  /* 5. Sports & Outdoors Theme (sports) */
+  .theme-sports {
+    --background: 20 25% 97%;
+    --foreground: 20 50% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 50% 10%;
+    --primary: 15 95% 52%;
+    --secondary: 35 95% 50%;
+    --accent: 15 95% 52%;
+    --border: 20 20% 90%;
+    --ring: 15 95% 52%;
+    --gold: 35 95% 50%;
+  }
+  .theme-sports.dark {
+    --background: 20 25% 7%;
+    --foreground: 20 20% 92%;
+    --card: 20 20% 10%;
+    --card-foreground: 20 20% 92%;
+    --primary: 15 95% 55%;
+    --secondary: 35 95% 52%;
+    --accent: 15 95% 55%;
+    --border: 20 15% 16%;
+    --ring: 15 95% 55%;
+    --gold: 35 95% 52%;
+  }
+
+  /* 6. Beauty, Luxury & Jewelry Theme (luxury, jewelry, beauty) */
+  .theme-luxury, .theme-jewelry, .theme-beauty {
     --background: 0 0% 5%;
-    --foreground: 40 10% 90%;
+    --foreground: 40 20% 92%;
     --card: 0 0% 8%;
-    --card-foreground: 40 10% 90%;
-    --primary: 40 50% 55%;
-    --secondary: 0 0% 12%;
-    --accent: 40 50% 55%;
+    --card-foreground: 40 20% 92%;
+    --primary: 40 60% 52%;
+    --secondary: 340 65% 55%;
+    --accent: 40 60% 52%;
     --border: 0 0% 14%;
-    --ring: 40 50% 55%;
-    --gold: 40 50% 55%;
+    --ring: 40 60% 52%;
+    --gold: 40 60% 52%;
+  }
+  .theme-luxury.dark, .theme-jewelry.dark, .theme-beauty.dark {
+    --background: 0 0% 5%;
+    --foreground: 40 20% 92%;
+    --card: 0 0% 8%;
+    --card-foreground: 40 20% 92%;
+    --primary: 40 60% 52%;
+    --secondary: 340 65% 55%;
+    --accent: 40 60% 52%;
+    --border: 0 0% 14%;
+    --ring: 40 60% 52%;
+    --gold: 40 60% 52%;
   }
 
   /* 5. Natural Organic Sage Theme (organic) */
