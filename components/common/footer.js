@@ -12,7 +12,7 @@ const defaultCategories = [
   { name: 'Bags & Accessories', href: '/products?category=bags-accessories' },
   { name: 'Beauty & Skincare', href: '/products?category=beauty-skincare' },
   { name: 'Jewelry & Watches', href: '/products?category=jewelry-watches' },
-  { name: 'All Cashback Deals', href: '/products' },
+  { name: 'All Brand Deals', href: '/products' },
 ];
 
 export default function Footer({ settings = {}, categories: passedCategories }) {
@@ -25,7 +25,7 @@ export default function Footer({ settings = {}, categories: passedCategories }) 
         name: c.name,
         href: `/products?category=${c.slug}`
       }));
-      setCategoriesList([...formatted, { name: 'All Cashback Deals', href: '/products' }]);
+      setCategoriesList([...formatted, { name: 'All Brand Deals', href: '/products' }]);
     } else {
       async function loadCats() {
         try {
@@ -36,7 +36,7 @@ export default function Footer({ settings = {}, categories: passedCategories }) 
               name: c.name,
               href: `/products?category=${c.slug}`
             }));
-            setCategoriesList([...formatted, { name: 'All Cashback Deals', href: '/products' }]);
+            setCategoriesList([...formatted, { name: 'All Brand Deals', href: '/products' }]);
           }
         } catch (_) {}
       }
@@ -46,12 +46,12 @@ export default function Footer({ settings = {}, categories: passedCategories }) 
 
   const footerLinks = {
     brands: [
-      { name: 'Nike Deals & Rebates', href: '/products?brand=Nike' },
+      { name: 'Nike Deals & Discounts', href: '/products?brand=Nike' },
       { name: 'ZARA Promo Coupons', href: '/products?brand=ZARA' },
       { name: 'adidas Official Outlet', href: '/products?brand=adidas' },
       { name: 'Burberry Luxury Sales', href: '/products?brand=Burberry' },
       { name: "Levi's Denim Discounts", href: "/products?brand=Levi's" },
-      { name: 'Sony Electronics Rebates', href: '/products?brand=Sony' },
+      { name: 'Sony Electronics Deals', href: '/products?brand=Sony' },
     ],
     company: [
       { name: 'About Us', href: '/about' },
@@ -75,7 +75,7 @@ export default function Footer({ settings = {}, categories: passedCategories }) 
             Ready to Save Big on Top Global Brands?
           </h2>
           <p className="text-indigo-200/80 text-base max-w-xl mx-auto mb-8">
-            Explore 10,000+ verified coupons, brand promo codes, and instant affiliate cashback rebates. Updated daily by deal editors.
+            Explore 10,000+ verified coupons, brand promo codes, and direct store deal links. Updated daily by deal editors.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
@@ -118,7 +118,7 @@ export default function Footer({ settings = {}, categories: passedCategories }) 
               )}
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Curated cashback deals, promo codes, and discounts across Fashion, Electronics, Home & Services. Shop partner merchants and earn instant rebates.
+              Curated brand deals, promo codes, and discounts across Fashion, Electronics, Home & Services. Direct jump links to official brand stores.
             </p>
             <div className="flex gap-3">
               {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
@@ -190,7 +190,7 @@ export default function Footer({ settings = {}, categories: passedCategories }) 
             © {currentYear} {settings.site_name || 'AffSite Deals'}. All rights reserved.
           </p>
           <p className="text-xs text-gray-500">
-            Curated Multi-Category Cashback & Coupon Directory
+            Curated Multi-Category Brand Deals & Coupon Directory
           </p>
         </div>
       </div>

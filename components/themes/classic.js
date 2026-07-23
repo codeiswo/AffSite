@@ -23,23 +23,23 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
   const [copiedCode, setCopiedCode] = useState('');
 
   const stores = [
-    { name: 'Burberry', rate: 15, coupon: 'LUXURY15', desc: '15% Rebate + $50 Voucher' },
-    { name: 'Nike', rate: 12, coupon: 'NIKE20', desc: '12% Rebate + $20 Off' },
-    { name: 'ZARA', rate: 10, coupon: 'SUMMER10', desc: '10% Rebate + Free Shipping' },
-    { name: 'Sony', rate: 8, coupon: 'TECH30', desc: '8% Rebate + $30 Off' },
-    { name: "Levi's", rate: 14, coupon: 'DENIM14', desc: '14% Rebate + Extra 10%' },
+    { name: 'Burberry', rate: 15, coupon: 'LUXURY15', desc: '15% Off + $50 Voucher' },
+    { name: 'Nike', rate: 12, coupon: 'NIKE20', desc: '12% Off + $20 Off' },
+    { name: 'ZARA', rate: 10, coupon: 'SUMMER10', desc: '10% Off + Free Shipping' },
+    { name: 'Sony', rate: 8, coupon: 'TECH30', desc: '8% Off + $30 Off' },
+    { name: "Levi's", rate: 14, coupon: 'DENIM14', desc: '14% Off + Extra 10%' },
   ];
 
   const categoriesList = [
-    { name: 'Apparel & Fashion', slug: 'apparel', icon: '👗', badge: 'Up to 18% Rebate', bg: 'from-pink-500/10 to-rose-500/10 border-pink-500/20 text-pink-600 dark:text-pink-400' },
-    { name: 'Electronics & Digital', slug: 'digital', icon: '💻', badge: 'Up to 12% Rebate', bg: 'from-blue-500/10 to-cyan-500/10 border-blue-500/20 text-blue-600 dark:text-blue-400' },
-    { name: 'Home & Living', slug: 'home', icon: '🛋️', badge: 'Up to 15% Rebate', bg: 'from-emerald-500/10 to-teal-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400' },
-    { name: 'Services & Subscriptions', slug: 'services', icon: '⚡', badge: 'Up to 25% Rebate', bg: 'from-purple-500/10 to-indigo-500/10 border-purple-500/20 text-purple-600 dark:text-purple-400' },
-    { name: 'Sports & Outdoors', slug: 'sports', icon: '🏃', badge: 'Up to 14% Rebate', bg: 'from-amber-500/10 to-orange-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400' },
-    { name: 'Beauty & Skincare', slug: 'beauty', icon: '💄', badge: 'Up to 20% Rebate', bg: 'from-rose-500/10 to-pink-500/10 border-rose-500/20 text-rose-600 dark:text-rose-400' },
+    { name: 'Apparel & Fashion', slug: 'apparel', icon: '👗', badge: 'Up to 18% Off', bg: 'from-pink-500/10 to-rose-500/10 border-pink-500/20 text-pink-600 dark:text-pink-400' },
+    { name: 'Electronics & Digital', slug: 'digital', icon: '💻', badge: 'Up to 12% Off', bg: 'from-blue-500/10 to-cyan-500/10 border-blue-500/20 text-blue-600 dark:text-blue-400' },
+    { name: 'Home & Living', slug: 'home', icon: '🛋️', badge: 'Up to 15% Off', bg: 'from-emerald-500/10 to-teal-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400' },
+    { name: 'Services & Subscriptions', slug: 'services', icon: '⚡', badge: 'Up to 25% Off', bg: 'from-purple-500/10 to-indigo-500/10 border-purple-500/20 text-purple-600 dark:text-purple-400' },
+    { name: 'Sports & Outdoors', slug: 'sports', icon: '🏃', badge: 'Up to 14% Off', bg: 'from-amber-500/10 to-orange-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400' },
+    { name: 'Beauty & Skincare', slug: 'beauty', icon: '💄', badge: 'Up to 20% Off', bg: 'from-rose-500/10 to-pink-500/10 border-rose-500/20 text-rose-600 dark:text-rose-400' },
   ];
 
-  const estimatedRebate = Math.round(calcSpend * (calcRate / 100));
+  const estimatedSavings = Math.round(calcSpend * (calcRate / 100));
 
   const defaultModules = [
     { id: 'm1', type: 'hero', name: 'Hero Banner', active: true },
@@ -94,7 +94,7 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
                     EXPLORE MAINSTREAM CATEGORIES
                   </div>
                   <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-gray-900 dark:text-white">
-                    {mod.title || 'Shop Cashback Deals by Category'}
+                    {mod.title || 'Shop Deals by Category'}
                   </h2>
                 </div>
                 <Link
@@ -143,7 +143,7 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
                   {mod.title || 'Verified Fashion & Multi-Category Deals'}
                 </h2>
                 <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-base">
-                  {mod.subtitle || 'Click outbound links to claim discount coupons and earn instant cash rebates at partner merchant stores.'}
+                  {mod.subtitle || 'Click outbound links to claim discount coupons and earn instant store savings at partner merchant stores.'}
                 </p>
               </div>
 
@@ -171,98 +171,75 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
       case 'rebate_calc': {
         return (
           <section key={mod.id || `rebate_calc-${index}`} className="section-padding bg-gradient-to-br from-indigo-950 via-slate-900 to-purple-950 text-white relative overflow-hidden">
-            <div className="absolute inset-0 opacity-20 pointer-events-none">
-              <div className="absolute top-1/3 right-10 w-96 h-96 rounded-full bg-indigo-500 blur-3xl" />
-              <div className="absolute bottom-10 left-10 w-96 h-96 rounded-full bg-purple-500 blur-3xl" />
-            </div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.15),transparent_50%)]" />
+            <div className="container-custom max-w-5xl relative z-10">
+              <div className="text-center max-w-2xl mx-auto mb-12">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-bold uppercase tracking-wider mb-4">
+                  <Zap className="w-3.5 h-3.5 text-amber-400" />
+                  INSTANT SAVINGS CALCULATOR
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-white">
+                  {mod.title || 'Calculate Your Shopping Savings'}
+                </h2>
+                <p className="text-sm text-indigo-200 mt-3 leading-relaxed">
+                  {mod.subtitle || 'Select your order spend and partner merchant store to calculate estimated store savings.'}
+                </p>
+              </div>
 
-            <div className="container-custom relative z-10">
-              <div className="max-w-4xl mx-auto">
-                <div className="text-center mb-12">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-amber-300 text-xs font-bold uppercase tracking-wider mb-4">
-                    <Zap className="w-4 h-4 text-amber-400" />
-                    INSTANT REBATE CALCULATOR
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-10 backdrop-blur-xl">
+                <div className="lg:col-span-7 space-y-6">
+                  <div>
+                    <label className="block text-xs font-extrabold uppercase tracking-wider text-indigo-200 mb-2">Select Partner Store</label>
+                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+                      {stores.map((st) => (
+                        <button
+                          key={st.name}
+                          type="button"
+                          onClick={() => { setCalcStore(st.name); setCalcRate(st.rate); }}
+                          className={`p-3 rounded-xl border text-left transition-all ${
+                            calcStore === st.name
+                              ? 'bg-indigo-600 border-indigo-400 text-white shadow-lg'
+                              : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
+                          }`}
+                        >
+                          <p className="text-xs font-extrabold line-clamp-1">{st.name}</p>
+                          <span className="text-xs font-bold text-amber-300">{st.rate}% Off Deal</span>
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white mb-4">
-                    {mod.title || 'Calculate Your Shopping Savings'}
-                  </h2>
-                  <p className="text-indigo-200 text-base max-w-xl mx-auto">
-                    {mod.subtitle || 'Select your order spend and partner merchant store to calculate instant cashback returns.'}
-                  </p>
+
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <label className="text-xs font-extrabold uppercase tracking-wider text-indigo-200">Order Amount</label>
+                      <span className="text-lg font-mono font-extrabold text-amber-300">${calcSpend}</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="50"
+                      max="2000"
+                      step="50"
+                      value={calcSpend}
+                      onChange={(e) => setCalcSpend(Number(e.target.value))}
+                      className="w-full accent-indigo-500 cursor-pointer"
+                    />
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white/5 backdrop-blur-xl border border-white/15 p-8 sm:p-10 rounded-3xl shadow-2xl">
-                  {/* Controls */}
-                  <div className="lg:col-span-7 space-y-6">
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <label className="text-sm font-semibold text-indigo-200">1. Select Target Merchant Store</label>
-                        <span className="text-xs font-bold text-amber-300">{calcRate}% Cash Rebate</span>
-                      </div>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                        {stores.map((st) => (
-                          <button
-                            key={st.name}
-                            onClick={() => {
-                              setCalcStore(st.name);
-                              setCalcRate(st.rate);
-                            }}
-                            className={`px-4 py-3 rounded-2xl border text-left transition-all cursor-pointer ${
-                              calcStore === st.name
-                                ? 'bg-indigo-600 border-indigo-400 text-white shadow-lg scale-105'
-                                : 'bg-white/5 border-white/10 text-indigo-100 hover:bg-white/10'
-                            }`}
-                          >
-                            <p className="font-bold text-sm">{st.name}</p>
-                            <p className="text-[11px] text-indigo-200">{st.rate}% Rebate</p>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <label className="text-sm font-semibold text-indigo-200">2. Estimated Shopping Spend Amount</label>
-                        <span className="text-lg font-mono font-extrabold text-amber-300">${calcSpend}</span>
-                      </div>
-                      <input
-                        type="range"
-                        min="50"
-                        max="2000"
-                        step="50"
-                        value={calcSpend}
-                        onChange={(e) => setCalcSpend(Number(e.target.value))}
-                        className="w-full h-3 bg-white/20 rounded-lg appearance-none cursor-pointer accent-amber-400"
-                      />
-                      <div className="flex justify-between text-xs text-indigo-300 mt-1 font-mono">
-                        <span>$50</span>
-                        <span>$500</span>
-                        <span>$1,000</span>
-                        <span>$2,000</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Result Output Card */}
-                  <div className="lg:col-span-5 bg-gradient-to-br from-indigo-600 to-purple-700 p-8 rounded-2xl text-center space-y-4 shadow-xl border border-white/20">
-                    <p className="text-xs font-bold uppercase tracking-widest text-indigo-200">ESTIMATED CASHBACK RETURN</p>
-                    <div className="text-5xl sm:text-6xl font-extrabold text-amber-300 font-mono tracking-tight">
-                      +${estimatedRebate}
-                    </div>
-                    <p className="text-xs text-white/90 leading-relaxed">
-                      Earn <span className="font-bold text-amber-300">{calcRate}% cashback</span> on your <span className="font-bold text-white">${calcSpend}</span> order at <span className="font-bold text-white">{calcStore}</span>.
-                    </p>
-
-                    <div className="pt-2">
-                      <Link
-                        href="/products"
-                        className="inline-flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-xl bg-white text-indigo-950 font-bold text-sm shadow-lg hover:bg-amber-300 transition-colors"
-                      >
-                        Claim {calcStore} Rebate Deal
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
-                    </div>
-                  </div>
+                <div className="lg:col-span-5 bg-gradient-to-br from-indigo-600 to-purple-600 p-6 sm:p-8 rounded-2xl text-center space-y-4 shadow-2xl">
+                  <p className="text-xs font-bold uppercase tracking-widest text-indigo-200">ESTIMATED STORE SAVINGS</p>
+                  <p className="text-4xl sm:text-5xl font-mono font-extrabold text-amber-300">
+                    +${estimatedSavings}
+                  </p>
+                  <p className="text-xs text-indigo-100 leading-relaxed">
+                    Save up to <span className="font-bold text-amber-300">{calcRate}% off</span> on your <span className="font-bold text-white">${calcSpend}</span> order at <span className="font-bold text-white">{calcStore}</span>.
+                  </p>
+                  <Link
+                    href={`/products?search=${calcStore}`}
+                    className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-gray-900 font-extrabold text-xs uppercase tracking-wider shadow-lg transition-all"
+                  >
+                    Explore {calcStore} Deals <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -280,7 +257,7 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
                   EASY 3-STEP PROCESS
                 </p>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-gray-900 dark:text-white mb-4">
-                  {mod.title || 'How to Claim Savings & Cashback'}
+                  {mod.title || 'How to Claim Savings & Discounts'}
                 </h2>
               </div>
 
@@ -288,7 +265,7 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
                 {[
                   { step: '01', title: 'Find Your Favorite Deal', desc: 'Browse verified coupons and discount deals across fashion, electronics, home, and services.' },
                   { step: '02', title: 'Click Outbound Track Link', desc: 'Click "Claim Coupon" to jump directly to official brand merchant website with tracking.' },
-                  { step: '03', title: 'Shop & Earn Cash Rebate', desc: 'Complete your checkout at partner store and get instant savings + cashback returns.' },
+                  { step: '03', title: 'Shop & Save Big', desc: 'Complete your checkout at partner store and get instant discounts + store savings.' },
                 ].map(({ step, title, desc }) => (
                   <div key={step} className="text-center group p-8 rounded-3xl bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all">
                     <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-600 text-white font-heading font-extrabold text-2xl mb-6 shadow-lg shadow-indigo-600/30 group-hover:scale-110 transition-transform">
@@ -306,6 +283,11 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
 
       case 'testimonials':
       case 'reviews': {
+        const reviews = [
+          { name: 'Sarah M.', role: 'Fashion Buyer', text: 'Used the Burberry 15% discount link and saved over $140 on my trench coat purchase. Works seamlessly!', rating: 5 },
+          { name: 'David K.', role: 'Tech Enthusiast', text: 'Found active promo code for Sony wireless headphones plus 8% extra discount. Best deal portal.', rating: 5 },
+          { name: 'Elena R.', role: 'Smart Shopper', text: 'Clean interface with zero misleading ads. Just click, get redirected, and save money.', rating: 5 },
+        ];
         return (
           <section key={mod.id || `testimonials-${index}`} className="section-padding bg-surface dark:bg-surface-dark">
             <div className="container-custom">
@@ -319,11 +301,7 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {[
-                  { name: 'Sarah M.', role: 'Fashion Buyer', text: 'Used the Burberry 15% cashback link and saved over $140 on my trench coat purchase. Works seamlessly!', rating: 5 },
-                  { name: 'David K.', role: 'Tech Enthusiast', text: 'Found active promo code for Sony wireless headphones plus 8% cash rebate. Best affiliate portal.', rating: 5 },
-                  { name: 'Elena R.', role: 'Home Decorator', text: 'Clean interface with zero misleading ads. Just click, get redirected, and save money.', rating: 5 },
-                ].map(({ name, role, text, rating }) => (
+                {reviews.map(({ name, role, text, rating }) => (
                   <div key={name} className="p-8 rounded-3xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
                     <div className="flex items-center gap-1 mb-4">
                       {[...Array(rating)].map((_, j) => (
@@ -663,7 +641,7 @@ export function ProductDetailPage({ product = {}, relatedProducts = [] }) {
               )}
             </div>
 
-            {/* Price & Rebate Card */}
+            {/* Price & Deal Card */}
             <div className="p-6 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-800/50 flex items-center justify-between">
               <div>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Merchant Deal Price</p>
@@ -677,7 +655,7 @@ export function ProductDetailPage({ product = {}, relatedProducts = [] }) {
 
               <div className="text-right">
                 <span className="inline-block px-3 py-1.5 rounded-full bg-emerald-500 text-white text-xs font-extrabold shadow-sm">
-                  ⚡ UP TO 15% CASHBACK
+                  ⚡ VERIFIED BRAND OFFER
                 </span>
               </div>
             </div>

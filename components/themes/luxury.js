@@ -44,7 +44,7 @@ function LuxuryProductCard({ product }) {
         rel="noopener noreferrer nofollow"
         className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 border border-[#d4a84b]/50 text-[#d4a84b] font-heading text-xs font-bold uppercase tracking-widest hover:bg-[#d4a84b] hover:text-black transition-all duration-500"
       >
-        CLAIM BOUTIQUE REBATE <ArrowRight className="w-3.5 h-3.5" />
+        SHOP BOUTIQUE DEAL <ArrowRight className="w-3.5 h-3.5" />
       </a>
     </div>
   );
@@ -54,7 +54,7 @@ function LuxuryProductCard({ product }) {
 // 1. HOMEPAGE (Haute Couture Luxury Boutique Theme)
 // ============================================
 export function Homepage({ settings = {}, featuredProducts = [] }) {
-  const siteDesc = settings.site_tagline || 'Haute Couture & Luxury Fashion Cashback Directory';
+  const siteDesc = settings.site_tagline || 'Haute Couture & Luxury Fashion Brand Directory';
 
   const defaultModules = [
     { id: 'm1', type: 'hero', name: 'Hero Banner', active: true },
@@ -100,7 +100,7 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
               <div className="w-24 h-[1px] bg-[#d4a84b]/50 mx-auto mb-8" />
 
               <p className="text-base sm:text-lg text-[#a1a1a5] max-w-2xl mx-auto mb-10 leading-relaxed font-heading italic">
-                {mod.subtitle || 'Discover designer fashion discounts, luxury apparel promo codes, and exclusive cashback links from Burberry, Gucci, Prada & luxury partner boutiques.'}
+                {mod.subtitle || 'Discover designer fashion discounts, luxury apparel promo codes, and exclusive store links from Burberry, Gucci, Prada & luxury partner boutiques.'}
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -203,7 +203,7 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {[
                   { title: 'Official Merchants', desc: 'Direct affiliate integration with verified flagship brand stores.' },
-                  { title: 'VIP Cashback Rates', desc: 'Privileged rebate links ensuring maximum return on luxury purchases.' },
+                  { title: 'VIP Store Offers', desc: 'Privileged store links ensuring maximum savings on luxury purchases.' },
                   { title: 'Curated Deals', desc: 'Hand-vetted coupon codes tailored for discerning shoppers.' },
                 ].map(({ title, desc }) => (
                   <div key={title} className="p-8 bg-[#0f0f11] border border-[#d4a84b]/20 text-center">
@@ -231,7 +231,7 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
                 {[
                   { text: 'Saved over $200 on my designer trench coat. Outstanding luxury portal.', author: 'Victoria R.' },
-                  { text: 'Seamless redirection to official brand boutiques with guaranteed rebates.', author: 'Charles B.' },
+                  { text: 'Seamless redirection to official brand boutiques with guaranteed discount offers.', author: 'Charles B.' },
                   { text: 'High-end interface without spammy ads. Exceptional service.', author: 'Sophia L.' },
                 ].map(({ text, author }) => (
                   <div key={author} className="p-8 bg-[#0f0f11] border border-[#d4a84b]/20">

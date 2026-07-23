@@ -55,7 +55,7 @@ function MinimalProductCard({ product }) {
 // 1. HOMEPAGE (Minimalist Scandinavian Theme)
 // ============================================
 export function Homepage({ settings = {}, featuredProducts = [] }) {
-  const siteDesc = settings.site_tagline || 'Curated Fashion & Lifestyle Rebates';
+  const siteDesc = settings.site_tagline || 'Curated Fashion & Lifestyle Brand Deals';
 
   const categoriesList = [
     { name: 'Apparel & Fashion', slug: 'apparel', icon: '👗' },
@@ -97,13 +97,13 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
             <div className="container-custom max-w-5xl">
               <div className="max-w-3xl">
                 <span className="text-xs uppercase tracking-widest font-bold text-gray-400 mb-4 block">
-                  CURATED LIFESTYLE & HOME REBATES
+                  CURATED LIFESTYLE & HOME DEALS
                 </span>
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading font-normal text-gray-900 dark:text-white leading-tight mb-6">
                   {mod.title || siteDesc}
                 </h1>
                 <p className="text-lg text-gray-500 dark:text-gray-400 leading-relaxed mb-10 max-w-xl">
-                  {mod.subtitle || 'Handpicked apparel collections, promo codes, and verified cashback offers from official brand stores. No gimmicks, just direct savings.'}
+                  {mod.subtitle || 'Handpicked apparel collections, promo codes, and verified discount offers from official brand stores. No gimmicks, just direct savings.'}
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
@@ -197,7 +197,7 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
             <div className="container-custom max-w-4xl text-center">
               <span className="text-xs uppercase tracking-widest font-bold text-gray-400 mb-3 block">WHY CHOOSE US</span>
               <h2 className="text-3xl font-heading font-normal text-gray-900 dark:text-white mb-12">
-                {mod.title || 'Direct Savings & Transparent Cashback'}
+                {mod.title || 'Direct Savings & Transparent Discounts'}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {[
@@ -226,9 +226,9 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
                 {[
-                  { text: 'Extremely clean UI with direct brand cashback links. Saved $120 on Burberry coat.', author: 'Sarah M.' },
+                  { text: 'Extremely clean UI with direct brand store links. Saved $120 on Burberry coat.', author: 'Sarah M.' },
                   { text: 'No annoying popup ads. Click the deal and check out on Nike directly.', author: 'David K.' },
-                  { text: 'Simple, fast, and high rebate rates for official store purchases.', author: 'Elena R.' },
+                  { text: 'Simple, fast, and high discount rates for official store purchases.', author: 'Elena R.' },
                 ].map(({ text, author }) => (
                   <div key={author} className="p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg">
                     <p className="text-sm text-gray-600 dark:text-gray-300 italic mb-4">&ldquo;{text}&rdquo;</p>

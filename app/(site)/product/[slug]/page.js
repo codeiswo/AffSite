@@ -30,7 +30,7 @@ const fallbackProducts = [
     features: '["Double-breasted closure","70% Wool 30% Cashmere","Water-resistant finish","Dry clean only"]',
     affiliate_link: 'https://www.burberry.com/?aff=affsite_coat',
     meta_title: 'Classic Cashmere Trench Coat | AffSite Deals',
-    meta_description: 'Get exclusive cashback on classic cashmere trench coats. Free shipping on partner merchant orders.'
+    meta_description: 'Discover exclusive store deals on classic cashmere trench coats. Free shipping on partner merchant orders.'
   },
   {
     id: 2,
@@ -51,7 +51,7 @@ const fallbackProducts = [
     features: '["100% Organic Cotton","Vintage Wash Finish","Reinforced Stitching","Chest Pockets"]',
     affiliate_link: 'https://www.levis.com/?aff=affsite_jacket',
     meta_title: 'Designer Distressed Denim Jacket | AffSite Deals',
-    meta_description: 'Shop vintage distressed denim jacket with instant rebate.'
+    meta_description: 'Shop vintage distressed denim jacket with instant store savings.'
   },
   {
     id: 3,

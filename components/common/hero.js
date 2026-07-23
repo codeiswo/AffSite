@@ -26,9 +26,9 @@ export default function Hero({ settings = {} }) {
 
   const themeConfig = getThemeConfig(settings.site_theme || 'default');
   const heroDesc = settings.hero_description || themeConfig.heroSubtitle;
-  const btnText = settings.hero_button_text || 'Explore Cashback Deals';
+  const btnText = settings.hero_button_text || 'Explore Brand Deals';
   const btnUrl = settings.hero_button_url || '/products';
-  const badgeText = themeConfig.badge || '🔥 Up to 70% Off + Instant Cashback Rebates';
+  const badgeText = themeConfig.badge || '🔥 Up to 70% Off Verified Store Deals';
 
   const renderTitle = () => {
     if (settings.hero_title) {
@@ -135,7 +135,7 @@ export default function Hero({ settings = {} }) {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.45s' }}>
             {[
               { icon: ShieldCheck, label: 'Verified Promo Codes', desc: 'Tested & updated daily' },
-              { icon: Percent, label: 'Instant Cashback Link', desc: 'Direct merchant checkout' },
+              { icon: Percent, label: 'Instant Store Link', desc: 'Direct merchant checkout' },
               { icon: Tag, label: '100% Free Access', desc: 'No hidden subscription fees' },
             ].map(({ icon: Icon, label, desc }) => (
               <div

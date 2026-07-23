@@ -16,7 +16,7 @@ export default function NotFound() {
         </h2>
         <p className="text-gray-500 dark:text-gray-400 mb-8 max-w-md mx-auto">
           The page you&apos;re looking for doesn&apos;t exist or has been moved. 
-          Let us help you explore the latest fashion cashback deals.
+          Let us help you explore the latest fashion brand deals.
         </p>
         <Link
           href="/"

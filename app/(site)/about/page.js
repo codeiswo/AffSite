@@ -16,7 +16,7 @@ export async function generateMetadata() {
 
   return {
     title: page?.meta_title || page?.title || 'About Us | AffSite Deals',
-    description: page?.meta_description || 'Learn about AffSite Deals - your curated source for fashion cashback deals, brand promo codes, and verified discount links.',
+    description: page?.meta_description || 'Learn about AffSite Deals - your curated source for fashion brand deals, promo codes, and verified discount links.',
   };
 }
 
@@ -53,7 +53,7 @@ export default async function AboutPage() {
             Smart Savings, <span className="text-gradient">Made Simple</span>
           </h1>
           <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            AffSite Deals is a premier affiliate cashback directory dedicated to aggregating top fashion discounts, verified coupon codes, and exclusive rebate links across 1,500+ partner stores.
+            AffSite Deals is a premier affiliate deals directory dedicated to aggregating top fashion discounts, verified coupon codes, and exclusive promo links across 1,500+ partner stores.
           </p>
         </div>
       </section>
@@ -64,7 +64,7 @@ export default async function AboutPage() {
           {[
             { value: '100K+', label: 'Happy Shoppers', icon: Users },
             { value: '1,500+', label: 'Partner Brands', icon: ShoppingBag },
-            { value: '$2.5M+', label: 'Cashback Claimed', icon: Percent },
+            { value: '$2.5M+', label: 'Savings Tracked', icon: Percent },
             { value: '100%', label: 'Free Access', icon: Sparkles },
           ].map(({ value, label, icon: Icon }) => (
             <div key={label} className="card-premium p-6 rounded-2xl text-center">
@@ -86,13 +86,13 @@ export default async function AboutPage() {
                 Connecting Shoppers with Official Store Discounts
               </h2>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                We believe online shopping should always come with extra value. By partnering directly with top retailers like Nike, ZARA, adidas, Burberry, and Levi's, we bring you active promo codes and seamless cashback jump links without any membership fees.
+                We believe online shopping should always come with extra value. By partnering directly with top retailers like Nike, ZARA, adidas, Burberry, and Levi's, we bring you active promo codes and seamless store jump links without any membership fees.
               </p>
               <div className="space-y-3">
                 {[
                   'Verified promo codes tested daily by deal editors',
                   'Direct outbound link to official brand merchant store',
-                  'Automatic cashback tracking & rebate eligibility',
+                  'Instant deal tracking & store offer eligibility',
                   'Coverage across Fashion, Electronics, Home & Services',
                   '100% free access for all users',
                 ].map((item) => (
@@ -121,7 +121,7 @@ export default async function AboutPage() {
             Ready to Start Saving?
           </h2>
           <p className="text-gray-500 dark:text-gray-400 mb-8 max-w-lg mx-auto">
-            Discover the latest promo codes, apparel discounts, and cashback deals across your favorite partner brands.
+            Discover the latest promo codes, apparel discounts, and store deals across your favorite partner brands.
           </p>
           <Link href="/products" className="group inline-flex items-center gap-2 btn-primary text-lg px-8 py-4">
             Explore Deals & Coupons

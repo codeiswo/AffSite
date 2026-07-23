@@ -49,7 +49,7 @@ function TechProductCard({ product }) {
         rel="noopener noreferrer nofollow"
         className="relative z-10 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-accent/10 border border-accent/30 text-accent font-mono text-xs font-bold uppercase tracking-wider hover:bg-accent hover:text-black transition-all duration-300"
       >
-        CLAIM DEAL & REBATE <ArrowRight className="w-3.5 h-3.5" />
+        CLAIM STORE DEAL <ArrowRight className="w-3.5 h-3.5" />
       </a>
     </div>
   );
@@ -59,7 +59,7 @@ function TechProductCard({ product }) {
 // 1. HOMEPAGE (Futuristic / Cyberpunk High-Tech Theme)
 // ============================================
 export function Homepage({ settings = {}, featuredProducts = [] }) {
-  const siteDesc = settings.site_tagline || 'Cyber Fashion & Multi-Category Cashback Portal';
+  const siteDesc = settings.site_tagline || 'Cyber Fashion & Multi-Category Deals Portal';
 
   const defaultModules = [
     { id: 'm1', type: 'hero', name: 'Hero Banner', active: true },
@@ -99,7 +99,7 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
                   {mod.title || siteDesc}
                 </h1>
                 <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed font-mono">
-                  {mod.subtitle || 'High-tech cashback aggregation network linking directly to official brand stores. Up to 70% off apparel, tech gear & lifestyle coupons.'}
+                  {mod.subtitle || 'High-tech deal aggregation network linking directly to official brand stores. Up to 70% off apparel, tech gear & lifestyle coupons.'}
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <Link
@@ -120,7 +120,7 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
               {/* Cyber Live Stats */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto mt-16 p-4 rounded-2xl bg-black/40 border border-[#1e293b] backdrop-blur-xl font-mono text-center">
                 <div className="p-3">
-                  <p className="text-xs text-gray-500 uppercase">// REBATES_DISBURSED</p>
+                  <p className="text-xs text-gray-500 uppercase">// SAVINGS_TRACKED</p>
                   <p className="text-xl font-bold text-accent">$2,450,000+</p>
                 </div>
                 <div className="p-3 border-y sm:border-y-0 sm:border-x border-[#1e293b]">
@@ -151,7 +151,7 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
                 <div>
                   <p className="text-xs font-mono text-accent uppercase tracking-widest mb-2">// PRODUCT_CATALOG</p>
                   <h2 className="text-3xl font-heading font-extrabold text-white">
-                    {mod.title || 'Active Cashback Offers'}
+                    {mod.title || 'Active Store Deals'}
                   </h2>
                 </div>
                 <Link

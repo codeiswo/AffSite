@@ -47,8 +47,8 @@ export async function generateMetadata() {
 
   const customOtherMetas = parseCustomMetaTags(settings.custom_html_tags);
   const siteName = settings.site_name || siteSettings.siteName || "AffSite Deals";
-  const defaultTitle = settings.meta_title || siteSettings.seoTitle || "AffSite Deals - Curated Multi-Category Cashback & Coupon Directory";
-  const defaultDescription = settings.meta_description || siteSettings.seoDescription || "Discover top cashback deals, coupons, and discounts across Apparel, Electronics, Home, and more.";
+  const defaultTitle = settings.meta_title || siteSettings.seoTitle || "AffSite Deals - Curated Multi-Category Brand Deals & Coupon Directory";
+  const defaultDescription = settings.meta_description || siteSettings.seoDescription || "Discover top store deals, coupons, and discounts across Apparel, Electronics, Home, and more.";
 
   const icons = {};
   if (settings.site_favicon) {
@@ -73,13 +73,13 @@ export async function generateMetadata() {
       ...customOtherMetas,
     },
     keywords: [
-      "cashback deals",
+      "brand deals",
       "fashion promo codes",
       "coupons directory",
       "apparel discounts",
-      "electronics cashback",
+      "electronics deals",
       "home deals",
-      "shopping rebates",
+      "shopping vouchers",
       "verified promo codes"
     ],
     authors: [{ name: siteName }],
@@ -94,7 +94,7 @@ export async function generateMetadata() {
           url: "/opengraph-image.png",
           width: 1200,
           height: 630,
-          alt: `${siteName} - Curated Cashback Deals`,
+          alt: `${siteName} - Curated Store Deals`,
         },
       ],
       locale: "en_US",

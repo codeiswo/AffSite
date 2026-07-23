@@ -21,8 +21,8 @@ const brands = ['Burberry', "Levi's", 'ZARA', 'Nike', 'Sony', 'Roborock', 'Gucci
 const fallbackCategories = ['apparel', 'digital', 'home', 'beauty', 'sports', 'services'];
 
 export const metadata = {
-  title: 'All Cashback Deals & Coupons | AffSite Deals',
-  description: 'Browse our complete collection of fashion cashback deals, brand promo codes, and shopping discounts across top categories.',
+  title: 'All Brand Deals & Coupons | AffSite Deals',
+  description: 'Browse our complete collection of fashion brand deals, promo codes, and shopping discounts across top categories.',
 };
 
 export default async function ProductsPage({ searchParams }) {

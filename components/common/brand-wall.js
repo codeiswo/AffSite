@@ -26,7 +26,7 @@ export default function BrandWall() {
           OFFICIAL PARTNER MERCHANTS
         </p>
         <h2 className="text-3xl sm:text-4xl font-heading font-bold text-gray-900 dark:text-white">
-          Shop & Earn Cashback Across 1,500+ Top Brands
+          Explore Official Deals Across 1,500+ Top Brands
         </h2>
       </div>
 

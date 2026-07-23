@@ -9,12 +9,12 @@ import {
 } from 'lucide-react';
 
 const defaultModules = [
-  { id: 'm1', type: 'hero', name: 'Hero Banner (首页大图横幅)', active: true, title: 'Exclusive Fashion Cashback Deals & Verified Promo Codes', subtitle: 'Save big on top global fashion brands, apparel, electronics, and lifestyle items.', btnText: 'Explore Cashback Deals', btnUrl: '/products' },
+  { id: 'm1', type: 'hero', name: 'Hero Banner (首页大图横幅)', active: true, title: 'Exclusive Fashion Brand Deals & Verified Promo Codes', subtitle: 'Save big on top global fashion brands, apparel, electronics, and lifestyle items.', btnText: 'Explore Brand Deals', btnUrl: '/products' },
   { id: 'm2', type: 'brand_wall', name: 'Partner Brands Wall (合作商家品牌墙)', active: true, title: 'OFFICIAL PARTNER MERCHANTS' },
-  { id: 'm3', type: 'category_grid', name: 'Category Explorer Bar (主流品类导航)', active: true, title: 'Shop Cashback Deals by Category' },
+  { id: 'm3', type: 'category_grid', name: 'Category Explorer Bar (主流品类导航)', active: true, title: 'Shop Deals by Category' },
   { id: 'm4', type: 'product_grid', name: 'Featured Products Grid (热门导购商品区)', active: true, title: 'Verified Fashion & Multi-Category Deals', limit: 6 },
-  { id: 'm5', type: 'rebate_calc', name: 'Interactive Rebate Calculator (返利计算器)', active: true, title: 'Calculate Your Shopping Savings' },
-  { id: 'm6', type: 'features', name: 'Why Choose Us (平台优势/信任标识)', active: true, title: 'Maximizing Your Savings & Cashback' },
+  { id: 'm5', type: 'rebate_calc', name: 'Interactive Savings Calculator (省钱计算器)', active: true, title: 'Calculate Your Shopping Savings' },
+  { id: 'm6', type: 'features', name: 'Why Choose Us (平台优势/信任标识)', active: true, title: 'Maximizing Your Shopping Savings' },
   { id: 'm7', type: 'testimonials', name: 'Shopper Reviews (买家好评展示)', active: true, title: 'Trusted by 100,000+ Smart Shoppers' }
 ];
 
