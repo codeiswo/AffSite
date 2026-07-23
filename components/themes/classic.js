@@ -32,12 +32,12 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
   ];
 
   const categoriesList = [
-    { name: 'Apparel & Fashion (服装)', slug: 'apparel', icon: '👗', badge: 'Up to 18% Rebate', bg: 'from-pink-500/10 to-rose-500/10 border-pink-500/20 text-pink-600 dark:text-pink-400' },
-    { name: 'Electronics & Digital (数码)', slug: 'digital', icon: '💻', badge: 'Up to 12% Rebate', bg: 'from-blue-500/10 to-cyan-500/10 border-blue-500/20 text-blue-600 dark:text-blue-400' },
-    { name: 'Home & Living (家居)', slug: 'home', icon: '🛋️', badge: 'Up to 15% Rebate', bg: 'from-emerald-500/10 to-teal-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400' },
-    { name: 'Services & Subscriptions (服务)', slug: 'services', icon: '⚡', badge: 'Up to 25% Rebate', bg: 'from-purple-500/10 to-indigo-500/10 border-purple-500/20 text-purple-600 dark:text-purple-400' },
-    { name: 'Sports & Outdoors (运动)', slug: 'sports', icon: '🏃', badge: 'Up to 14% Rebate', bg: 'from-amber-500/10 to-orange-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400' },
-    { name: 'Beauty & Skincare (美妆)', slug: 'beauty', icon: '💄', badge: 'Up to 20% Rebate', bg: 'from-rose-500/10 to-pink-500/10 border-rose-500/20 text-rose-600 dark:text-rose-400' },
+    { name: 'Apparel & Fashion', slug: 'apparel', icon: '👗', badge: 'Up to 18% Rebate', bg: 'from-pink-500/10 to-rose-500/10 border-pink-500/20 text-pink-600 dark:text-pink-400' },
+    { name: 'Electronics & Digital', slug: 'digital', icon: '💻', badge: 'Up to 12% Rebate', bg: 'from-blue-500/10 to-cyan-500/10 border-blue-500/20 text-blue-600 dark:text-blue-400' },
+    { name: 'Home & Living', slug: 'home', icon: '🛋️', badge: 'Up to 15% Rebate', bg: 'from-emerald-500/10 to-teal-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400' },
+    { name: 'Services & Subscriptions', slug: 'services', icon: '⚡', badge: 'Up to 25% Rebate', bg: 'from-purple-500/10 to-indigo-500/10 border-purple-500/20 text-purple-600 dark:text-purple-400' },
+    { name: 'Sports & Outdoors', slug: 'sports', icon: '🏃', badge: 'Up to 14% Rebate', bg: 'from-amber-500/10 to-orange-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400' },
+    { name: 'Beauty & Skincare', slug: 'beauty', icon: '💄', badge: 'Up to 20% Rebate', bg: 'from-rose-500/10 to-pink-500/10 border-rose-500/20 text-rose-600 dark:text-rose-400' },
   ];
 
   const estimatedRebate = Math.round(calcSpend * (calcRate / 100));
@@ -89,10 +89,7 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
               >
                 <span className="text-3xl mb-3 group-hover:scale-110 transition-transform">{cat.icon}</span>
                 <span className="text-sm font-heading font-bold text-gray-900 dark:text-white mb-1 leading-tight">
-                  {cat.name.split(' ')[0]}
-                </span>
-                <span className="text-[10px] font-semibold text-gray-500 dark:text-gray-400">
-                  {cat.name.split('(')[1]?.replace(')', '') || ''}
+                  {cat.name}
                 </span>
                 <div className="mt-3 px-2 py-0.5 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-[10px] font-bold text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
                   {cat.badge}
@@ -404,19 +401,33 @@ export function ProductListPage({ products = [], categories = [], brands = [], s
               <div>
                 <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Categories</h4>
                 <div className="space-y-1">
-                  {['all', 'apparel', 'digital', 'home', 'services', 'sports', 'beauty'].map(cat => (
-                    <Link
-                      key={cat}
-                      href={cat === 'all' ? '/products' : `/products?category=${cat}`}
-                      className={`block px-3 py-2 rounded-xl text-xs font-semibold capitalize transition-colors ${
-                        (selectedCategory === cat || (!selectedCategory && cat === 'all'))
-                          ? 'bg-indigo-600 text-white font-bold'
-                          : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-750'
-                      }`}
-                    >
-                      {cat === 'all' ? 'All Categories' : cat}
-                    </Link>
-                  ))}
+                  <Link
+                    href="/products"
+                    className={`block px-3 py-2 rounded-xl text-xs font-semibold capitalize transition-colors ${
+                      !selectedCategory
+                        ? 'bg-indigo-600 text-white font-bold'
+                        : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-750'
+                    }`}
+                  >
+                    All Categories
+                  </Link>
+                  {categories.map(cat => {
+                    const catSlug = typeof cat === 'string' ? cat : cat.slug;
+                    const catName = typeof cat === 'string' ? cat : cat.name;
+                    return (
+                      <Link
+                        key={catSlug}
+                        href={`/products?category=${catSlug}`}
+                        className={`block px-3 py-2 rounded-xl text-xs font-semibold capitalize transition-colors ${
+                          selectedCategory === catSlug
+                            ? 'bg-indigo-600 text-white font-bold'
+                            : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-750'
+                        }`}
+                      >
+                        {catName}
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
             </div>

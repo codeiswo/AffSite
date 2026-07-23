@@ -1,4 +1,4 @@
-import { getProducts, getSettings } from '@/lib/db';
+import { getProducts, getSettings, getCategories } from '@/lib/db';
 import { getThemeArchetype } from '@/lib/theme';
 import * as ClassicTheme from '@/components/themes/classic';
 import * as MinimalistTheme from '@/components/themes/minimalist';
@@ -18,7 +18,7 @@ const fallbackProducts = [
 ];
 
 const brands = ['Burberry', "Levi's", 'ZARA', 'Nike', 'Sony', 'Roborock', 'Gucci', 'adidas', 'Uniqlo'];
-const categories = ['apparel', 'digital', 'home', 'beauty', 'sports', 'services'];
+const fallbackCategories = ['apparel', 'digital', 'home', 'beauty', 'sports', 'services'];
 
 export const metadata = {
   title: 'All Cashback Deals & Coupons | AffSite Deals',
@@ -61,6 +61,17 @@ export default async function ProductsPage({ searchParams }) {
     settings = await getSettings();
   } catch (_) {}
 
+  // Fetch dynamic categories from DB
+  let dbCategories = [];
+  try {
+    dbCategories = await getCategories();
+  } catch (_) {}
+
+  // Use DB categories if available, otherwise fallback
+  const categories = dbCategories.length > 0
+    ? JSON.parse(JSON.stringify(dbCategories.map(c => ({ name: c.name, slug: c.slug }))))
+    : fallbackCategories.map(c => ({ name: c, slug: c }));
+
   const theme = settings.site_theme || 'default';
   const archetype = getThemeArchetype(theme);
 
@@ -80,3 +91,4 @@ export default async function ProductsPage({ searchParams }) {
     />
   );
 }
+
