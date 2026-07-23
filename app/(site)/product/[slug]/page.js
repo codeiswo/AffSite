@@ -166,16 +166,18 @@ export async function generateMetadata({ params }) {
 export default async function ProductDetailPage({ params }) {
   const resolvedParams = await params;
   const slug = resolvedParams?.slug;
-  let product;
-  try { product = await getProductBySlug(slug); } catch { product = null; }
+  let rawProduct;
+  try { rawProduct = await getProductBySlug(slug); } catch { rawProduct = null; }
 
-  if (!product) {
-    product = fallbackProducts.find(p => p.slug === slug) || fallbackProducts[0];
+  if (!rawProduct) {
+    rawProduct = fallbackProducts.find(p => p.slug === slug) || fallbackProducts[0];
   }
 
   let settings = {};
   try { settings = await getSettings(); } catch (_) {}
   const baseUrl = settings.site_url || 'https://www.affsite.com';
+
+  const product = JSON.parse(JSON.stringify(rawProduct || {}));
 
   const gallery = parseJSON(product.gallery) || [];
   const features = parseJSON(product.features) || [];
@@ -184,31 +186,33 @@ export default async function ProductDetailPage({ params }) {
   const discount = product.compare_price ? Math.round((1 - product.price / product.compare_price) * 100) : 0;
 
   // Related products
-  let relatedProducts = [];
+  let rawRelatedProducts = [];
   try {
     const result = await getProducts({ brand: product.brand, limit: 4 });
-    relatedProducts = (result?.products || []).filter(p => p.id !== product.id).slice(0, 3);
+    rawRelatedProducts = (result?.products || []).filter(p => p.id !== product.id).slice(0, 3);
   } catch { /* ignore */ }
 
-  if (relatedProducts.length === 0) {
-    relatedProducts = fallbackProducts.filter(p => p.id !== product.id).slice(0, 3);
+  if (rawRelatedProducts.length === 0) {
+    rawRelatedProducts = fallbackProducts.filter(p => p.id !== product.id).slice(0, 3);
   }
+
+  const relatedProducts = JSON.parse(JSON.stringify(rawRelatedProducts || []));
 
   // JSON-LD Product & Breadcrumb Schema
   const jsonLdProduct = {
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: product.title,
+    name: product.title || '',
     description: product.description || '',
     image: allImages,
     brand: { '@type': 'Brand', name: product.brand || 'Generic' },
-    sku: product.sku || `SKU-${product.id}`,
+    sku: product.sku || `SKU-${product.id || '0'}`,
     offers: {
       '@type': 'Offer',
       price: product.price || 0,
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
-      url: product.affiliate_link || `${baseUrl}/product/${product.slug}`,
+      url: product.affiliate_link || `${baseUrl}/product/${product.slug || ''}`,
       seller: { '@type': 'Organization', name: settings.site_name || 'AffSite Deals' },
     },
   };
@@ -219,7 +223,7 @@ export default async function ProductDetailPage({ params }) {
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
       { '@type': 'ListItem', position: 2, name: 'Products', item: `${baseUrl}/products` },
-      { '@type': 'ListItem', position: 3, name: product.title, item: `${baseUrl}/product/${product.slug}` }
+      { '@type': 'ListItem', position: 3, name: product.title || 'Product', item: `${baseUrl}/product/${product.slug || ''}` }
     ]
   };
 
