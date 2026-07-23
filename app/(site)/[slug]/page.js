@@ -24,10 +24,10 @@ export async function generateMetadata({ params }) {
 
 export default async function TopLevelCMSPage({ params }) {
   const { slug } = await params;
-  let page;
-  try { page = await getPageBySlug(slug); } catch { page = null; }
+  let rawPage;
+  try { rawPage = await getPageBySlug(slug); } catch { rawPage = null; }
 
-  if (!page) notFound();
+  if (!rawPage) notFound();
 
   let settings = {};
   try {
@@ -43,5 +43,7 @@ export default async function TopLevelCMSPage({ params }) {
   else if (archetype === 'luxury') SelectedSinglePage = LuxuryTheme.SinglePage;
   else SelectedSinglePage = ClassicTheme.SinglePage;
 
-  return <SelectedSinglePage page={page} />;
+  const cleanPage = JSON.parse(JSON.stringify(rawPage || {}));
+
+  return <SelectedSinglePage page={cleanPage} />;
 }

@@ -30,13 +30,13 @@ export async function generateMetadata() {
 }
 
 export default async function HomePage() {
-  let products;
+  let rawProducts;
   let settings = {};
   try {
-    products = await getAllProducts();
-    if (!products || products.length === 0) products = fallbackProducts;
+    rawProducts = await getAllProducts();
+    if (!rawProducts || rawProducts.length === 0) rawProducts = fallbackProducts;
   } catch {
-    products = fallbackProducts;
+    rawProducts = fallbackProducts;
   }
 
   try {
@@ -66,7 +66,9 @@ export default async function HomePage() {
     logo: `${baseUrl}/logo.png`,
   };
 
+  const products = JSON.parse(JSON.stringify(rawProducts || []));
   const featuredProducts = products.filter(p => p.is_featured).slice(0, 6);
+  const cleanSettings = JSON.parse(JSON.stringify(settings || {}));
 
   const theme = settings.site_theme || 'default';
   const archetype = getThemeArchetype(theme);
@@ -81,7 +83,7 @@ export default async function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrg) }} />
-      <SelectedHomepage settings={settings} featuredProducts={featuredProducts} />
+      <SelectedHomepage settings={cleanSettings} featuredProducts={featuredProducts} />
     </>
   );
 }

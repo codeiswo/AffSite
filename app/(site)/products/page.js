@@ -33,28 +33,28 @@ export default async function ProductsPage({ searchParams }) {
   const search = params?.search || '';
   const page = parseInt(params?.page || '1');
 
-  let products, total;
+  let rawProducts, total;
   try {
     const result = await getProducts({ page, limit: 12, brand, category, search, sort });
-    products = result.products;
-    total = result.total;
-    if (!products || products.length === 0) {
-      products = fallbackProducts;
+    rawProducts = result?.products;
+    total = result?.total || 0;
+    if (!rawProducts || rawProducts.length === 0) {
+      rawProducts = fallbackProducts;
       total = fallbackProducts.length;
     }
   } catch {
-    products = fallbackProducts;
+    rawProducts = fallbackProducts;
     total = fallbackProducts.length;
   }
 
   // Filter fallback products if needed
-  if (products === fallbackProducts) {
-    if (brand) products = products.filter(p => p.brand === brand);
-    if (category) products = products.filter(p => p.category === category);
-    total = products.length;
+  if (rawProducts === fallbackProducts) {
+    if (brand) rawProducts = rawProducts.filter(p => p.brand === brand);
+    if (category) rawProducts = rawProducts.filter(p => p.category === category);
+    total = rawProducts.length;
   }
 
-  const totalPages = Math.ceil(total / 12);
+  const products = JSON.parse(JSON.stringify(rawProducts || []));
 
   let settings = {};
   try {
@@ -77,7 +77,6 @@ export default async function ProductsPage({ searchParams }) {
       products={products}
       categories={categories}
       brands={brands}
-      onFilterChange={() => {}}
     />
   );
 }
