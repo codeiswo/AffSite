@@ -230,7 +230,7 @@ export default function ModularHomepageAdmin() {
           className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 text-white text-sm font-bold hover:bg-indigo-500 transition-colors shadow-lg cursor-pointer"
         >
           <Save className="w-4 h-4" />
-          {saving ? 'Saving...' : saved ? 'Saved ✓' : 'Save Layout Changes'}
+          {saving ? '保存中...' : saved ? '已保存 ✓' : '保存'}
         </button>
       </div>
 

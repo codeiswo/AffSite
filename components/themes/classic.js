@@ -21,7 +21,6 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
   const [calcRate, setCalcRate] = useState(12);
   const [calcStore, setCalcStore] = useState('Nike');
   const [copiedCode, setCopiedCode] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
 
   const stores = [
     { name: 'Burberry', rate: 15, coupon: 'LUXURY15', desc: '15% Rebate + $50 Voucher' },
@@ -42,288 +41,381 @@ export function Homepage({ settings = {}, featuredProducts = [] }) {
 
   const estimatedRebate = Math.round(calcSpend * (calcRate / 100));
 
-  const handleCopy = (code) => {
-    setCopiedCode(code);
-    if (typeof navigator !== 'undefined' && navigator.clipboard) {
-      navigator.clipboard.writeText(code);
+  const defaultModules = [
+    { id: 'm1', type: 'hero', name: 'Hero Banner', active: true },
+    { id: 'm2', type: 'brand_wall', name: 'Partner Brands Wall', active: true },
+    { id: 'm3', type: 'category_grid', name: 'Category Explorer Bar', active: true },
+    { id: 'm4', type: 'product_grid', name: 'Featured Products Grid', active: true },
+    { id: 'm5', type: 'rebate_calc', name: 'Interactive Rebate Calculator', active: true },
+    { id: 'm6', type: 'features', name: 'Why Choose Us', active: true },
+    { id: 'm7', type: 'testimonials', name: 'Shopper Reviews', active: true }
+  ];
+
+  let modules = defaultModules;
+  if (settings.homepage_modules) {
+    try {
+      const parsed = typeof settings.homepage_modules === 'string'
+        ? JSON.parse(settings.homepage_modules)
+        : settings.homepage_modules;
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        modules = parsed;
+      }
+    } catch (_) {}
+  }
+
+  const renderModule = (mod, index) => {
+    if (mod.active === false) return null;
+
+    switch (mod.type) {
+      case 'hero': {
+        const heroCustomSettings = {
+          ...settings,
+          hero_title: mod.title || settings.hero_title,
+          hero_description: mod.subtitle || settings.hero_description,
+          hero_button_text: mod.btnText || settings.hero_button_text,
+          hero_button_url: mod.btnUrl || settings.hero_button_url,
+          hero_image: mod.imageUrl || settings.hero_image,
+        };
+        return <Hero key={mod.id || `hero-${index}`} settings={heroCustomSettings} />;
+      }
+
+      case 'brand_wall': {
+        return <BrandWall key={mod.id || `brand_wall-${index}`} title={mod.title} subtitle={mod.subtitle} />;
+      }
+
+      case 'category_grid': {
+        return (
+          <section key={mod.id || `category_grid-${index}`} className="py-12 bg-white dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800">
+            <div className="container-custom">
+              <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 text-xs font-bold uppercase tracking-wider mb-2">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    EXPLORE MAINSTREAM CATEGORIES
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-gray-900 dark:text-white">
+                    {mod.title || 'Shop Cashback Deals by Category'}
+                  </h2>
+                </div>
+                <Link
+                  href="/products"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 transition-colors"
+                >
+                  Browse All Categories & Stores
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                {categoriesList.map((cat) => (
+                  <Link
+                    key={cat.slug}
+                    href={`/products?category=${cat.slug}`}
+                    className={`group p-5 rounded-2xl bg-gradient-to-br ${cat.bg} border hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden`}
+                  >
+                    <span className="text-3xl mb-3 group-hover:scale-110 transition-transform">{cat.icon}</span>
+                    <span className="text-sm font-heading font-bold text-gray-900 dark:text-white mb-1 leading-tight">
+                      {cat.name}
+                    </span>
+                    <div className="mt-3 px-2 py-0.5 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-[10px] font-bold text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
+                      {cat.badge}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      case 'product_grid': {
+        const displayLimit = mod.limit || 6;
+        const productsToDisplay = featuredProducts.slice(0, displayLimit);
+        return (
+          <section key={mod.id || `product_grid-${index}`} className="section-padding bg-surface dark:bg-surface-dark">
+            <div className="container-custom">
+              <div className="text-center mb-14">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 text-xs font-extrabold uppercase tracking-wider mb-3">
+                  <Flame className="w-4 h-4 animate-pulse" />
+                  HOT & FEATURED OFFERS
+                </div>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-gray-900 dark:text-white mb-4">
+                  {mod.title || 'Verified Fashion & Multi-Category Deals'}
+                </h2>
+                <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-base">
+                  {mod.subtitle || 'Click outbound links to claim discount coupons and earn instant cash rebates at partner merchant stores.'}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                {productsToDisplay.map((product, i) => (
+                  <ProductCard key={product.id} product={product} index={i} />
+                ))}
+              </div>
+
+              <div className="text-center mt-12">
+                <Link
+                  href="/products"
+                  className="group inline-flex items-center gap-2 btn-primary text-base px-8 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all"
+                >
+                  <ShoppingBag className="w-5 h-5" />
+                  Explore All Deals & Promo Codes
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      case 'rebate_calc': {
+        return (
+          <section key={mod.id || `rebate_calc-${index}`} className="section-padding bg-gradient-to-br from-indigo-950 via-slate-900 to-purple-950 text-white relative overflow-hidden">
+            <div className="absolute inset-0 opacity-20 pointer-events-none">
+              <div className="absolute top-1/3 right-10 w-96 h-96 rounded-full bg-indigo-500 blur-3xl" />
+              <div className="absolute bottom-10 left-10 w-96 h-96 rounded-full bg-purple-500 blur-3xl" />
+            </div>
+
+            <div className="container-custom relative z-10">
+              <div className="max-w-4xl mx-auto">
+                <div className="text-center mb-12">
+                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-amber-300 text-xs font-bold uppercase tracking-wider mb-4">
+                    <Zap className="w-4 h-4 text-amber-400" />
+                    INSTANT REBATE CALCULATOR
+                  </div>
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white mb-4">
+                    {mod.title || 'Calculate Your Shopping Savings'}
+                  </h2>
+                  <p className="text-indigo-200 text-base max-w-xl mx-auto">
+                    {mod.subtitle || 'Select your order spend and partner merchant store to calculate instant cashback returns.'}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white/5 backdrop-blur-xl border border-white/15 p-8 sm:p-10 rounded-3xl shadow-2xl">
+                  {/* Controls */}
+                  <div className="lg:col-span-7 space-y-6">
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <label className="text-sm font-semibold text-indigo-200">1. Select Target Merchant Store</label>
+                        <span className="text-xs font-bold text-amber-300">{calcRate}% Cash Rebate</span>
+                      </div>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                        {stores.map((st) => (
+                          <button
+                            key={st.name}
+                            onClick={() => {
+                              setCalcStore(st.name);
+                              setCalcRate(st.rate);
+                            }}
+                            className={`px-4 py-3 rounded-2xl border text-left transition-all cursor-pointer ${
+                              calcStore === st.name
+                                ? 'bg-indigo-600 border-indigo-400 text-white shadow-lg scale-105'
+                                : 'bg-white/5 border-white/10 text-indigo-100 hover:bg-white/10'
+                            }`}
+                          >
+                            <p className="font-bold text-sm">{st.name}</p>
+                            <p className="text-[11px] text-indigo-200">{st.rate}% Rebate</p>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <label className="text-sm font-semibold text-indigo-200">2. Estimated Shopping Spend Amount</label>
+                        <span className="text-lg font-mono font-extrabold text-amber-300">${calcSpend}</span>
+                      </div>
+                      <input
+                        type="range"
+                        min="50"
+                        max="2000"
+                        step="50"
+                        value={calcSpend}
+                        onChange={(e) => setCalcSpend(Number(e.target.value))}
+                        className="w-full h-3 bg-white/20 rounded-lg appearance-none cursor-pointer accent-amber-400"
+                      />
+                      <div className="flex justify-between text-xs text-indigo-300 mt-1 font-mono">
+                        <span>$50</span>
+                        <span>$500</span>
+                        <span>$1,000</span>
+                        <span>$2,000</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Result Output Card */}
+                  <div className="lg:col-span-5 bg-gradient-to-br from-indigo-600 to-purple-700 p-8 rounded-2xl text-center space-y-4 shadow-xl border border-white/20">
+                    <p className="text-xs font-bold uppercase tracking-widest text-indigo-200">ESTIMATED CASHBACK RETURN</p>
+                    <div className="text-5xl sm:text-6xl font-extrabold text-amber-300 font-mono tracking-tight">
+                      +${estimatedRebate}
+                    </div>
+                    <p className="text-xs text-white/90 leading-relaxed">
+                      Earn <span className="font-bold text-amber-300">{calcRate}% cashback</span> on your <span className="font-bold text-white">${calcSpend}</span> order at <span className="font-bold text-white">{calcStore}</span>.
+                    </p>
+
+                    <div className="pt-2">
+                      <Link
+                        href="/products"
+                        className="inline-flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-xl bg-white text-indigo-950 font-bold text-sm shadow-lg hover:bg-amber-300 transition-colors"
+                      >
+                        Claim {calcStore} Rebate Deal
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      case 'features':
+      case 'why_us': {
+        return (
+          <section key={mod.id || `features-${index}`} className="section-padding bg-white dark:bg-gray-900">
+            <div className="container-custom">
+              <div className="text-center mb-14">
+                <p className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-3">
+                  EASY 3-STEP PROCESS
+                </p>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-gray-900 dark:text-white mb-4">
+                  {mod.title || 'How to Claim Savings & Cashback'}
+                </h2>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                {[
+                  { step: '01', title: 'Find Your Favorite Deal', desc: 'Browse verified coupons and discount deals across fashion, electronics, home, and services.' },
+                  { step: '02', title: 'Click Outbound Track Link', desc: 'Click "Claim Coupon" to jump directly to official brand merchant website with tracking.' },
+                  { step: '03', title: 'Shop & Earn Cash Rebate', desc: 'Complete your checkout at partner store and get instant savings + cashback returns.' },
+                ].map(({ step, title, desc }) => (
+                  <div key={step} className="text-center group p-8 rounded-3xl bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-600 text-white font-heading font-extrabold text-2xl mb-6 shadow-lg shadow-indigo-600/30 group-hover:scale-110 transition-transform">
+                      {step}
+                    </div>
+                    <h3 className="text-xl font-heading font-bold text-gray-900 dark:text-white mb-3">{title}</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      case 'testimonials':
+      case 'reviews': {
+        return (
+          <section key={mod.id || `testimonials-${index}`} className="section-padding bg-surface dark:bg-surface-dark">
+            <div className="container-custom">
+              <div className="text-center mb-14">
+                <p className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-3">
+                  VERIFIED REVIEWS
+                </p>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-gray-900 dark:text-white mb-4">
+                  {mod.title || 'Trusted by 100,000+ Smart Shoppers'}
+                </h2>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[
+                  { name: 'Sarah M.', role: 'Fashion Buyer', text: 'Used the Burberry 15% cashback link and saved over $140 on my trench coat purchase. Works seamlessly!', rating: 5 },
+                  { name: 'David K.', role: 'Tech Enthusiast', text: 'Found active promo code for Sony wireless headphones plus 8% cash rebate. Best affiliate portal.', rating: 5 },
+                  { name: 'Elena R.', role: 'Home Decorator', text: 'Clean interface with zero misleading ads. Just click, get redirected, and save money.', rating: 5 },
+                ].map(({ name, role, text, rating }) => (
+                  <div key={name} className="p-8 rounded-3xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex items-center gap-1 mb-4">
+                      {[...Array(rating)].map((_, j) => (
+                        <Star key={j} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-6">&ldquo;{text}&rdquo;</p>
+                    <div className="flex items-center gap-3 border-t border-gray-100 dark:border-gray-700 pt-4">
+                      <div className="w-10 h-10 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm">
+                        {name.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold text-gray-900 dark:text-white">{name}</p>
+                        <p className="text-xs text-gray-400">{role}</p>
+                      </div>
+                      <ShieldCheck className="w-5 h-5 text-emerald-500 ml-auto" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      case 'custom_banner': {
+        return (
+          <section key={mod.id || `custom_banner-${index}`} className="py-12 bg-white dark:bg-gray-900">
+            <div className="container-custom">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-800 bg-gradient-to-r from-indigo-900 via-purple-900 to-slate-900 text-white p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
+                {mod.imageUrl && (
+                  <div className="w-full md:w-1/2 aspect-video md:aspect-square max-h-72 rounded-2xl overflow-hidden bg-black/20 flex items-center justify-center shrink-0">
+                    <img src={mod.imageUrl} alt={mod.title || 'Banner'} className="w-full h-full object-cover" />
+                  </div>
+                )}
+                <div className={`space-y-4 ${mod.imageUrl ? 'w-full md:w-1/2' : 'w-full text-center'}`}>
+                  {mod.title && (
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-extrabold text-white">
+                      {mod.title}
+                    </h2>
+                  )}
+                  {mod.subtitle && (
+                    <p className="text-indigo-200 text-sm md:text-base leading-relaxed">
+                      {mod.subtitle}
+                    </p>
+                  )}
+                  {mod.btnText && (
+                    <div className="pt-2">
+                      <Link
+                        href={mod.btnUrl || '/products'}
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-indigo-950 font-bold text-sm hover:bg-amber-300 transition-colors shadow-lg"
+                      >
+                        {mod.btnText}
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      case 'custom_html': {
+        return (
+          <section key={mod.id || `custom_html-${index}`} className="py-8 bg-surface dark:bg-surface-dark">
+            <div className="container-custom">
+              {mod.title && (
+                <h3 className="text-lg font-heading font-bold text-gray-900 dark:text-white mb-4">
+                  {mod.title}
+                </h3>
+              )}
+              {mod.htmlContent && (
+                <div
+                  className="prose dark:prose-invert max-w-none"
+                  dangerouslySetInnerHTML={{ __html: mod.htmlContent }}
+                />
+              )}
+            </div>
+          </section>
+        );
+      }
+
+      default:
+        return null;
     }
-    setTimeout(() => setCopiedCode(''), 2500);
   };
 
   return (
     <>
-      {/* 1. Hero Section */}
-      <Hero settings={settings} />
-
-      {/* 2. Top Brands Showcase */}
-      <BrandWall />
-
-      {/* 3. Category Grid Selector Bar */}
-      <section className="py-12 bg-white dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800">
-        <div className="container-custom">
-          <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 text-xs font-bold uppercase tracking-wider mb-2">
-                <Sparkles className="w-3.5 h-3.5" />
-                EXPLORE MAINSTREAM CATEGORIES
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-gray-900 dark:text-white">
-                Shop Cashback Deals by Category
-              </h2>
-            </div>
-            <Link
-              href="/products"
-              className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 transition-colors"
-            >
-              Browse All Categories & Stores
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {categoriesList.map((cat) => (
-              <Link
-                key={cat.slug}
-                href={`/products?category=${cat.slug}`}
-                className={`group p-5 rounded-2xl bg-gradient-to-br ${cat.bg} border hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden`}
-              >
-                <span className="text-3xl mb-3 group-hover:scale-110 transition-transform">{cat.icon}</span>
-                <span className="text-sm font-heading font-bold text-gray-900 dark:text-white mb-1 leading-tight">
-                  {cat.name}
-                </span>
-                <div className="mt-3 px-2 py-0.5 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-[10px] font-bold text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
-                  {cat.badge}
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Trending Cashback Deals Grid */}
-      <section className="section-padding bg-surface dark:bg-surface-dark">
-        <div className="container-custom">
-          <div className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 text-xs font-extrabold uppercase tracking-wider mb-3">
-              <Flame className="w-4 h-4 animate-pulse" />
-              HOT & FEATURED OFFERS
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-gray-900 dark:text-white mb-4">
-              Verified Fashion & Multi-Category Deals
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-base">
-              Click outbound links to claim discount coupons and earn instant cash rebates at partner merchant stores.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {featuredProducts.map((product, i) => (
-              <ProductCard key={product.id} product={product} index={i} />
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link
-              href="/products"
-              className="group inline-flex items-center gap-2 btn-primary text-base px-8 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all"
-            >
-              <ShoppingBag className="w-5 h-5" />
-              Explore All Deals & Promo Codes
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Interactive Rebate Calculator Widget */}
-      <section className="section-padding bg-gradient-to-br from-indigo-950 via-slate-900 to-purple-950 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
-          <div className="absolute top-1/3 right-10 w-96 h-96 rounded-full bg-indigo-500 blur-3xl" />
-          <div className="absolute bottom-10 left-10 w-96 h-96 rounded-full bg-purple-500 blur-3xl" />
-        </div>
-
-        <div className="container-custom relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-amber-300 text-xs font-bold uppercase tracking-wider mb-4">
-                <Zap className="w-4 h-4 text-amber-400" />
-                INSTANT REBATE CALCULATOR
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white mb-4">
-                Calculate Your Shopping Savings
-              </h2>
-              <p className="text-indigo-200 text-base max-w-xl mx-auto">
-                Select your order spend and partner merchant store to calculate instant cashback returns.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white/5 backdrop-blur-xl border border-white/15 p-8 sm:p-10 rounded-3xl shadow-2xl">
-              {/* Controls */}
-              <div className="lg:col-span-7 space-y-6">
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <label className="text-sm font-semibold text-indigo-200">1. Select Target Merchant Store</label>
-                    <span className="text-xs font-bold text-amber-300">{calcRate}% Cash Rebate</span>
-                  </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                    {stores.map((st) => (
-                      <button
-                        key={st.name}
-                        onClick={() => {
-                          setCalcStore(st.name);
-                          setCalcRate(st.rate);
-                        }}
-                        className={`px-4 py-3 rounded-2xl border text-left transition-all cursor-pointer ${
-                          calcStore === st.name
-                            ? 'bg-indigo-600 border-indigo-400 text-white shadow-lg scale-105'
-                            : 'bg-white/5 border-white/10 text-indigo-100 hover:bg-white/10'
-                        }`}
-                      >
-                        <p className="font-bold text-sm">{st.name}</p>
-                        <p className="text-[11px] text-indigo-200">{st.rate}% Rebate</p>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <label className="text-sm font-semibold text-indigo-200">2. Estimated Shopping Spend Amount</label>
-                    <span className="text-lg font-mono font-extrabold text-amber-300">${calcSpend}</span>
-                  </div>
-                  <input
-                    type="range"
-                    min="50"
-                    max="2000"
-                    step="50"
-                    value={calcSpend}
-                    onChange={(e) => setCalcSpend(Number(e.target.value))}
-                    className="w-full h-3 bg-white/20 rounded-lg appearance-none cursor-pointer accent-amber-400"
-                  />
-                  <div className="flex justify-between text-xs text-indigo-300 mt-1 font-mono">
-                    <span>$50</span>
-                    <span>$500</span>
-                    <span>$1,000</span>
-                    <span>$2,000</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Result Output Card */}
-              <div className="lg:col-span-5 bg-gradient-to-br from-indigo-600 to-purple-700 p-8 rounded-2xl text-center space-y-4 shadow-xl border border-white/20">
-                <p className="text-xs font-bold uppercase tracking-widest text-indigo-200">ESTIMATED CASHBACK RETURN</p>
-                <div className="text-5xl sm:text-6xl font-extrabold text-amber-300 font-mono tracking-tight">
-                  +${estimatedRebate}
-                </div>
-                <p className="text-xs text-white/90 leading-relaxed">
-                  Earn <span className="font-bold text-amber-300">{calcRate}% cashback</span> on your <span className="font-bold text-white">${calcSpend}</span> order at <span className="font-bold text-white">{calcStore}</span>.
-                </p>
-
-                <div className="pt-2">
-                  <Link
-                    href="/products"
-                    className="inline-flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-xl bg-white text-indigo-950 font-bold text-sm shadow-lg hover:bg-amber-300 transition-colors"
-                  >
-                    Claim {calcStore} Rebate Deal
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Simple 3-Step Infographic */}
-      <section className="section-padding bg-white dark:bg-gray-900">
-        <div className="container-custom">
-          <div className="text-center mb-14">
-            <p className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-3">
-              EASY 3-STEP PROCESS
-            </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-gray-900 dark:text-white mb-4">
-              How to Claim Savings & Cashback
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {[
-              { step: '01', title: 'Find Your Favorite Deal', desc: 'Browse verified coupons and discount deals across fashion, electronics, home, and services.' },
-              { step: '02', title: 'Click Outbound Track Link', desc: 'Click "Claim Coupon" to jump directly to official brand merchant website with tracking.' },
-              { step: '03', title: 'Shop & Earn Cash Rebate', desc: 'Complete your checkout at partner store and get instant savings + cashback returns.' },
-            ].map(({ step, title, desc }, i) => (
-              <div key={step} className="text-center group p-8 rounded-3xl bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-600 text-white font-heading font-extrabold text-2xl mb-6 shadow-lg shadow-indigo-600/30 group-hover:scale-110 transition-transform">
-                  {step}
-                </div>
-                <h3 className="text-xl font-heading font-bold text-gray-900 dark:text-white mb-3">{title}</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 7. Shopper Reviews */}
-      <section className="section-padding bg-surface dark:bg-surface-dark">
-        <div className="container-custom">
-          <div className="text-center mb-14">
-            <p className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-3">
-              VERIFIED REVIEWS
-            </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-gray-900 dark:text-white mb-4">
-              Trusted by 100,000+ Smart Shoppers
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { name: 'Sarah M.', role: 'Fashion Buyer', text: 'Used the Burberry 15% cashback link and saved over $140 on my trench coat purchase. Works seamlessly!', rating: 5 },
-              { name: 'David K.', role: 'Tech Enthusiast', text: 'Found active promo code for Sony wireless headphones plus 8% cash rebate. Best affiliate portal.', rating: 5 },
-              { name: 'Elena R.', role: 'Home Decorator', text: 'Clean interface with zero misleading ads. Just click, get redirected, and save money.', rating: 5 },
-            ].map(({ name, role, text, rating }) => (
-              <div key={name} className="p-8 rounded-3xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(rating)].map((_, j) => (
-                    <Star key={j} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-6">&ldquo;{text}&rdquo;</p>
-                <div className="flex items-center gap-3 border-t border-gray-100 dark:border-gray-700 pt-4">
-                  <div className="w-10 h-10 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm">
-                    {name.charAt(0)}
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-gray-900 dark:text-white">{name}</p>
-                    <p className="text-xs text-gray-400">{role}</p>
-                  </div>
-                  <ShieldCheck className="w-5 h-5 text-emerald-500 ml-auto" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 8. CTA Banner */}
-      <section className="relative py-20 bg-gradient-to-r from-indigo-900 via-purple-900 to-slate-900 text-white text-center overflow-hidden">
-        <div className="container-custom relative z-10">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold mb-6 max-w-3xl mx-auto">
-            Ready to Earn Cashback on Top Brands?
-          </h2>
-          <p className="text-lg text-indigo-200 max-w-xl mx-auto mb-10">
-            Join thousands of smart shoppers saving money on fashion, electronics, home, and more.
-          </p>
-          <Link
-            href="/products"
-            className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-white text-indigo-950 font-extrabold text-lg shadow-2xl hover:bg-amber-300 transition-all hover:-translate-y-1"
-          >
-            <ShoppingBag className="w-6 h-6" />
-            Explore Cashback Deals Now
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-        </div>
-      </section>
+      {modules.map((mod, i) => renderModule(mod, i))}
     </>
   );
 }
