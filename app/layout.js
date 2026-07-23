@@ -10,8 +10,6 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const runtime = "edge";
 
-
-
 function parseCustomMetaTags(htmlString) {
   if (!htmlString) return {};
   const otherObj = {};
@@ -50,7 +48,7 @@ export async function generateMetadata() {
   const customOtherMetas = parseCustomMetaTags(settings.custom_html_tags);
   const siteName = settings.site_name || siteSettings.siteName || "AffSite Deals";
   const defaultTitle = settings.meta_title || siteSettings.seoTitle || "AffSite Deals - Curated Multi-Category Cashback & Coupon Directory";
-  const defaultDescription = settings.meta_description || siteSettings.seoDescription || "Discover top cashback deals, coupons, and discounts across Fashion, Electronics, Home, and more.";
+  const defaultDescription = settings.meta_description || siteSettings.seoDescription || "Discover top cashback deals, coupons, and discounts across Apparel, Electronics, Home, and more.";
 
   const icons = {};
   if (settings.site_favicon) {
@@ -75,30 +73,28 @@ export async function generateMetadata() {
       ...customOtherMetas,
     },
     keywords: [
-      "refrigerator water filter replacement",
-      "water filter replacement",
-      "refrigerator water filter",
-      "samsung water filter",
-      "ge water filter",
-      "lg water filter",
-      "whirlpool water filter",
-      "fridge water filter",
-      "water filter cartridge",
-      "NSF certified water filter",
+      "cashback deals",
+      "fashion promo codes",
+      "coupons directory",
+      "apparel discounts",
+      "electronics cashback",
+      "home deals",
+      "shopping rebates",
+      "verified promo codes"
     ],
     authors: [{ name: siteName }],
     creator: siteName,
     openGraph: {
       title: defaultTitle,
       description: defaultDescription,
-      url: `https://www.${siteSettings.domain || "filterspro.com"}`,
+      url: siteUrl,
       siteName: siteName,
       images: [
         {
           url: "/opengraph-image.png",
           width: 1200,
           height: 630,
-          alt: `${siteName} - Premium Water Filter Replacements`,
+          alt: `${siteName} - Curated Cashback Deals`,
         },
       ],
       locale: "en_US",
@@ -131,35 +127,9 @@ export default async function RootLayout({ children }) {
   } catch (_) {}
 
   const activeThemeClass = `theme-${settings.site_theme || 'default'}`;
-  const customHtmlTags = settings.custom_html_tags || '';
 
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable} ${activeThemeClass}`} suppressHydrationWarning>
-      <head suppressHydrationWarning>
-        {customHtmlTags && (
-          <script
-            id="custom-html-tags-injector"
-            dangerouslySetInnerHTML={{
-              __html: `(function(){
-                try {
-                  var temp = document.createElement('div');
-                  temp.innerHTML = ${JSON.stringify(customHtmlTags)};
-                  Array.from(temp.childNodes).forEach(function(node){
-                    if (node.tagName === 'SCRIPT') {
-                      var s = document.createElement('script');
-                      Array.from(node.attributes).forEach(function(attr){ s.setAttribute(attr.name, attr.value); });
-                      s.appendChild(document.createTextNode(node.innerHTML));
-                      document.head.appendChild(s);
-                    } else if (node.tagName === 'LINK' || node.tagName === 'STYLE') {
-                      document.head.appendChild(node.cloneNode(true));
-                    }
-                  });
-                } catch(e){}
-              })();`
-            }}
-          />
-        )}
-      </head>
       <body className="font-body antialiased" suppressHydrationWarning>
         <CartProvider>
           {children}
