@@ -9,20 +9,20 @@ export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
 const fallbackProducts = [
-  { id: 1, title: 'Samsung DA29-00020B Filter', slug: 'samsung-da29-00020b-replacement', price: 29.99, compare_price: 49.99, brand: 'Samsung', category: 'Refrigerator Water Filters', image_url: 'https://placehold.co/600x600/0F4C81/FFFFFF?text=Samsung', features: '["NSF Certified","6-Month Life"]', is_featured: 1 },
-  { id: 2, title: 'GE MWF SmartWater Filter', slug: 'ge-mwf-smartwater-replacement', price: 24.99, compare_price: 44.99, brand: 'GE', category: 'Refrigerator Water Filters', image_url: 'https://placehold.co/600x600/0A3558/FFFFFF?text=GE+MWF', features: '["NSF Certified","Easy Install"]', is_featured: 1 },
-  { id: 3, title: 'LG LT1000P Filter', slug: 'lg-lt1000p-replacement', price: 26.99, compare_price: 45.99, brand: 'LG', category: 'Refrigerator Water Filters', image_url: 'https://placehold.co/600x600/00B4D8/FFFFFF?text=LG', features: '["Quick Connect","200 Gallon"]', is_featured: 1 },
-  { id: 4, title: 'Whirlpool W10295370A Filter', slug: 'whirlpool-w10295370a-replacement', price: 22.99, compare_price: 39.99, brand: 'Whirlpool', category: 'Refrigerator Water Filters', image_url: 'https://placehold.co/600x600/0096B4/FFFFFF?text=Whirlpool', features: '["Triple Filtration","NSF Certified"]', is_featured: 1 },
-  { id: 5, title: 'Maytag UKF8001 PUR Filter', slug: 'maytag-ukf8001-replacement', price: 23.99, compare_price: 42.99, brand: 'Maytag', category: 'Refrigerator Water Filters', image_url: 'https://placehold.co/600x600/0D4373/FFFFFF?text=Maytag', features: '["Multi-Brand","Premium Carbon"]', is_featured: 1 },
-  { id: 6, title: 'Frigidaire ULTRAWF Filter', slug: 'frigidaire-ultrawf-replacement', price: 21.99, compare_price: 38.99, brand: 'Frigidaire', category: 'Refrigerator Water Filters', image_url: 'https://placehold.co/600x600/005B6B/FFFFFF?text=Frigidaire', features: '["Activated Carbon","Push-In Install"]', is_featured: 1 },
+  { id: 1, title: 'Classic Cashmere Blend Trench Coat', slug: 'classic-cashmere-blend-trench-coat', price: 189.99, compare_price: 299.99, brand: 'Burberry', category: 'apparel', image_url: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=800&auto=format&fit=crop&q=80', features: '["70% Wool 30% Cashmere","Water-resistant finish","Dry clean only"]', affiliate_link: 'https://www.burberry.com', is_featured: 1 },
+  { id: 2, title: 'Designer Distressed Denim Jacket', slug: 'designer-distressed-denim-jacket', price: 79.99, compare_price: 129.99, brand: "Levi's", category: 'apparel', image_url: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=800&auto=format&fit=crop&q=80', features: '["100% Organic Cotton","Vintage Wash Finish","Reinforced Stitching"]', affiliate_link: 'https://www.levis.com', is_featured: 1 },
+  { id: 3, title: 'Vintage Floral Summer Midi Dress', slug: 'vintage-floral-summer-midi-dress', price: 59.99, compare_price: 89.99, brand: 'ZARA', category: 'apparel', image_url: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=800&auto=format&fit=crop&q=80', features: '["Breathable Linen Fabric","Puff Sleeves","Side Slit"]', affiliate_link: 'https://www.zara.com', is_featured: 1 },
+  { id: 4, title: 'Premium Heavyweight Fleece Hoodie', slug: 'premium-heavyweight-fleece-hoodie', price: 64.99, compare_price: 99.99, brand: 'Nike', category: 'apparel', image_url: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&auto=format&fit=crop&q=80', features: '["450GSM Heavyweight Fleece","Double-Layer Hood","Pre-shrunk Fabric"]', affiliate_link: 'https://www.nike.com', is_featured: 1 },
+  { id: 5, title: 'Wireless Active Noise Canceling Headphones', slug: 'wireless-active-noise-canceling-headphones', price: 249.99, compare_price: 349.99, brand: 'Sony', category: 'digital', image_url: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80', features: '["ANC Noise Cancellation","30-Hour Playtime","Bluetooth 5.3"]', affiliate_link: 'https://www.sony.com', is_featured: 1 },
+  { id: 6, title: 'Smart Robotic Vacuum Cleaner & Mop', slug: 'smart-robotic-vacuum-cleaner-mop', price: 399.99, compare_price: 599.99, brand: 'Roborock', category: 'home', image_url: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800&auto=format&fit=crop&q=80', features: '["LiDAR Precision Mapping","5000Pa Suction","Self-Emptying Base"]', affiliate_link: 'https://www.roborock.com', is_featured: 1 },
 ];
 
-const brands = ['Samsung', 'GE', 'LG', 'Whirlpool', 'Maytag', 'Frigidaire'];
-const categories = ['Refrigerator Water Filters', 'Refrigerator Air Filters', 'Ice Maker'];
+const brands = ['Burberry', "Levi's", 'ZARA', 'Nike', 'Sony', 'Roborock', 'Gucci', 'adidas', 'Uniqlo'];
+const categories = ['apparel', 'digital', 'home', 'beauty', 'sports', 'services'];
 
 export const metadata = {
-  title: 'All Products - Refrigerator Water Filter Replacements',
-  description: 'Browse our complete collection of premium refrigerator water filter replacements. Samsung, GE, LG, Whirlpool, Maytag & more. NSF certified, great prices.',
+  title: 'All Cashback Deals & Coupons | AffSite Deals',
+  description: 'Browse our complete collection of fashion cashback deals, brand promo codes, and shopping discounts across top categories.',
 };
 
 export default async function ProductsPage({ searchParams }) {
@@ -65,22 +65,19 @@ export default async function ProductsPage({ searchParams }) {
   const archetype = getThemeArchetype(theme);
 
   let SelectedProductList;
-  if (archetype === 'minimalist') SelectedProductList = MinimalistTheme.ProductList;
-  else if (archetype === 'futuristic') SelectedProductList = FuturisticTheme.ProductList;
-  else if (archetype === 'luxury') SelectedProductList = LuxuryTheme.ProductList;
-  else SelectedProductList = ClassicTheme.ProductList;
+  if (archetype === 'minimalist') SelectedProductList = MinimalistTheme.ProductListPage;
+  else if (archetype === 'futuristic') SelectedProductList = FuturisticTheme.ProductListPage;
+  else if (archetype === 'luxury') SelectedProductList = LuxuryTheme.ProductListPage;
+  else SelectedProductList = ClassicTheme.ProductListPage;
 
   return (
     <SelectedProductList
-      category={category}
-      brand={brand}
-      sort={sort}
+      selectedCategory={category}
+      selectedBrand={brand}
       products={products}
-      total={total}
-      page={page}
-      totalPages={totalPages}
       categories={categories}
       brands={brands}
+      onFilterChange={() => {}}
     />
   );
 }

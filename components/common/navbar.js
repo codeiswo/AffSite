@@ -100,12 +100,12 @@ export default function Navbar({ settings = {} }) {
             ) : (
               <>
                 <div className="w-10 h-10 rounded-xl bg-hero-gradient flex items-center justify-center shadow-glow group-hover:shadow-glow-lg transition-shadow duration-300">
-                  <Droplets className="w-5 h-5 text-white" />
+                  <ShoppingBag className="w-5 h-5 text-white" />
                 </div>
                 <span className={`text-xl font-bold font-heading tracking-tight transition-colors duration-300 ${
                   showScrolledStyle ? 'text-primary dark:text-accent-400' : 'text-white'
                 }`}>
-                  {settings.site_name || siteSettings.siteName || 'FiltersPro'}
+                  {settings.site_name || siteSettings.siteName || 'AffSite Deals'}
                 </span>
               </>
             )}

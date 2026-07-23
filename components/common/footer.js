@@ -1,44 +1,74 @@
 import Link from 'next/link';
-import { Droplets, Mail, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
+import { ShoppingBag, Mail, Facebook, Twitter, Instagram, Youtube, ArrowRight, Tag } from 'lucide-react';
 import siteSettings from "@/config/site-settings.json";
 
 export default function Footer({ settings = {} }) {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
-    products: [
-      { name: 'Refrigerator Water Filters', href: '/products?category=Refrigerator+Water+Filters' },
-      { name: 'Refrigerator Air Filters', href: '/products?category=Refrigerator+Air+Filters' },
-      { name: 'Ice Maker', href: '/products?category=Ice+Maker' },
-      { name: 'All Products', href: '/products' },
+    categories: [
+      { name: 'Apparel & Fashion (服装)', href: '/products?category=apparel' },
+      { name: 'Electronics & Tech (数码)', href: '/products?category=digital' },
+      { name: 'Home & Living (家居)', href: '/products?category=home' },
+      { name: 'Beauty & Accessories (美妆)', href: '/products?category=beauty' },
+      { name: 'Sports & Outdoors (运动)', href: '/products?category=sports' },
+      { name: 'All Cashback Deals', href: '/products' },
     ],
     brands: [
-      { name: 'Samsung Filters', href: '/products?brand=Samsung' },
-      { name: 'GE Filters', href: '/products?brand=GE' },
-      { name: 'LG Filters', href: '/products?brand=LG' },
-      { name: 'Whirlpool Filters', href: '/products?brand=Whirlpool' },
-      { name: 'Maytag Filters', href: '/products?brand=Maytag' },
-      { name: 'Frigidaire Filters', href: '/products?brand=Frigidaire' },
+      { name: 'Nike Deals & Rebates', href: '/products?brand=Nike' },
+      { name: 'ZARA Promo Coupons', href: '/products?brand=ZARA' },
+      { name: 'adidas Official Outlet', href: '/products?brand=adidas' },
+      { name: 'Burberry Luxury Sales', href: '/products?brand=Burberry' },
+      { name: "Levi's Denim Discounts", href: "/products?brand=Levi's" },
+      { name: 'Sony Electronics Rebates', href: '/products?brand=Sony' },
     ],
     company: [
       { name: 'About Us', href: '/about' },
-      { name: 'Contact', href: '/contact' },
+      { name: 'Contact Us', href: '/contact' },
       { name: 'Privacy Policy', href: '/page/privacy-policy' },
       { name: 'Terms of Service', href: '/page/terms-of-service' },
-      { name: 'Shipping Policy', href: '/page/shipping-policy' },
     ],
   };
 
-  const contactEmail = settings.site_email || `info@${siteSettings.domain || 'filterspro.com'}`;
+  const contactEmail = settings.site_email || `info@${siteSettings.domain || 'affsite.com'}`;
 
   return (
-    <footer id="site-footer" className="bg-gray-900 text-gray-300">
+    <footer id="site-footer" className="bg-gray-950 text-gray-300">
+      {/* Top Call to Action Banner */}
+      <div className="bg-gradient-to-r from-indigo-900 via-purple-900 to-slate-900 border-t border-b border-indigo-500/20 py-12">
+        <div className="container-custom text-center max-w-4xl">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-4 border border-indigo-500/30">
+            <Tag className="w-3.5 h-3.5" /> Exclusive Partner Discounts
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-heading font-bold text-white mb-4">
+            Ready to Save Big on Top Global Brands?
+          </h2>
+          <p className="text-indigo-200/80 text-base max-w-xl mx-auto mb-8">
+            Explore 10,000+ verified coupons, brand promo codes, and instant affiliate cashback rebates. Updated daily by deal editors.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="/products"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-white text-indigo-950 font-bold text-base hover:bg-slate-100 transition-all duration-300 hover:shadow-glow"
+            >
+              Find Partner Deals <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl border border-white/20 text-white font-semibold text-base hover:bg-white/10 transition-all duration-300"
+            >
+              Contact Support
+            </Link>
+          </div>
+        </div>
+      </div>
+
       {/* Main footer */}
       <div className="container-custom pt-16 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand column */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-5 group">
+            <Link href="/" className="flex items-center gap-2.5 mb-5 group">
               {settings.site_logo ? (
                 <img
                   src={settings.site_logo}
@@ -48,38 +78,37 @@ export default function Footer({ settings = {} }) {
               ) : (
                 <>
                   <div className="w-10 h-10 rounded-xl bg-hero-gradient flex items-center justify-center shadow-glow group-hover:shadow-glow-lg transition-shadow">
-                    <Droplets className="w-5 h-5 text-white" />
+                    <ShoppingBag className="w-5 h-5 text-white" />
                   </div>
                   <span className="text-xl font-bold font-heading text-white tracking-tight">
-                    {settings.site_name || 'FiltersPro'}
+                    {settings.site_name || 'AffSite Deals'}
                   </span>
                 </>
               )}
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Premium refrigerator water filter replacements for all major brands. 
-              NSF certified, easy installation, pure clean water for your family.
+              Curated cashback deals, promo codes, and discounts across Apparel, Electronics, Home & Services. Shop partner merchants and earn instant rebates.
             </p>
             <div className="flex gap-3">
               {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
                 <a
                   key={i}
                   href="#"
-                  className="w-9 h-9 rounded-lg bg-white/5 hover:bg-accent/20 flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  className="w-9 h-9 rounded-lg bg-white/5 hover:bg-indigo-500/20 flex items-center justify-center transition-all duration-300 hover:scale-110"
                 >
-                  <Icon className="w-4 h-4 text-gray-400 hover:text-accent" />
+                  <Icon className="w-4 h-4 text-gray-400 hover:text-indigo-400" />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Products */}
+          {/* Categories */}
           <div>
-            <h3 className="text-white font-heading font-semibold text-sm uppercase tracking-wider mb-4">Products</h3>
+            <h3 className="text-white font-heading font-semibold text-sm uppercase tracking-wider mb-4">Categories</h3>
             <ul className="space-y-2.5">
-              {footerLinks.products.map((link) => (
+              {footerLinks.categories.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-sm text-gray-400 hover:text-accent transition-colors duration-300">
+                  <Link href={link.href} className="text-sm text-gray-400 hover:text-indigo-400 transition-colors duration-300">
                     {link.name}
                   </Link>
                 </li>
@@ -87,13 +116,13 @@ export default function Footer({ settings = {} }) {
             </ul>
           </div>
 
-          {/* Brands */}
+          {/* Partner Brands */}
           <div>
-            <h3 className="text-white font-heading font-semibold text-sm uppercase tracking-wider mb-4">Brands</h3>
+            <h3 className="text-white font-heading font-semibold text-sm uppercase tracking-wider mb-4">Top Brands</h3>
             <ul className="space-y-2.5">
               {footerLinks.brands.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-sm text-gray-400 hover:text-accent transition-colors duration-300">
+                  <Link href={link.href} className="text-sm text-gray-400 hover:text-indigo-400 transition-colors duration-300">
                     {link.name}
                   </Link>
                 </li>
@@ -107,14 +136,14 @@ export default function Footer({ settings = {} }) {
             <ul className="space-y-2.5 mb-6">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-sm text-gray-400 hover:text-accent transition-colors duration-300">
+                  <Link href={link.href} className="text-sm text-gray-400 hover:text-indigo-400 transition-colors duration-300">
                     {link.name}
                   </Link>
                 </li>
               ))}
             </ul>
             <div className="space-y-3">
-              <a href={`mailto:${contactEmail}`} className="flex items-center gap-2 text-sm text-gray-400 hover:text-accent transition-colors">
+              <a href={`mailto:${contactEmail}`} className="flex items-center gap-2 text-sm text-gray-400 hover:text-indigo-400 transition-colors">
                 <Mail className="w-4 h-4" />
                 {contactEmail}
               </a>
@@ -127,10 +156,10 @@ export default function Footer({ settings = {} }) {
       <div className="border-t border-white/5">
         <div className="container-custom py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-gray-500">
-            © {currentYear} {settings.site_name || 'FiltersPro'}. All rights reserved.
+            © {currentYear} {settings.site_name || 'AffSite Deals'}. All rights reserved.
           </p>
           <p className="text-xs text-gray-500">
-            Premium Refrigerator Water Filter Replacements
+            Curated Multi-Category Cashback & Coupon Directory
           </p>
         </div>
       </div>

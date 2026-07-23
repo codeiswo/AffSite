@@ -1,14 +1,18 @@
 'use client';
 
 const brands = [
-  { name: 'Samsung', color: '#1428A0' },
-  { name: 'GE', color: '#003DA5' },
-  { name: 'LG', color: '#A50034' },
-  { name: 'Whirlpool', color: '#003B5C' },
-  { name: 'Maytag', color: '#B50000' },
-  { name: 'Frigidaire', color: '#0066B2' },
-  { name: 'KitchenAid', color: '#B50000' },
-  { name: 'Kenmore', color: '#1D4488' },
+  { name: 'Nike', color: '#111111' },
+  { name: 'ZARA', color: '#000000' },
+  { name: 'adidas', color: '#000000' },
+  { name: 'Gucci', color: '#1B365D' },
+  { name: 'Burberry', color: '#000000' },
+  { name: "Levi's", color: '#C41230' },
+  { name: 'H&M', color: '#E50010' },
+  { name: 'Uniqlo', color: '#FF0000' },
+  { name: 'Prada', color: '#000000' },
+  { name: 'Chanel', color: '#000000' },
+  { name: 'PUMA', color: '#000000' },
+  { name: 'Under Armour', color: '#1D1D1D' },
 ];
 
 export default function BrandWall() {
@@ -16,13 +20,13 @@ export default function BrandWall() {
   const allBrands = [...brands, ...brands];
 
   return (
-    <section id="brand-wall" className="section-padding bg-white dark:bg-gray-900 overflow-hidden">
+    <section id="brand-wall" className="section-padding bg-white dark:bg-gray-900 overflow-hidden border-b border-gray-100 dark:border-gray-800">
       <div className="container-custom mb-12 text-center">
         <p className="text-sm font-semibold text-accent uppercase tracking-widest mb-3">
-          Trusted Compatibility
+          OFFICIAL PARTNER MERCHANTS
         </p>
         <h2 className="text-3xl sm:text-4xl font-heading font-bold text-gray-900 dark:text-white">
-          Compatible with All Major Brands
+          Shop & Earn Cashback Across 1,500+ Top Brands
         </h2>
       </div>
 
@@ -37,12 +41,11 @@ export default function BrandWall() {
           {allBrands.map((brand, i) => (
             <div
               key={`${brand.name}-${i}`}
-              className="flex-shrink-0 mx-6 group"
+              className="flex-shrink-0 mx-4 group"
             >
               <div className="w-44 h-24 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 flex items-center justify-center px-6 group-hover:border-accent/30 group-hover:bg-accent/5 dark:group-hover:bg-accent/5 transition-all duration-300 group-hover:shadow-glow">
                 <span
-                  className="text-xl font-heading font-bold tracking-tight opacity-40 group-hover:opacity-90 transition-opacity duration-300"
-                  style={{ color: brand.color }}
+                  className="text-xl font-heading font-bold tracking-tight opacity-50 group-hover:opacity-100 transition-opacity duration-300 text-gray-800 dark:text-gray-200"
                 >
                   {brand.name}
                 </span>

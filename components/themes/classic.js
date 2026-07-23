@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Shield, Truck, RefreshCw, HeartHandshake, ArrowRight, Star, CheckCircle2, SlidersHorizontal, Grid3X3, ChevronRight, Package, Plus, Minus, ShoppingCart } from 'lucide-react';
+import { Shield, Truck, RefreshCw, HeartHandshake, ArrowRight, Star, CheckCircle2, SlidersHorizontal, Grid3X3, ChevronRight, Package, Plus, Minus, ShoppingCart, Tag, Percent, Sparkles, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/components/common/cart-context';
 import Hero from '@/components/common/hero';
 import BrandWall from '@/components/common/brand-wall';
@@ -23,13 +23,13 @@ export function Homepage({ settings, featuredProducts }) {
         <div className="container-custom">
           <div className="text-center mb-14">
             <p className="text-sm font-semibold text-accent uppercase tracking-widest mb-3">
-              Best Sellers
+              TRENDING CASHBACK DEALS
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-gray-900 dark:text-white mb-4">
-              Featured Water Filters
+              Featured Fashion & Brand Deals
             </h2>
             <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-              Our most popular refrigerator water filter replacements, trusted by thousands of families
+              Handpicked apparel discounts, promo codes, and verified cashback offers from top global stores
             </p>
           </div>
 
@@ -44,7 +44,7 @@ export function Homepage({ settings, featuredProducts }) {
               href="/products"
               className="group inline-flex items-center gap-2 btn-primary text-base px-8 py-4"
             >
-              View All Products
+              Explore All Deals & Coupons
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -56,10 +56,10 @@ export function Homepage({ settings, featuredProducts }) {
         <div className="container-custom">
           <div className="text-center mb-14">
             <p className="text-sm font-semibold text-accent uppercase tracking-widest mb-3">
-              Why FiltersPro
+              WHY AFFSITE DEALS
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-gray-900 dark:text-white mb-4">
-              The Smart Choice for Your Family
+              Maximizing Your Savings & Cashback
             </h2>
           </div>
 
@@ -67,29 +67,29 @@ export function Homepage({ settings, featuredProducts }) {
             {[
               {
                 icon: Shield,
-                title: 'NSF Certified',
-                desc: 'All our filters are NSF 42 & 53 certified, tested and verified by independent labs for safety and performance.',
+                title: 'Verified Promo Codes',
+                desc: 'Tested daily by deal editors to ensure every coupon and promo code actually works at checkout.',
                 color: 'text-primary dark:text-accent',
                 bg: 'bg-primary-50 dark:bg-primary/10',
               },
               {
-                icon: Truck,
-                title: 'Free Shipping',
-                desc: 'Free standard shipping on all orders over $35. Express options available for urgent replacements.',
+                icon: Percent,
+                title: 'Instant Cashback Redirect',
+                desc: 'Direct outbound link to official brand merchant stores with automatic rebate tracking.',
                 color: 'text-accent-600 dark:text-accent-400',
                 bg: 'bg-accent-50 dark:bg-accent/10',
               },
               {
-                icon: RefreshCw,
-                title: 'Easy Installation',
-                desc: 'Simple twist-and-lock or push-in design. Replace your filter in under 60 seconds, no tools required.',
+                icon: Sparkles,
+                title: '100% Free Access',
+                desc: 'No hidden subscription fees or membership charges. Claim discounts freely anytime.',
                 color: 'text-green-600 dark:text-green-400',
                 bg: 'bg-green-50 dark:bg-green-500/10',
               },
               {
                 icon: HeartHandshake,
-                title: '30-Day Guarantee',
-                desc: "Not satisfied? Return any filter within 30 days for a full refund. Your satisfaction is our priority.",
+                title: '1,500+ Partner Brands',
+                desc: 'Official affiliate partnerships with Nike, ZARA, adidas, Burberry, Levi\'s & global retailers.',
                 color: 'text-gold dark:text-gold-light',
                 bg: 'bg-gold-light dark:bg-gold/10',
               },
@@ -113,9 +113,9 @@ export function Homepage({ settings, featuredProducts }) {
         </div>
       </section>
 
-      {/* How It Works */}
+      {/* How it works */}
       <section className="section-padding bg-surface dark:bg-surface-dark relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 opacity-5 pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-accent blur-3xl" />
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-primary blur-3xl" />
         </div>
@@ -123,10 +123,10 @@ export function Homepage({ settings, featuredProducts }) {
         <div className="container-custom relative z-10">
           <div className="text-center mb-14">
             <p className="text-sm font-semibold text-accent uppercase tracking-widest mb-3">
-              Simple Process
+              SIMPLE 3-STEP PROCESS
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-gray-900 dark:text-white mb-4">
-              3 Easy Steps to Clean Water
+              How to Earn Cashback & Save Money
             </h2>
           </div>
 
@@ -134,18 +134,18 @@ export function Homepage({ settings, featuredProducts }) {
             {[
               {
                 step: '01',
-                title: 'Find Your Filter',
-                desc: 'Search by your refrigerator brand and model number to find the perfect compatible filter.',
+                title: 'Browse & Select Deal',
+                desc: 'Explore curated promo offers by category, merchant store, or fashion brand.',
               },
               {
                 step: '02',
-                title: 'Quick Delivery',
-                desc: 'Order online and get free shipping. Your filter arrives in 5-7 business days.',
+                title: 'Click Outbound Link',
+                desc: 'Click "Get Deal" to jump directly to the official merchant site with active cashback tracking.',
               },
               {
                 step: '03',
-                title: 'Easy Install',
-                desc: 'Simple twist or push installation. No tools needed. Fresh, clean water in 60 seconds.',
+                title: 'Shop & Claim Rebate',
+                desc: 'Complete your purchase at merchant store and receive instant cash back & promo savings.',
               },
             ].map(({ step, title, desc }, i) => (
               <div key={step} className="text-center group">
@@ -168,10 +168,10 @@ export function Homepage({ settings, featuredProducts }) {
         <div className="container-custom">
           <div className="text-center mb-14">
             <p className="text-sm font-semibold text-accent uppercase tracking-widest mb-3">
-              Customer Reviews
+              SHOPPER REVIEWS
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-gray-900 dark:text-white mb-4">
-              Trusted by 50,000+ Families
+              Loved by 100,000+ Smart Shoppers
             </h2>
           </div>
 
@@ -179,20 +179,20 @@ export function Homepage({ settings, featuredProducts }) {
             {[
               {
                 name: 'Sarah M.',
-                location: 'Texas',
-                text: 'Perfect replacement for my Samsung fridge. Water tastes so much better and the price is half of what I was paying at the store!',
+                location: 'Fashion Enthusiast',
+                text: 'Found a 40% off promo code plus 8% cashback for Burberry coat order. Saved over $120 instantly!',
                 rating: 5,
               },
               {
                 name: 'James K.',
-                location: 'California',
-                text: 'Easy to install, great quality. I\'ve been buying from FiltersPro for over a year now. Best water filter replacement service.',
+                location: 'Daily Shopper',
+                text: 'The outbound rebate links work flawlessly. I always check AffSite Deals before buying Nike or Levi\'s gear.',
                 rating: 5,
               },
               {
                 name: 'Linda W.',
-                location: 'Florida',
-                text: 'NSF certified and affordable. The customer service team helped me find the right filter for my GE fridge. Highly recommend!',
+                location: 'Boutique Fan',
+                text: 'Super clean site with zero annoying popups. Just click and jump straight to the brand store discount page.',
                 rating: 5,
               },
             ].map(({ name, location, text, rating }) => (
@@ -222,28 +222,27 @@ export function Homepage({ settings, featuredProducts }) {
       </section>
 
       {/* CTA Section */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-hero-gradient dark:bg-hero-gradient-dark" />
-        <div className="absolute inset-0 py-20 md:py-28 text-center relative z-10">
+      <section className="relative overflow-hidden bg-gradient-to-r from-indigo-900 via-purple-900 to-slate-900 py-20 text-center">
+        <div className="container-custom relative z-10">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-white mb-6 max-w-3xl mx-auto">
-            Ready for Crystal-Clear Water?
+            Ready to Maximize Your Savings?
           </h2>
-          <p className="text-lg text-white/70 max-w-xl mx-auto mb-10">
-            Join 50,000+ families who trust FiltersPro for their refrigerator water filter replacements.
+          <p className="text-lg text-white/80 max-w-xl mx-auto mb-10">
+            Join 100,000+ smart shoppers earning instant cashback and claiming exclusive brand coupons today.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/products"
-              className="group inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white text-primary font-bold text-lg shadow-premium hover:shadow-glow-lg transition-all duration-300 hover:-translate-y-1"
+              className="group inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white text-indigo-950 font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
             >
-              Find Your Filter
+              Explore Deals Now
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl border-2 border-white/30 text-white font-semibold text-lg hover:bg-white/10 transition-all duration-300"
             >
-              Contact Us
+              Contact Support
             </Link>
           </div>
         </div>
@@ -253,148 +252,147 @@ export function Homepage({ settings, featuredProducts }) {
 }
 
 // ============================================
-// 2. PRODUCT LIST
+// 2. PRODUCT LIST PAGE
 // ============================================
-export function ProductList({ category, brand, sort, products, total, page, totalPages, categories, brands, handleSortChange }) {
+export function ProductListPage({ products, categories, brands, selectedCategory, selectedBrand, onFilterChange }) {
+  const [viewMode, setViewMode] = useState('grid');
+
   return (
-    <div className="pt-24 pb-16 min-h-screen bg-surface dark:bg-surface-dark">
+    <div className="pt-28 pb-20 bg-surface dark:bg-surface-dark min-h-screen">
       <div className="container-custom">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm text-gray-400 mb-8">
-          <Link href="/" className="hover:text-primary dark:hover:text-accent transition-colors">Home</Link>
-          <ChevronRight className="w-4 h-4" />
-          <span className="text-gray-900 dark:text-white font-medium">
-            {category || brand ? (category || `${brand} Filters`) : 'All Products'}
-          </span>
-        </nav>
-
-        {/* Page header */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-10">
-          <div>
-            <h1 className="text-3xl sm:text-4xl font-heading font-bold text-gray-900 dark:text-white">
-              {category || (brand ? `${brand} Water Filters` : 'All Products')}
-            </h1>
-            <p className="text-gray-500 dark:text-gray-400 mt-2">
-              {total} products found
-            </p>
+        {/* Page Header */}
+        <div className="mb-10">
+          <div className="flex items-center gap-2 text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">
+            <Link href="/" className="hover:text-accent">Home</Link>
+            <ChevronRight className="w-3.5 h-3.5" />
+            <span>Deals Directory</span>
           </div>
-
-          {/* Sort dropdown */}
-          <div className="flex items-center gap-3">
-            <SlidersHorizontal className="w-4 h-4 text-gray-400" />
-            <select
-              value={sort}
-              className="px-4 py-2.5 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none transition-all"
-              onChange={handleSortChange}
-            >
-              <option value="sort_order">Featured</option>
-              <option value="price_asc">Price: Low to High</option>
-              <option value="price_desc">Price: High to Low</option>
-              <option value="newest">Newest</option>
-              <option value="title">Name: A to Z</option>
-            </select>
-          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-gray-900 dark:text-white">
+            {selectedCategory || selectedBrand ? `${selectedCategory || selectedBrand} Deals` : 'All Cashback & Promo Deals'}
+          </h1>
+          <p className="text-gray-500 dark:text-gray-400 mt-2 text-base max-w-2xl">
+            Browse verified coupons, cashback offers, and brand promo links across top categories.
+          </p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar filters */}
-          <aside className="w-full lg:w-64 flex-shrink-0">
-            <div className="sticky top-24 space-y-6">
-              {/* Categories */}
-              <div className="p-5 rounded-2xl bg-white dark:bg-gray-800 shadow-card">
-                <h3 className="text-sm font-heading font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
-                  Categories
+          <aside className="w-full lg:w-64 shrink-0">
+            <div className="card-premium p-6 rounded-2xl sticky top-28 space-y-6">
+              <div className="flex items-center justify-between border-b border-gray-100 dark:border-gray-800 pb-4">
+                <h3 className="font-heading font-bold text-gray-900 dark:text-white text-base flex items-center gap-2">
+                  <SlidersHorizontal className="w-4 h-4 text-accent" />
+                  Filter Deals
                 </h3>
+                {(selectedCategory || selectedBrand) && (
+                  <button
+                    onClick={() => onFilterChange({ category: '', brand: '' })}
+                    className="text-xs text-rose-500 hover:underline font-semibold"
+                  >
+                    Reset All
+                  </button>
+                )}
+              </div>
+
+              {/* Categories Filter */}
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Categories</h4>
                 <div className="space-y-1">
-                  <Link
-                    href="/products"
-                    className={`block px-3 py-2 rounded-lg text-sm transition-colors ${
-                      !category ? 'bg-primary-50 dark:bg-accent/10 text-primary dark:text-accent font-semibold' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'
+                  <button
+                    onClick={() => onFilterChange({ category: '', brand: selectedBrand })}
+                    className={`w-full text-left px-3 py-2 rounded-xl text-sm font-medium transition-colors ${
+                      !selectedCategory
+                        ? 'bg-accent/10 text-accent font-bold'
+                        : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
                     }`}
                   >
                     All Categories
-                  </Link>
-                  {categories.map(cat => (
-                    <Link
+                  </button>
+                  {categories.map((cat) => (
+                    <button
                       key={cat}
-                      href={`/products?category=${encodeURIComponent(cat)}`}
-                      className={`block px-3 py-2 rounded-lg text-sm transition-colors ${
-                        category === cat ? 'bg-primary-50 dark:bg-accent/10 text-primary dark:text-accent font-semibold' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'
+                      onClick={() => onFilterChange({ category: cat, brand: selectedBrand })}
+                      className={`w-full text-left px-3 py-2 rounded-xl text-sm font-medium transition-colors capitalize ${
+                        selectedCategory === cat
+                          ? 'bg-accent/10 text-accent font-bold'
+                          : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
                       }`}
                     >
                       {cat}
-                    </Link>
+                    </button>
                   ))}
                 </div>
               </div>
 
-              {/* Brands */}
-              <div className="p-5 rounded-2xl bg-white dark:bg-gray-800 shadow-card">
-                <h3 className="text-sm font-heading font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
-                  Brands
-                </h3>
-                <div className="space-y-1">
-                  <Link
-                    href={category ? `/products?category=${encodeURIComponent(category)}` : '/products'}
-                    className={`block px-3 py-2 rounded-lg text-sm transition-colors ${
-                      !brand ? 'bg-primary-50 dark:bg-accent/10 text-primary dark:text-accent font-semibold' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'
+              {/* Brands Filter */}
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Brands</h4>
+                <div className="space-y-1 max-h-48 overflow-y-auto pr-1">
+                  <button
+                    onClick={() => onFilterChange({ category: selectedCategory, brand: '' })}
+                    className={`w-full text-left px-3 py-2 rounded-xl text-sm font-medium transition-colors ${
+                      !selectedBrand
+                        ? 'bg-accent/10 text-accent font-bold'
+                        : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
                     }`}
                   >
                     All Brands
-                  </Link>
-                  {brands.map(b => (
-                    <Link
+                  </button>
+                  {brands.map((b) => (
+                    <button
                       key={b}
-                      href={`/products?brand=${encodeURIComponent(b)}${category ? `&category=${encodeURIComponent(category)}` : ''}`}
-                      className={`block px-3 py-2 rounded-lg text-sm transition-colors ${
-                        brand === b ? 'bg-primary-50 dark:bg-accent/10 text-primary dark:text-accent font-semibold' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'
+                      onClick={() => onFilterChange({ category: selectedCategory, brand: b })}
+                      className={`w-full text-left px-3 py-2 rounded-xl text-sm font-medium transition-colors ${
+                        selectedBrand === b
+                          ? 'bg-accent/10 text-accent font-bold'
+                          : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
                       }`}
                     >
                       {b}
-                    </Link>
+                    </button>
                   ))}
                 </div>
               </div>
             </div>
           </aside>
 
-          {/* Product grid */}
-          <div className="flex-1">
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-              {products.map((product, i) => (
-                <ProductCard key={product.id} product={product} index={i} />
-              ))}
+          {/* Main Products Grid */}
+          <main className="flex-1">
+            {/* Controls Bar */}
+            <div className="flex items-center justify-between mb-6 bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-100 dark:border-gray-800">
+              <span className="text-sm text-gray-500 font-medium">
+                Showing <strong className="text-gray-900 dark:text-white">{products.length}</strong> verified deals
+              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={`p-2 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-accent/10 text-accent' : 'text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
+                >
+                  <Grid3X3 className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
-            {/* Empty state */}
-            {products.length === 0 && (
-              <div className="text-center py-20">
-                <Grid3X3 className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-                <h3 className="text-xl font-heading font-bold text-gray-900 dark:text-white mb-2">No products found</h3>
-                <p className="text-gray-500 dark:text-gray-400 mb-6">Try adjusting your filters or search terms</p>
-                <Link href="/products" className="btn-primary">View All Products</Link>
+            {products.length === 0 ? (
+              <div className="card-premium p-12 text-center rounded-2xl">
+                <Package className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">No Deals Found</h3>
+                <p className="text-gray-500 dark:text-gray-400 mb-6">Try adjusting your filters or category selection.</p>
+                <button
+                  onClick={() => onFilterChange({ category: '', brand: '' })}
+                  className="btn-primary text-sm px-6 py-2.5"
+                >
+                  Reset Filters
+                </button>
               </div>
-            )}
-
-            {/* Pagination */}
-            {totalPages > 1 && (
-              <div className="flex justify-center gap-2 mt-12">
-                {[...Array(totalPages)].map((_, i) => (
-                  <Link
-                    key={i}
-                    href={`/products?page=${i + 1}${brand ? `&brand=${brand}` : ''}${category ? `&category=${encodeURIComponent(category)}` : ''}${sort ? `&sort=${sort}` : ''}`}
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-medium transition-all ${
-                      page === i + 1
-                        ? 'bg-primary text-white shadow-glow'
-                        : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-primary-50 dark:hover:bg-accent/10'
-                    }`}
-                  >
-                    {i + 1}
-                  </Link>
+            ) : (
+              <div className={`grid ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'} gap-6`}>
+                {products.map((product, i) => (
+                  <ProductCard key={product.id} product={product} index={i} />
                 ))}
               </div>
             )}
-          </div>
+          </main>
         </div>
       </div>
     </div>
@@ -402,272 +400,153 @@ export function ProductList({ category, brand, sort, products, total, page, tota
 }
 
 // ============================================
-// 3. PRODUCT DETAIL
+// 3. PRODUCT DETAIL PAGE (Affiliate Redirect)
 // ============================================
-export function ProductDetail({ product, allImages, discount, features, compatibleModels, relatedProducts }) {
-  const [activeImage, setActiveImage] = useState(product.image_url || allImages[0] || '');
-  const [qty, setQty] = useState(1);
-  const { addToCart, setCheckoutStep, setIsCartOpen } = useCart();
+export function ProductDetailPage({ product, relatedProducts }) {
+  const [selectedImage, setSelectedImage] = useState(product.image_url);
+  const gallery = Array.isArray(product.gallery) ? product.gallery : (typeof product.gallery === 'string' ? JSON.parse(product.gallery || '[]') : []);
+  const allImages = [product.image_url, ...gallery].filter(Boolean);
+  const features = Array.isArray(product.features) ? product.features : (typeof product.features === 'string' ? JSON.parse(product.features || '[]') : []);
 
-  const handleBuyNow = () => {
-    addToCart(product, qty);
-    setCheckoutStep('checkout');
-    setIsCartOpen(true);
-  };
+  const discount = product.compare_price ? Math.round((1 - product.price / product.compare_price) * 100) : 0;
+  const affiliateUrl = product.affiliate_link || '#';
 
   return (
-    <div className="pt-24 pb-16 min-h-screen bg-surface dark:bg-surface-dark">
+    <div className="pt-28 pb-20 bg-surface dark:bg-surface-dark min-h-screen">
       <div className="container-custom">
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm text-gray-400 mb-8 flex-wrap">
-          <Link href="/" className="hover:text-primary dark:hover:text-accent transition-colors">Home</Link>
-          <ChevronRight className="w-4 h-4" />
-          <Link href="/products" className="hover:text-primary dark:hover:text-accent transition-colors">Products</Link>
-          <ChevronRight className="w-4 h-4" />
-          {product.brand && (
-            <>
-              <Link href={`/products?brand=${product.brand}`} className="hover:text-primary dark:hover:text-accent transition-colors">{product.brand}</Link>
-              <ChevronRight className="w-4 h-4" />
-            </>
-          )}
-          <span className="text-gray-900 dark:text-white font-medium line-clamp-1">{product.title}</span>
-        </nav>
+        <div className="flex items-center gap-2 text-xs font-semibold text-gray-400 uppercase tracking-widest mb-8">
+          <Link href="/" className="hover:text-accent">Home</Link>
+          <ChevronRight className="w-3.5 h-3.5" />
+          <Link href="/products" className="hover:text-accent">Deals</Link>
+          <ChevronRight className="w-3.5 h-3.5" />
+          <span className="text-gray-900 dark:text-white truncate max-w-xs">{product.title}</span>
+        </div>
 
-        {/* Product detail grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Image gallery */}
-          <div>
-            <div className="aspect-square rounded-3xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 overflow-hidden mb-4 flex items-center justify-center p-12 relative">
+        {/* Product main section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+          {/* Left: Gallery */}
+          <div className="space-y-4">
+            <div className="aspect-square bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800 p-8 flex items-center justify-center relative overflow-hidden shadow-card">
               {discount > 0 && (
-                <div className="absolute top-4 left-4 px-4 py-1.5 rounded-full bg-red-500 text-white text-sm font-bold shadow-lg">
-                  Save {discount}%
+                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-rose-500 text-white font-bold text-xs uppercase tracking-wider shadow-md z-10">
+                  {discount}% OFF
                 </div>
               )}
               <img
-                src={activeImage || 'https://placehold.co/600x600/EEE/999?text=No+Image'}
+                src={selectedImage || product.image_url || 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=800&auto=format&fit=crop&q=80'}
                 alt={product.title}
-                className="w-full h-full object-contain"
+                className="w-full h-full object-contain hover:scale-105 transition-transform duration-500"
               />
             </div>
-
-            {/* Thumbnail gallery */}
             {allImages.length > 1 && (
-              <div className="grid grid-cols-4 gap-3">
-                {allImages.map((img, i) => (
-                  <div
-                    key={i}
-                    onClick={() => setActiveImage(img)}
-                    className={`aspect-square rounded-xl bg-white dark:bg-gray-800 border-2 transition-colors overflow-hidden cursor-pointer flex items-center justify-center p-4 ${
-                      activeImage === img ? 'border-primary dark:border-accent' : 'border-gray-100 dark:border-gray-700 hover:border-accent'
+              <div className="flex gap-3 overflow-x-auto pb-2">
+                {allImages.map((img, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setSelectedImage(img)}
+                    className={`w-20 h-20 rounded-2xl border-2 p-2 bg-white dark:bg-gray-900 shrink-0 transition-all ${
+                      selectedImage === img ? 'border-accent shadow-md' : 'border-transparent opacity-60 hover:opacity-100'
                     }`}
                   >
-                    <img src={img} alt={`${product.title} view ${i + 1}`} className="w-full h-full object-contain" />
-                  </div>
+                    <img src={img} alt="" className="w-full h-full object-contain" />
+                  </button>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Product info */}
-          <div>
-            <span className="text-sm font-semibold text-accent uppercase tracking-widest">{product.brand}</span>
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-gray-900 dark:text-white mt-2 mb-4">
+          {/* Right: Info & Affiliate Action */}
+          <div className="flex flex-col">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs font-bold uppercase tracking-wider w-fit mb-3">
+              <Tag className="w-3.5 h-3.5" /> Brand: {product.brand || 'Official Merchant'}
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-heading font-bold text-gray-900 dark:text-white mb-4">
               {product.title}
             </h1>
 
-            <div className="flex items-center gap-2 mb-6">
-              <div className="flex gap-0.5">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-gold text-gold" />
-                ))}
-              </div>
-              <span className="text-sm text-gray-500 dark:text-gray-400">4.8 (127 reviews)</span>
-            </div>
-
-            <div className="flex items-baseline gap-3 mb-6 pb-6 border-b border-gray-100 dark:border-gray-800">
-              <span className="text-4xl font-heading font-bold text-primary dark:text-accent">
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">
                 {formatPrice(product.price)}
               </span>
               {product.compare_price && (
-                <>
-                  <span className="text-xl text-gray-400 line-through">{formatPrice(product.compare_price)}</span>
-                  <span className="px-3 py-1 rounded-full bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 text-sm font-semibold">
-                    Save {formatPrice(product.compare_price - product.price)}
-                  </span>
-                </>
+                <span className="text-lg text-gray-400 line-through">
+                  {formatPrice(product.compare_price)}
+                </span>
+              )}
+              {discount > 0 && (
+                <span className="px-2.5 py-1 rounded-lg bg-green-500/10 text-green-600 dark:text-green-400 text-xs font-bold">
+                  Save {formatPrice(product.compare_price - product.price)}
+                </span>
               )}
             </div>
 
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
+            <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-8">
               {product.description}
             </p>
 
+            {/* Outbound Link CTA Button */}
+            <div className="p-6 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/50 mb-8 space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-indigo-900 dark:text-indigo-200 uppercase tracking-wider">
+                  Partner Merchant Outbound Offer
+                </span>
+                <span className="text-xs font-bold text-green-600 dark:text-green-400 bg-green-500/10 px-2.5 py-0.5 rounded-full">
+                  Verified Cashback Active
+                </span>
+              </div>
+              <a
+                href={affiliateUrl}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                className="w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
+              >
+                <ShoppingBag className="w-5 h-5" />
+                Claim Coupon & Earn Cashback at Merchant Store
+                <ArrowRight className="w-5 h-5" />
+              </a>
+              <p className="text-xs text-center text-gray-500 dark:text-gray-400">
+                🔒 You will be redirected safely to official partner website in a new window.
+              </p>
+            </div>
+
+            {/* Features */}
             {features.length > 0 && (
-              <div className="mb-8">
-                <h3 className="text-sm font-heading font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Key Features</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {features.map((f, i) => (
-                    <div key={i} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                      {f}
-                    </div>
+              <div className="border-t border-gray-100 dark:border-gray-800 pt-6">
+                <h3 className="text-sm font-bold uppercase tracking-wider text-gray-900 dark:text-white mb-4">
+                  Deal Highlights & Specs
+                </h3>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {features.map((feat, idx) => (
+                    <li key={idx} className="flex items-center gap-2.5 text-sm text-gray-600 dark:text-gray-300">
+                      <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" />
+                      <span>{feat}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
-            )}
-
-            {/* Trust badges */}
-            <div className="grid grid-cols-3 gap-3 mb-8 p-4 rounded-2xl bg-gray-50 dark:bg-gray-800">
-              {[
-                { icon: Shield, label: 'NSF Certified' },
-                { icon: Truck, label: 'Free Shipping' },
-                { icon: Package, label: '30-Day Returns' },
-              ].map(({ icon: Icon, label }) => (
-                <div key={label} className="flex flex-col items-center gap-1.5 text-center">
-                  <Icon className="w-5 h-5 text-accent" />
-                  <span className="text-xs font-medium text-gray-600 dark:text-gray-400">{label}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Quantity and Actions block */}
-            <div className="space-y-4 mb-8">
-              <div className="flex items-center gap-3">
-                <span className="text-sm font-semibold text-gray-750 dark:text-gray-300">Quantity:</span>
-                <div className="flex items-center border border-gray-200 dark:border-gray-700 rounded-xl p-1 bg-white dark:bg-gray-800">
-                  <button
-                    type="button"
-                    onClick={() => setQty(prev => Math.max(1, prev - 1))}
-                    className="p-1 hover:bg-gray-150 dark:hover:bg-gray-750 rounded-lg text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer"
-                  >
-                    <Minus className="w-3.5 h-3.5" />
-                  </button>
-                  <span className="w-10 text-center font-bold text-sm text-gray-900 dark:text-white">{qty}</span>
-                  <button
-                    type="button"
-                    onClick={() => setQty(prev => prev + 1)}
-                    className="p-1 hover:bg-gray-150 dark:hover:bg-gray-750 rounded-lg text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer"
-                  >
-                    <Plus className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </div>
-
-              {product.affiliate_link ? (
-                <a
-                  href={product.affiliate_link}
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-base shadow-lg hover:shadow-xl transition-all duration-300 active:scale-[0.98] cursor-pointer"
-                >
-                  <ShoppingCart className="w-5 h-5" />
-                  <span>Go to Merchant & Get Deal (领券前往商家购买)</span>
-                  <ArrowRight className="w-5 h-5 ml-1" />
-                </a>
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <button
-                    type="button"
-                    onClick={() => addToCart(product, qty)}
-                    className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl border-2 border-primary text-primary dark:border-accent dark:text-accent font-bold text-base hover:bg-primary hover:text-white dark:hover:bg-accent dark:hover:text-black transition-all duration-300 active:scale-[0.98] cursor-pointer"
-                  >
-                    <ShoppingCart className="w-5 h-5" />
-                    <span>Add to Cart</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleBuyNow}
-                    className="w-full btn-primary text-center font-bold text-base py-4 shadow-lg shadow-primary/10 active:scale-[0.98] cursor-pointer"
-                  >
-                    Buy Now
-                  </button>
-                </div>
-              )}
-
-              <div className="text-center">
-                <Link
-                  href="/contact"
-                  className="inline-block text-xs text-gray-400 hover:text-primary dark:hover:text-accent transition-colors"
-                >
-                  Have questions? Inquire about this product
-                </Link>
-              </div>
-            </div>
-
-            {product.sku && (
-              <p className="text-xs text-gray-400 mt-4">SKU: {product.sku}</p>
             )}
           </div>
         </div>
-
-        {/* Compatible Models */}
-        {compatibleModels.length > 0 && (
-          <div className="mt-16 p-8 rounded-3xl bg-white dark:bg-gray-800 shadow-card">
-            <h2 className="text-2xl font-heading font-bold text-gray-900 dark:text-white mb-6">
-              Compatible Refrigerator Models
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              {compatibleModels.map((model, i) => (
-                <span
-                  key={i}
-                  className="px-4 py-2 rounded-xl bg-primary-50 dark:bg-primary/10 text-primary dark:text-accent-400 text-sm font-medium border border-primary-100 dark:border-primary/20"
-                >
-                  {model}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Product content */}
-        {product.content && (
-          <div className="mt-16 p-8 rounded-3xl bg-white dark:bg-gray-800 shadow-card">
-            <div
-              className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-heading prose-a:text-accent"
-              dangerouslySetInnerHTML={{ __html: product.content }}
-            />
-          </div>
-        )}
-
-        {/* Related Products */}
-        {relatedProducts.length > 0 && (
-          <div className="mt-16">
-            <h2 className="text-2xl sm:text-3xl font-heading font-bold text-gray-900 dark:text-white mb-8">
-              You May Also Like
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {relatedProducts.map((p, i) => (
-                <ProductCard key={p.id} product={p} index={i} />
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
 }
 
 // ============================================
-// 4. SINGLE PAGE (CMS)
+// 4. SINGLE CMS PAGE
 // ============================================
 export function SinglePage({ page }) {
   return (
-    <div className="pt-24 pb-16 min-h-screen bg-surface dark:bg-surface-dark">
-      <div className="container-custom max-w-4xl">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm text-gray-400 mb-8">
-          <Link href="/" className="hover:text-primary dark:hover:text-accent transition-colors">Home</Link>
-          <ChevronRight className="w-4 h-4" />
-          <span className="text-gray-900 dark:text-white font-medium">{page.title}</span>
-        </nav>
-
-        {/* Content */}
-        <div className="p-8 md:p-12 rounded-3xl bg-white dark:bg-gray-800 shadow-card">
-          <div
-            className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-heading prose-a:text-accent prose-strong:text-gray-900 dark:prose-strong:text-white"
-            dangerouslySetInnerHTML={{ __html: page.content }}
-          />
-        </div>
+    <div className="pt-28 pb-20 bg-surface dark:bg-surface-dark min-h-screen">
+      <div className="container-custom max-w-4xl mx-auto">
+        <h1 className="text-3xl sm:text-4xl font-heading font-bold text-gray-900 dark:text-white mb-8">
+          {page?.title}
+        </h1>
+        <div 
+          className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 leading-relaxed"
+          dangerouslySetInnerHTML={{ __html: page?.content || '' }}
+        />
       </div>
     </div>
   );

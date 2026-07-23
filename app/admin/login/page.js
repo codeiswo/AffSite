@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Droplets, Eye, EyeOff, Globe } from 'lucide-react';
+import { ShoppingBag, Eye, EyeOff, Globe } from 'lucide-react';
 
 const loginTranslations = {
   zh: {
@@ -96,9 +96,9 @@ export default function AdminLoginPage() {
         {/* Logo */}
         <div className="text-center mb-10">
           <div className="w-16 h-16 rounded-2xl bg-hero-gradient flex items-center justify-center mx-auto mb-4 shadow-glow-lg">
-            <Droplets className="w-8 h-8 text-white" />
+            <ShoppingBag className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-2xl font-heading font-bold text-white">{lang === 'zh' ? '站点管理器后台' : 'SitesPro Admin'}</h1>
+          <h1 className="text-2xl font-heading font-bold text-white">{lang === 'zh' ? '返利站点管理后台' : 'AffSite Admin'}</h1>
           <p className="text-gray-400 text-sm mt-1">{t.desc}</p>
         </div>
 

@@ -137,10 +137,10 @@ export default async function ProductDetailPage({ params }) {
   const archetype = getThemeArchetype(theme);
 
   let SelectedProductDetail;
-  if (archetype === 'minimalist') SelectedProductDetail = MinimalistTheme.ProductDetail;
-  else if (archetype === 'futuristic') SelectedProductDetail = FuturisticTheme.ProductDetail;
-  else if (archetype === 'luxury') SelectedProductDetail = LuxuryTheme.ProductDetail;
-  else SelectedProductDetail = ClassicTheme.ProductDetail;
+  if (archetype === 'minimalist') SelectedProductDetail = MinimalistTheme.ProductDetailPage;
+  else if (archetype === 'futuristic') SelectedProductDetail = FuturisticTheme.ProductDetailPage;
+  else if (archetype === 'luxury') SelectedProductDetail = LuxuryTheme.ProductDetailPage;
+  else SelectedProductDetail = ClassicTheme.ProductDetailPage;
 
   return (
     <>

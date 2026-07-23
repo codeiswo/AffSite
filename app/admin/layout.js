@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard, Package, FileText, ArrowLeftRight, Settings,
-  Menu, X, Droplets, LogOut, ChevronRight, Globe, ShoppingBag
+  Menu, X, ShoppingBag, LogOut, ChevronRight, Globe
 } from 'lucide-react';
 
 const sidebarNav = [
@@ -44,7 +44,7 @@ const layoutTranslations = {
 
 export default function AdminLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [siteName, setSiteName] = useState('FiltersPro');
+  const [siteName, setSiteName] = useState('AffSite Deals');
   const [siteLogo, setSiteLogo] = useState('');
   const [lang, setLang] = useState('zh');
   const [mounted, setMounted] = useState(false);
@@ -123,7 +123,7 @@ export default function AdminLayout({ children }) {
             ) : (
               <>
                 <div className="w-8 h-8 rounded-lg bg-hero-gradient flex items-center justify-center flex-shrink-0">
-                  <Droplets className="w-4.5 h-4.5 text-white" />
+                  <ShoppingBag className="w-4.5 h-4.5 text-white" />
                 </div>
                 <div className="truncate">
                   <span className="font-heading font-bold text-base block truncate max-w-[130px]">{siteName}</span>
