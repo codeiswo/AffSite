@@ -106,6 +106,7 @@ const productsTranslations = {
 
 export default function AdminProductsPage() {
   const searchParams = useSearchParams();
+  const [lang, setLang] = useState('zh');
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
