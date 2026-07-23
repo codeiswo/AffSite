@@ -1,6 +1,15 @@
+import { getSettings } from '@/lib/db';
+
 export const runtime = 'edge';
 
-export default function robots() {
+export default async function robots() {
+  let settings = {};
+  try {
+    settings = await getSettings();
+  } catch (_) {}
+
+  const BASE_URL = settings.site_url || 'https://www.affsite.com';
+
   return {
     rules: [
       {
@@ -9,6 +18,6 @@ export default function robots() {
         disallow: ['/admin/', '/api/'],
       },
     ],
-    sitemap: 'https://www.filterspro.com/sitemap.xml',
+    sitemap: `${BASE_URL}/sitemap.xml`,
   };
 }

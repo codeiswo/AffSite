@@ -23,8 +23,8 @@ export default function Hero({ settings = {} }) {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const heroDesc = settings.hero_description || 'Crystal-clear, great-tasting water for your family. Compatible with Samsung, GE, LG, Whirlpool, and all major brands. Up to 60% savings vs. OEM filters.';
-  const btnText = settings.hero_button_text || 'Shop All Filters';
+  const heroDesc = settings.hero_description || 'Curated cashback deals & exclusive coupons from top partner brands. Discover discounts across Apparel, Electronics, Home, Beauty & Services.';
+  const btnText = settings.hero_button_text || 'Explore Cashback Deals';
   const btnUrl = settings.hero_button_url || '/products';
 
   const renderTitle = () => {
@@ -49,13 +49,13 @@ export default function Hero({ settings = {} }) {
     // Default fallback
     return (
       <>
-        Premium{' '}
+        Exclusive Partner{' '}
         <span className="relative inline-block">
-          <span className="relative z-10">Water Filter</span>
+          <span className="relative z-10">Cashback Deals</span>
           <span className="absolute -bottom-2 left-0 w-full h-3 bg-accent/30 rounded-full" />
         </span>
         <br />
-        Replacements
+        & Brand Coupons
       </>
     );
   };

@@ -60,10 +60,10 @@ export async function generateMetadata() {
     icons.icon = "/favicon.ico";
   }
 
-  const customHtmlTags = settings.custom_html_tags || "";
-  const customOtherMetas = parseCustomMetaTags(customHtmlTags);
+  const siteUrl = settings.site_url || "https://www.affsite.com";
 
   return {
+    metadataBase: new URL(siteUrl),
     title: {
       default: defaultTitle,
       template: `%s | ${siteName}`,

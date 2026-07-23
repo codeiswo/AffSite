@@ -114,7 +114,7 @@ export default function AdminProductsPage() {
   const [lang, setLang] = useState('zh');
   const [form, setForm] = useState({
     title: '', slug: '', description: '', content: '', price: '', compare_price: '',
-    category: 'Refrigerator Water Filters', brand: '', sku: '', image_url: '',
+    category: 'apparel', brand: '', sku: '', image_url: '', affiliate_link: '',
     features: '', compatible_models: '', meta_title: '', meta_description: '',
     is_featured: false, is_active: true,
   });
@@ -210,7 +210,7 @@ export default function AdminProductsPage() {
   const resetForm = () => {
     setForm({
       title: '', slug: '', description: '', content: '', price: '', compare_price: '',
-      category: 'Refrigerator Water Filters', brand: '', sku: '', image_url: '',
+      category: 'apparel', brand: '', sku: '', image_url: '', affiliate_link: '',
       features: '', compatible_models: '', meta_title: '', meta_description: '',
       is_featured: false, is_active: true,
     });
@@ -226,10 +226,11 @@ export default function AdminProductsPage() {
       content: product.content || '',
       price: product.price?.toString() || '',
       compare_price: product.compare_price?.toString() || '',
-      category: product.category || 'Refrigerator Water Filters',
+      category: product.category || 'apparel',
       brand: product.brand || '',
       sku: product.sku || '',
       image_url: product.image_url || '',
+      affiliate_link: product.affiliate_link || '',
       features: (typeof product.features === 'string' ? JSON.parse(product.features || '[]') : product.features || []).join(', '),
       compatible_models: (typeof product.compatible_models === 'string' ? JSON.parse(product.compatible_models || '[]') : product.compatible_models || []).join(', '),
       meta_title: product.meta_title || '',
@@ -317,9 +318,16 @@ export default function AdminProductsPage() {
               <label className="block text-xs font-medium text-gray-500 mb-1">{t.categoryLabel}</label>
               <select value={form.category} onChange={e => setForm({ ...form, category: e.target.value })}
                 className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-sm text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-accent/50">
-                <option>Refrigerator Water Filters</option>
-                <option>Refrigerator Air Filters</option>
-                <option>Ice Maker</option>
+                <option value="apparel">服装 (Apparel & Fashion)</option>
+                <option value="digital">数码 (Electronics & Digital)</option>
+                <option value="home">家居 (Home & Living)</option>
+                <option value="services">服务 (Services & Subscriptions)</option>
+                <option value="beauty">美妆 (Beauty & Personal Care)</option>
+                <option value="baby">母婴 (Baby & Toys)</option>
+                <option value="sports">运动 (Sports & Outdoors)</option>
+                <option value="food">食品 (Food & Beverages)</option>
+                <option value="auto">汽车 (Automotive & Accessories)</option>
+                <option value="pets">宠物 (Pet Supplies)</option>
               </select>
             </div>
             <div>
@@ -341,6 +349,11 @@ export default function AdminProductsPage() {
               <label className="block text-xs font-medium text-gray-500 mb-1">{t.imageUrlLabel}</label>
               <input value={form.image_url} onChange={e => setForm({ ...form, image_url: e.target.value })}
                 className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-sm text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-accent/50" />
+            </div>
+            <div className="md:col-span-2">
+              <label className="block text-xs font-medium text-gray-500 mb-1">跳转链接 / 返利购买链接 (Affiliate Link URL)</label>
+              <input value={form.affiliate_link} onChange={e => setForm({ ...form, affiliate_link: e.target.value })} placeholder="https://www.merchant.com/dp/xxx?aff=..."
+                className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-sm text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-accent/50 font-mono text-xs" />
             </div>
           </div>
 

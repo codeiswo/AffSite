@@ -553,23 +553,36 @@ export function ProductDetail({ product, allImages, discount, features, compatib
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => addToCart(product, qty)}
-                  className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl border-2 border-primary text-primary dark:border-accent dark:text-accent font-bold text-base hover:bg-primary hover:text-white dark:hover:bg-accent dark:hover:text-black transition-all duration-300 active:scale-[0.98] cursor-pointer"
+              {product.affiliate_link ? (
+                <a
+                  href={product.affiliate_link}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-base shadow-lg hover:shadow-xl transition-all duration-300 active:scale-[0.98] cursor-pointer"
                 >
                   <ShoppingCart className="w-5 h-5" />
-                  <span>Add to Cart</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={handleBuyNow}
-                  className="w-full btn-primary text-center font-bold text-base py-4 shadow-lg shadow-primary/10 active:scale-[0.98] cursor-pointer"
-                >
-                  Buy Now
-                </button>
-              </div>
+                  <span>Go to Merchant & Get Deal (领券前往商家购买)</span>
+                  <ArrowRight className="w-5 h-5 ml-1" />
+                </a>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => addToCart(product, qty)}
+                    className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl border-2 border-primary text-primary dark:border-accent dark:text-accent font-bold text-base hover:bg-primary hover:text-white dark:hover:bg-accent dark:hover:text-black transition-all duration-300 active:scale-[0.98] cursor-pointer"
+                  >
+                    <ShoppingCart className="w-5 h-5" />
+                    <span>Add to Cart</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleBuyNow}
+                    className="w-full btn-primary text-center font-bold text-base py-4 shadow-lg shadow-primary/10 active:scale-[0.98] cursor-pointer"
+                  >
+                    Buy Now
+                  </button>
+                </div>
+              )}
 
               <div className="text-center">
                 <Link
