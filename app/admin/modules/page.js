@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { 
   Save, Layout, Plus, Trash2, ArrowUp, ArrowDown, Eye, EyeOff, Edit3, 
   Image as ImageIcon, Sparkles, Tag, ShoppingBag, Zap, Code, ShieldCheck, 
-  Star, CheckCircle2, Upload, X
+  Star, CheckCircle2, Upload, X, GripVertical
 } from 'lucide-react';
 
 const defaultModules = [
@@ -24,6 +24,10 @@ export default function ModularHomepageAdmin() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+
+  // Drag & Drop State
+  const [draggedIndex, setDraggedIndex] = useState(null);
+  const [dragOverIndex, setDragOverIndex] = useState(null);
 
   // Edit Modal State
   const [editingModule, setEditingModule] = useState(null);
@@ -73,6 +77,43 @@ export default function ModularHomepageAdmin() {
       alert('Network error');
     }
     setSaving(false);
+  };
+
+  // Drag and Drop Event Handlers
+  const handleDragStart = (e, index) => {
+    setDraggedIndex(index);
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', index.toString());
+  };
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    if (dragOverIndex !== index) {
+      setDragOverIndex(index);
+    }
+  };
+
+  const handleDrop = (e, dropIndex) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === dropIndex) {
+      setDraggedIndex(null);
+      setDragOverIndex(null);
+      return;
+    }
+
+    const updated = [...modules];
+    const [removed] = updated.splice(draggedIndex, 1);
+    updated.splice(dropIndex, 0, removed);
+
+    setModules(updated);
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedIndex(null);
+    setDragOverIndex(null);
   };
 
   const moveModule = (index, direction) => {
@@ -180,7 +221,7 @@ export default function ModularHomepageAdmin() {
             自定义首页模块 (Modular Homepage Builder)
           </h1>
           <p className="text-sm text-gray-500 mt-1">
-            自由拖动/调整顺序、添加、编辑、删除模块，上传自定义广告横幅图片 (支持 Cloudflare R2 存储)
+            支持鼠标拖拽或按按钮调整顺序，可灵活添加、编辑、删除模块，上传自定义广告横幅图片 (支持 Cloudflare R2 存储)
           </p>
         </div>
         <button
@@ -216,20 +257,38 @@ export default function ModularHomepageAdmin() {
         </div>
       </div>
 
-      {/* Module List (Drag / Reorder) */}
+      {/* Module List (Mouse Drag & Drop / Reorder) */}
       <div className="space-y-4">
-        <h2 className="text-xs font-bold uppercase tracking-wider text-gray-400">Current Active Homepage Sequence</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-xs font-bold uppercase tracking-wider text-gray-400">Current Active Homepage Sequence</h2>
+          <span className="text-xs text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+            <GripVertical className="w-3.5 h-3.5" />
+            鼠标按住左侧手柄拖拽可直接调整顺序
+          </span>
+        </div>
 
         {modules.map((mod, index) => (
           <div
             key={mod.id || index}
-            className={`p-5 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
-              mod.active !== false
-                ? 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm'
+            draggable={true}
+            onDragStart={(e) => handleDragStart(e, index)}
+            onDragOver={(e) => handleDragOver(e, index)}
+            onDrop={(e) => handleDrop(e, index)}
+            onDragEnd={handleDragEnd}
+            className={`p-5 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-grab active:cursor-grabbing ${
+              draggedIndex === index
+                ? 'opacity-30 border-dashed border-indigo-500 bg-indigo-50/20 scale-[0.99]'
+                : dragOverIndex === index
+                ? 'border-2 border-indigo-600 bg-indigo-50/50 dark:bg-indigo-950/40 shadow-md scale-[1.01]'
+                : mod.active !== false
+                ? 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm hover:border-indigo-300'
                 : 'bg-gray-50 dark:bg-gray-900 border-dashed border-gray-200 dark:border-gray-800 opacity-60'
             }`}
           >
-            <div className="flex items-center gap-4 flex-1">
+            <div className="flex items-center gap-3 flex-1">
+              <div className="p-1 rounded-lg text-gray-400 hover:text-indigo-600 transition-colors shrink-0">
+                <GripVertical className="w-5 h-5" />
+              </div>
               <span className="w-8 h-8 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 font-mono font-bold text-xs flex items-center justify-center shrink-0">
                 #{index + 1}
               </span>
@@ -247,7 +306,7 @@ export default function ModularHomepageAdmin() {
             </div>
 
             {/* Actions */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" onMouseDown={(e) => e.stopPropagation()}>
               <button
                 onClick={() => moveModule(index, -1)}
                 disabled={index === 0}
