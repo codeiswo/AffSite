@@ -130,46 +130,15 @@ export async function generateMetadata({ params }) {
       product = fallbackProducts.find(p => p.slug === slug) || fallbackProducts[0];
     }
 
-    let settings = {};
-    try { settings = await getSettings(); } catch (_) {}
-    const baseUrl = settings.site_url || 'https://www.affsite.com';
-    const canonicalUrl = `${baseUrl}/product/${product.slug}`;
+    const title = String(product.meta_title || product.title || 'Product Details');
+    const description = String(product.meta_description || product.description || '');
 
-    return {
-      title: product.meta_title || product.title || 'Product Details',
-      description: product.meta_description || product.description || '',
-      alternates: {
-        canonical: canonicalUrl,
-      },
-      openGraph: {
-        title: product.meta_title || product.title || 'Product Details',
-        description: product.meta_description || product.description || '',
-        url: canonicalUrl,
-        type: 'product',
-        images: [
-          {
-            url: product.image_url || '/opengraph-image.png',
-            width: 800,
-            height: 800,
-            alt: product.title || 'Product',
-          },
-        ],
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title: product.meta_title || product.title || 'Product Details',
-        description: product.meta_description || product.description || '',
-        images: [product.image_url || '/opengraph-image.png'],
-      },
-    };
+    return { title, description };
   } catch (err) {
-    console.error('generateMetadata error:', err);
-    return {
-      title: 'Product Details',
-      description: 'View product details and deals.',
-    };
+    return { title: 'Product Details', description: 'View product details and deals.' };
   }
 }
+
 
 export default async function ProductDetailPage({ params }) {
   const resolvedParams = await params;
