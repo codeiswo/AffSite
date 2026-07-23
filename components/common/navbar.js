@@ -63,30 +63,30 @@ export default function Navbar({ settings = {} }) {
       try {
         const res = await fetch('/api/categories');
         const data = await res.json();
-        if (data.success && Array.isArray(data.categories) && data.categories.length > 0) {
+        if (data && data.success && Array.isArray(data.categories) && data.categories.length > 0) {
           const allCats = data.categories;
-          const parentCats = allCats.filter(c => !c.parent_id);
+          const parentCats = allCats.filter(c => c && !c.parent_id);
 
           const categoryChildren = parentCats.map(parent => {
-            const subCats = allCats.filter(c => c.parent_id === parent.id);
+            const subCats = allCats.filter(c => c && c.parent_id === parent.id);
             if (subCats.length > 0) {
               return {
-                name: parent.name,
-                href: `/products?category=${parent.slug}`,
+                name: parent.name || 'Category',
+                href: `/products?category=${parent.slug || ''}`,
                 subItems: subCats.map(sub => ({
-                  name: sub.name,
-                  href: `/products?category=${sub.slug}`
+                  name: sub.name || 'Subcategory',
+                  href: `/products?category=${sub.slug || ''}`
                 }))
               };
             }
             return {
-              name: parent.name,
-              href: `/products?category=${parent.slug}`
+              name: parent.name || 'Category',
+              href: `/products?category=${parent.slug || ''}`
             };
           });
 
           const updatedNav = [...defaultNavigation];
-          const catIndex = updatedNav.findIndex(n => n.name === 'Categories');
+          const catIndex = updatedNav.findIndex(n => n && n.name === 'Categories');
           if (catIndex !== -1) {
             updatedNav[catIndex] = {
               ...updatedNav[catIndex],
@@ -153,63 +153,77 @@ export default function Navbar({ settings = {} }) {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1">
-            {navigationItems.map((item) => (
-              <div
-                key={item.name}
-                className="relative group"
-                onMouseEnter={() => item.children && setOpenDropdown(item.name)}
-                onMouseLeave={() => setOpenDropdown(null)}
-              >
-                <Link
-                  href={item.href || '#'}
-                  id={`nav-${item.name.toLowerCase().replace(/\s/g, '-')}`}
-                  className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                    showScrolledStyle
-                      ? 'text-gray-700 hover:text-primary hover:bg-primary-50 dark:text-gray-300 dark:hover:text-accent dark:hover:bg-accent/10'
-                      : 'text-white/90 hover:text-white hover:bg-white/10'
-                  }`}
+            {navigationItems.map((item, idx) => {
+              const itemName = item?.name || `Item-${idx}`;
+              const itemHref = item?.href || '#';
+              const navId = `nav-${String(itemName).toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
+
+              return (
+                <div
+                  key={itemName + idx}
+                  className="relative group"
+                  onMouseEnter={() => item?.children && setOpenDropdown(itemName)}
+                  onMouseLeave={() => setOpenDropdown(null)}
                 >
-                  {item.name}
-                  {item.children && <ChevronDown className="w-3.5 h-3.5 transition-transform group-hover:rotate-180" />}
-                </Link>
+                  <Link
+                    href={itemHref}
+                    id={navId}
+                    className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                      showScrolledStyle
+                        ? 'text-gray-700 hover:text-primary hover:bg-primary-50 dark:text-gray-300 dark:hover:text-accent dark:hover:bg-accent/10'
+                        : 'text-white/90 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    {itemName}
+                    {item?.children && <ChevronDown className="w-3.5 h-3.5 transition-transform group-hover:rotate-180" />}
+                  </Link>
 
-                {/* Dropdown with Sub-menus (包含二级菜单) */}
-                {item.children && openDropdown === item.name && (
-                  <div className="absolute top-full left-0 pt-2 w-72 animate-fade-in-down z-50">
-                    <div className="glass rounded-2xl shadow-2xl p-2 border border-white/20 dark:border-white/10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl">
-                      {item.children.map((child) => (
-                        <div key={child.name} className="group/sub relative">
-                          <Link
-                            href={child.href}
-                            className="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-700 dark:text-gray-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                          >
-                            <span>{child.name}</span>
-                            {child.subItems && child.subItems.length > 0 && (
-                              <span className="text-xs text-gray-400 font-mono">›</span>
-                            )}
-                          </Link>
+                  {/* Dropdown with Sub-menus (包含二级菜单) */}
+                  {item?.children && openDropdown === itemName && (
+                    <div className="absolute top-full left-0 pt-2 w-72 animate-fade-in-down z-50">
+                      <div className="glass rounded-2xl shadow-2xl p-2 border border-white/20 dark:border-white/10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl">
+                        {item.children.map((child, cIdx) => {
+                          const childName = child?.name || `Sub-${cIdx}`;
+                          const childHref = child?.href || '#';
+                          return (
+                            <div key={childName + cIdx} className="group/sub relative">
+                              <Link
+                                href={childHref}
+                                className="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-700 dark:text-gray-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                              >
+                                <span>{childName}</span>
+                                {child?.subItems && child.subItems.length > 0 && (
+                                  <span className="text-xs text-gray-400 font-mono">›</span>
+                                )}
+                              </Link>
 
-                          {/* Sub-menu (二级子菜单) */}
-                          {child.subItems && child.subItems.length > 0 && (
-                            <div className="hidden group-hover/sub:block absolute left-full top-0 ml-1.5 w-64 glass rounded-2xl shadow-2xl p-2 border border-white/20 dark:border-white/10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl z-50">
-                              {child.subItems.map((sub) => (
-                                <Link
-                                  key={sub.name}
-                                  href={sub.href}
-                                  className="block px-4 py-2 rounded-xl text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                                >
-                                  └ {sub.name}
-                                </Link>
-                              ))}
+                              {/* Sub-menu (二级子菜单) */}
+                              {child?.subItems && child.subItems.length > 0 && (
+                                <div className="hidden group-hover/sub:block absolute left-full top-0 ml-1.5 w-64 glass rounded-2xl shadow-2xl p-2 border border-white/20 dark:border-white/10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl z-50">
+                                  {child.subItems.map((sub, sIdx) => {
+                                    const subName = sub?.name || `SubSub-${sIdx}`;
+                                    const subHref = sub?.href || '#';
+                                    return (
+                                      <Link
+                                        key={subName + sIdx}
+                                        href={subHref}
+                                        className="block px-4 py-2 rounded-xl text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                                      >
+                                        └ {subName}
+                                      </Link>
+                                    );
+                                  })}
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                      ))}
+                          );
+                        })}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
+                  )}
+                </div>
+              );
+            })}
           </div>
 
           {/* Right side actions */}
@@ -277,46 +291,58 @@ export default function Navbar({ settings = {} }) {
       {isMobileMenuOpen && (
         <div className="lg:hidden glass border-t border-white/10 animate-fade-in-down">
           <div className="container-custom py-4 space-y-1">
-            {navigationItems.map((item) => (
-              <div key={item.name}>
-                <Link
-                  href={item.href || '#'}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-accent/10 font-medium"
-                >
-                  {item.name}
-                </Link>
-                {item.children && (
-                  <div className="pl-6 space-y-1">
-                    {item.children.map((child) => (
-                      <div key={child.name}>
-                        <Link
-                          href={child.href}
-                          onClick={() => setIsMobileMenuOpen(false)}
-                          className="block px-4 py-2 rounded-lg text-sm text-gray-600 dark:text-gray-300 hover:text-indigo-600 font-semibold"
-                        >
-                          {child.name}
-                        </Link>
-                        {child.subItems && (
-                          <div className="pl-4 space-y-1 border-l border-indigo-100 dark:border-indigo-900 ml-2">
-                            {child.subItems.map(sub => (
-                              <Link
-                                key={sub.name}
-                                href={sub.href}
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="block px-3 py-1.5 rounded-lg text-xs text-gray-500 dark:text-gray-400 hover:text-indigo-500"
-                              >
-                                └ {sub.name}
-                              </Link>
-                            ))}
+            {navigationItems.map((item, idx) => {
+              const itemName = item?.name || `Nav-${idx}`;
+              const itemHref = item?.href || '#';
+              return (
+                <div key={itemName + idx}>
+                  <Link
+                    href={itemHref}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-accent/10 font-medium"
+                  >
+                    {itemName}
+                  </Link>
+                  {item?.children && (
+                    <div className="pl-6 space-y-1">
+                      {item.children.map((child, cIdx) => {
+                        const childName = child?.name || `Child-${cIdx}`;
+                        const childHref = child?.href || '#';
+                        return (
+                          <div key={childName + cIdx}>
+                            <Link
+                              href={childHref}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className="block px-4 py-2 rounded-lg text-sm text-gray-600 dark:text-gray-300 hover:text-indigo-600 font-semibold"
+                            >
+                              {childName}
+                            </Link>
+                            {child?.subItems && (
+                              <div className="pl-4 space-y-1 border-l border-indigo-100 dark:border-indigo-900 ml-2">
+                                {child.subItems.map((sub, sIdx) => {
+                                  const subName = sub?.name || `Sub-${sIdx}`;
+                                  const subHref = sub?.href || '#';
+                                  return (
+                                    <Link
+                                      key={subName + sIdx}
+                                      href={subHref}
+                                      onClick={() => setIsMobileMenuOpen(false)}
+                                      className="block px-3 py-1.5 rounded-lg text-xs text-gray-500 dark:text-gray-400 hover:text-indigo-500"
+                                    >
+                                      └ {subName}
+                                    </Link>
+                                  );
+                                })}
+                              </div>
+                            )}
                           </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
             <div className="pt-3 px-4">
               <Link
                 href="/products"

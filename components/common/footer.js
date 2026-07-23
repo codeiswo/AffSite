@@ -137,10 +137,10 @@ export default function Footer({ settings = {}, categories: passedCategories }) 
           <div>
             <h3 className="text-white font-heading font-semibold text-sm uppercase tracking-wider mb-4">Categories</h3>
             <ul className="space-y-2.5">
-              {categoriesList.map((link) => (
-                <li key={link.name}>
-                  <Link href={link.href} className="text-sm text-gray-400 hover:text-indigo-400 transition-colors duration-300">
-                    {link.name}
+              {categoriesList.map((link, idx) => (
+                <li key={(link?.name || '') + idx}>
+                  <Link href={link?.href || '#'} className="text-sm text-gray-400 hover:text-indigo-400 transition-colors duration-300">
+                    {link?.name}
                   </Link>
                 </li>
               ))}
