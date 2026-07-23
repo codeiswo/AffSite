@@ -551,15 +551,41 @@ export function ProductListPage({ products = [], categories = [], brands = [], s
 // 3. PRODUCT DETAIL PAGE (Outbound Partner Link)
 // ============================================
 export function ProductDetailPage({ product = {}, relatedProducts = [] }) {
-  const [copied, setCopied] = useState(false);
-
   let gallery = [];
   try {
     if (Array.isArray(product.gallery)) gallery = product.gallery;
     else if (typeof product.gallery === 'string' && product.gallery.trim()) gallery = JSON.parse(product.gallery);
   } catch (_) { gallery = []; }
 
-  const allImages = [product.image_url, ...gallery].filter(Boolean);
+  let defaultGallery = [];
+  if (product.category === 'digital') {
+    defaultGallery = [
+      'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&auto=format&fit=crop&q=80'
+    ];
+  } else if (product.category === 'home') {
+    defaultGallery = [
+      'https://images.unsplash.com/photo-1558317374-067fb5f30001?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1563161934-8c6761d11558?w=800&auto=format&fit=crop&q=80'
+    ];
+  } else {
+    defaultGallery = [
+      'https://images.unsplash.com/photo-1544441893-675973e31985?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800&auto=format&fit=crop&q=80'
+    ];
+  }
+
+  const rawImages = [product.image_url, ...gallery, ...defaultGallery].filter(Boolean);
+  const allImages = Array.from(new Set(rawImages));
+
+  const [selectedImage, setSelectedImage] = useState(product.image_url);
+
+  useEffect(() => {
+    if (product.image_url) {
+      setSelectedImage(product.image_url);
+    }
+  }, [product.image_url]);
 
   let features = [];
   try {
@@ -569,15 +595,6 @@ export function ProductDetailPage({ product = {}, relatedProducts = [] }) {
 
   const discount = product.compare_price ? Math.round((1 - product.price / product.compare_price) * 100) : 0;
   const affiliateUrl = product.affiliate_link || '#';
-  const couponCode = 'AFFSAVE' + (product.id || '2026');
-
-  const handleCopyCode = () => {
-    setCopied(true);
-    if (typeof navigator !== 'undefined' && navigator.clipboard) {
-      navigator.clipboard.writeText(couponCode);
-    }
-    setTimeout(() => setCopied(false), 2500);
-  };
 
   return (
     <div className="pt-28 pb-20 bg-surface dark:bg-surface-dark min-h-screen">
@@ -592,13 +609,13 @@ export function ProductDetailPage({ product = {}, relatedProducts = [] }) {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
-          {/* Image */}
+          {/* Main Image & Thumbnail Gallery */}
           <div className="lg:col-span-5">
             <div className="aspect-square bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 p-8 flex items-center justify-center relative overflow-hidden shadow-sm">
               <img
-                src={product.image_url}
+                src={selectedImage || product.image_url}
                 alt={product.title}
-                className="max-h-full max-w-full object-contain"
+                className="max-h-full max-w-full object-contain transition-all duration-300"
               />
               {discount > 0 && (
                 <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-rose-500 text-white font-extrabold text-xs shadow-md">
@@ -606,6 +623,26 @@ export function ProductDetailPage({ product = {}, relatedProducts = [] }) {
                 </span>
               )}
             </div>
+
+            {/* Clickable Gallery Thumbnails */}
+            {allImages.length > 1 && (
+              <div className="flex items-center gap-3 mt-4 overflow-x-auto pb-2">
+                {allImages.map((img, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setSelectedImage(img)}
+                    className={`w-20 h-20 rounded-2xl border-2 overflow-hidden flex items-center justify-center p-1.5 bg-white dark:bg-gray-800 transition-all cursor-pointer ${
+                      (selectedImage || product.image_url) === img
+                        ? 'border-indigo-600 ring-2 ring-indigo-600/30 scale-105'
+                        : 'border-gray-200 dark:border-gray-700 opacity-70 hover:opacity-100'
+                    }`}
+                  >
+                    <img src={img} alt={`${product.title} view ${idx + 1}`} className="w-full h-full object-contain" />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Details & Outbound CTA */}
@@ -619,6 +656,11 @@ export function ProductDetailPage({ product = {}, relatedProducts = [] }) {
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-extrabold text-gray-900 dark:text-white leading-tight">
                 {product.title}
               </h1>
+              {product.description && (
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-3 leading-relaxed">
+                  {product.description}
+                </p>
+              )}
             </div>
 
             {/* Price & Rebate Card */}
@@ -640,22 +682,7 @@ export function ProductDetailPage({ product = {}, relatedProducts = [] }) {
               </div>
             </div>
 
-            {/* Coupon Code Box */}
-            <div className="p-5 rounded-2xl bg-white dark:bg-gray-800 border border-dashed border-indigo-300 dark:border-indigo-700 flex items-center justify-between">
-              <div>
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Exclusive Promo Code</p>
-                <p className="text-lg font-mono font-extrabold text-gray-900 dark:text-white mt-0.5 tracking-wider">{couponCode}</p>
-              </div>
-              <button
-                onClick={handleCopyCode}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 text-white font-bold text-xs hover:bg-indigo-500 transition-all cursor-pointer"
-              >
-                {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                {copied ? 'Copied!' : 'Copy Code'}
-              </button>
-            </div>
-
-            {/* Outbound Link Button */}
+            {/* Outbound Link Button ("Shop Now") */}
             <div className="space-y-3 pt-2">
               <a
                 href={affiliateUrl}
@@ -664,7 +691,7 @@ export function ProductDetailPage({ product = {}, relatedProducts = [] }) {
                 className="w-full inline-flex items-center justify-center gap-3 px-8 py-5 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-base shadow-xl hover:shadow-2xl transition-all hover:-translate-y-0.5"
               >
                 <ShoppingBag className="w-6 h-6" />
-                Claim Coupon & Earn Cashback at {product.brand || 'Official Store'}
+                Shop Now
                 <ExternalLink className="w-5 h-5" />
               </a>
               <p className="text-xs text-center text-gray-400 flex items-center justify-center gap-1">
@@ -673,7 +700,7 @@ export function ProductDetailPage({ product = {}, relatedProducts = [] }) {
               </p>
             </div>
 
-            {/* Features */}
+            {/* Highlights & Features */}
             {features.length > 0 && (
               <div className="border-t border-gray-100 dark:border-gray-800 pt-6">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Highlights & Features</h3>
@@ -685,6 +712,17 @@ export function ProductDetailPage({ product = {}, relatedProducts = [] }) {
                     </li>
                   ))}
                 </ul>
+              </div>
+            )}
+
+            {/* Rich Content HTML Description */}
+            {product.content && (
+              <div className="border-t border-gray-100 dark:border-gray-800 pt-6">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Product Overview</h3>
+                <div
+                  className="prose dark:prose-invert max-w-none text-sm text-gray-600 dark:text-gray-300 leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: product.content }}
+                />
               </div>
             )}
           </div>
