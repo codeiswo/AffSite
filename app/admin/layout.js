@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  LayoutDashboard, Package, FileText, ArrowLeftRight, Settings,
+  LayoutDashboard, Layout, Package, FileText, ArrowLeftRight, Settings,
   Menu, X, ShoppingBag, LogOut, ChevronRight, Globe
 } from 'lucide-react';
 

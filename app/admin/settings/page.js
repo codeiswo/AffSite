@@ -424,6 +424,19 @@ export default function AdminSettingsPage() {
               <option value="food">{lang === 'zh' ? '食品饮料 (Food & Groceries)' : 'Food & Groceries'}</option>
             </select>
           </div>
+          <div>
+            <label className="block text-xs font-medium text-gray-500 mb-1">
+              {lang === 'zh' ? '图片存储模式 (Cloudflare R2 Storage Mode)' : 'Image R2 Storage Mode'}
+            </label>
+            <select
+              value={settings.r2_storage_mode || 'default_r2'}
+              onChange={e => updateSetting('r2_storage_mode', e.target.value)}
+              className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-sm text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-accent/50"
+            >
+              <option value="default_r2">{lang === 'zh' ? '使用默认 Cloudflare R2 (Master Control Shared R2)' : 'Master Control Shared Cloudflare R2 (Default)'}</option>
+              <option value="child_r2">{lang === 'zh' ? '使用部署网站对应的 Cloudflare R2 (Child Site Dedicated R2)' : 'Child Site Dedicated Cloudflare R2 Bucket'}</option>
+            </select>
+          </div>
         </div>
       </div>
 
