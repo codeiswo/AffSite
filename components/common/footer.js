@@ -46,12 +46,12 @@ export default function Footer({ settings = {}, categories: passedCategories }) 
 
   const footerLinks = {
     brands: [
-      { name: 'Nike Deals & Discounts', href: '/products?brand=Nike' },
-      { name: 'ZARA Promo Coupons', href: '/products?brand=ZARA' },
-      { name: 'adidas Official Outlet', href: '/products?brand=adidas' },
-      { name: 'Burberry Luxury Sales', href: '/products?brand=Burberry' },
-      { name: "Levi's Denim Discounts", href: "/products?brand=Levi's" },
-      { name: 'Sony Electronics Deals', href: '/products?brand=Sony' },
+      { name: 'Nike Official Store', href: '/products?brand=Nike' },
+      { name: 'ZARA Official Store', href: '/products?brand=ZARA' },
+      { name: 'adidas Official Store', href: '/products?brand=adidas' },
+      { name: 'Burberry Official Store', href: '/products?brand=Burberry' },
+      { name: "Levi's Official Store", href: "/products?brand=Levi's" },
+      { name: 'Sony Official Store', href: '/products?brand=Sony' },
     ],
     company: [
       { name: 'About Us', href: '/about' },
@@ -68,21 +68,21 @@ export default function Footer({ settings = {}, categories: passedCategories }) 
       {/* Top Call to Action Banner */}
       <div className="bg-gradient-to-r from-indigo-900 via-purple-900 to-slate-900 border-t border-b border-indigo-500/20 py-12">
         <div className="container-custom text-center max-w-4xl">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-4 border border-indigo-500/30">
-            <Tag className="w-3.5 h-3.5" /> Exclusive Partner Discounts
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-4 border border-indigo-500/30">
+            <Tag className="w-3.5 h-3.5" /> Official Brand Directory
           </span>
           <h2 className="text-3xl sm:text-4xl font-heading font-bold text-white mb-4">
-            Ready to Save Big on Top Global Brands?
+            Ready to Discover Official Brand Collections?
           </h2>
           <p className="text-indigo-200/80 text-base max-w-xl mx-auto mb-8">
-            Explore 10,000+ verified coupons, brand promo codes, and direct store deal links. Updated daily by deal editors.
+            Browse curated product recommendations and jump directly to official flagship brand stores for secure online checkout.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/products"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-white text-indigo-950 font-bold text-base hover:bg-slate-100 transition-all duration-300 hover:shadow-glow"
             >
-              Find Partner Deals <ArrowRight className="w-4 h-4" />
+              Shop Official Stores <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/contact"
@@ -118,7 +118,7 @@ export default function Footer({ settings = {}, categories: passedCategories }) 
               )}
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Curated brand deals, promo codes, and discounts across Fashion, Electronics, Home & Services. Direct jump links to official brand stores.
+              Curated product recommendations & direct outbound links to official brand stores across Fashion, Electronics, Home & Services. Direct jump links to official merchant websites.
             </p>
             <div className="flex gap-3">
               {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
@@ -190,7 +190,7 @@ export default function Footer({ settings = {}, categories: passedCategories }) 
             © {currentYear} {settings.site_name || 'AffSite Deals'}. All rights reserved.
           </p>
           <p className="text-xs text-gray-500">
-            Curated Multi-Category Brand Deals & Coupon Directory
+            Curated Multi-Category Brand Store Directory
           </p>
         </div>
       </div>
