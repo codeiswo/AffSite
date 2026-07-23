@@ -6,12 +6,12 @@ import { ShoppingBag, Mail, Facebook, Twitter, Instagram, Youtube, ArrowRight, T
 import siteSettings from "@/config/site-settings.json";
 
 const defaultCategories = [
-  { name: "Women's Clothing (女装服饰)", href: '/products?category=womens-clothing' },
-  { name: "Men's Clothing (男装精品)", href: '/products?category=mens-clothing' },
-  { name: 'Shoes & Sneakers (时尚鞋靴)', href: '/products?category=shoes-sneakers' },
-  { name: 'Bags & Accessories (箱包配饰)', href: '/products?category=bags-accessories' },
-  { name: 'Beauty & Skincare (美妆护肤)', href: '/products?category=beauty-skincare' },
-  { name: 'Jewelry & Watches (珠宝手表)', href: '/products?category=jewelry-watches' },
+  { name: "Women's Clothing", href: '/products?category=womens-clothing' },
+  { name: "Men's Clothing", href: '/products?category=mens-clothing' },
+  { name: 'Shoes & Sneakers', href: '/products?category=shoes-sneakers' },
+  { name: 'Bags & Accessories', href: '/products?category=bags-accessories' },
+  { name: 'Beauty & Skincare', href: '/products?category=beauty-skincare' },
+  { name: 'Jewelry & Watches', href: '/products?category=jewelry-watches' },
   { name: 'All Cashback Deals', href: '/products' },
 ];
 

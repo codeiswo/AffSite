@@ -341,12 +341,12 @@ export default function AdminProductsPage() {
                   ))
                 ) : (
                   <>
-                    <option value="womens-clothing">女装服饰 (Women's Apparel)</option>
-                    <option value="mens-clothing">男装精品 (Men's Clothing)</option>
-                    <option value="shoes-sneakers">时尚鞋靴 (Shoes & Sneakers)</option>
-                    <option value="bags-accessories">箱包配饰 (Bags & Accessories)</option>
-                    <option value="beauty-skincare">美妆护肤 (Beauty & Skincare)</option>
-                    <option value="jewelry-watches">珠宝手表 (Jewelry & Watches)</option>
+                    <option value="womens-clothing">Women's Clothing</option>
+                    <option value="mens-clothing">Men's Clothing</option>
+                    <option value="shoes-sneakers">Shoes & Sneakers</option>
+                    <option value="bags-accessories">Bags & Accessories</option>
+                    <option value="beauty-skincare">Beauty & Skincare</option>
+                    <option value="jewelry-watches">Jewelry & Watches</option>
                   </>
                 )}
               </select>
