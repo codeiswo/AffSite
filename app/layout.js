@@ -47,9 +47,10 @@ export async function generateMetadata() {
     settings = await getSettings();
   } catch (_) {}
 
-  const siteName = settings.site_name || siteSettings.siteName || "FiltersPro";
-  const defaultTitle = settings.meta_title || siteSettings.seoTitle || "FiltersPro - Premium Refrigerator Water Filter Replacements";
-  const defaultDescription = settings.meta_description || siteSettings.seoDescription || "Shop premium refrigerator water filter replacements for Samsung, GE, LG, Whirlpool & more. NSF certified, easy installation, up to 60% savings vs OEM. Free shipping on orders over $35.";
+  const customOtherMetas = parseCustomMetaTags(settings.custom_html_tags);
+  const siteName = settings.site_name || siteSettings.siteName || "AffSite Deals";
+  const defaultTitle = settings.meta_title || siteSettings.seoTitle || "AffSite Deals - Curated Multi-Category Cashback & Coupon Directory";
+  const defaultDescription = settings.meta_description || siteSettings.seoDescription || "Discover top cashback deals, coupons, and discounts across Fashion, Electronics, Home, and more.";
 
   const icons = {};
   if (settings.site_favicon) {
