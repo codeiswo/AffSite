@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, ChevronDown, Moon, Sun, ShoppingBag } from 'lucide-react';
+import { Menu, X, ChevronDown, Moon, Sun, ShoppingBag, Zap } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { getThemeArchetype } from '@/lib/theme';
 import siteSettings from "@/config/site-settings.json";
