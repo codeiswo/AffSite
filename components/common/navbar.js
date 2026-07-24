@@ -117,14 +117,29 @@ export default function Navbar({ settings = {} }) {
   }
 
   return (
-    <nav
-      id="main-navbar"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        showScrolledStyle
-          ? 'glass shadow-lg shadow-primary/5'
-          : 'bg-transparent'
-      }`}
-    >
+    <>
+      {archetype === 'power' && (
+        <div className="fixed top-0 left-0 right-0 z-50 border-b border-orange-600/80 bg-gradient-to-r from-orange-600 to-amber-600 shadow-md text-white">
+          <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-4 py-2 sm:px-6 text-xs font-bold tracking-tight">
+            <div className="flex items-center gap-2">
+              <Zap className="h-4 w-4 text-orange-200 fill-orange-200" />
+              <span>Official Site — Engineered for Performance</span>
+            </div>
+            <a href={`mailto:${settings.site_email || 'info@domain'}`} className="hover:underline flex items-center gap-1 text-orange-100">
+              <span>{settings.site_email || 'info@domain'}</span>
+            </a>
+          </div>
+        </div>
+      )}
+
+      <nav
+        id="main-navbar"
+        className={`fixed ${archetype === 'power' ? 'top-8' : 'top-0'} left-0 right-0 z-40 transition-all duration-500 ${
+          showScrolledStyle
+            ? 'glass shadow-lg shadow-primary/5'
+            : 'bg-transparent'
+        }`}
+      >
       <div className="container-custom">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
@@ -317,5 +332,6 @@ export default function Navbar({ settings = {} }) {
         </div>
       )}
     </nav>
+    </>
   );
 }
