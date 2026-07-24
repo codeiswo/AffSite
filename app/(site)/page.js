@@ -4,6 +4,7 @@ import * as ClassicTheme from '@/components/themes/classic';
 import * as MinimalistTheme from '@/components/themes/minimalist';
 import * as FuturisticTheme from '@/components/themes/futuristic';
 import * as LuxuryTheme from '@/components/themes/luxury';
+import * as PowerTheme from '@/components/themes/power';
 
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
@@ -77,6 +78,7 @@ export default async function HomePage() {
   if (archetype === 'minimalist') SelectedHomepage = MinimalistTheme.Homepage;
   else if (archetype === 'futuristic') SelectedHomepage = FuturisticTheme.Homepage;
   else if (archetype === 'luxury') SelectedHomepage = LuxuryTheme.Homepage;
+  else if (archetype === 'power') SelectedHomepage = PowerTheme.Homepage;
   else SelectedHomepage = ClassicTheme.Homepage;
 
   return (
