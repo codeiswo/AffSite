@@ -12,7 +12,7 @@ export function CartProvider({ children }) {
   // Load from localStorage
   useEffect(() => {
     try {
-      const savedCart = localStorage.getItem('sitespro_cart');
+      const savedCart = localStorage.getItem('affsite_cart');
       if (savedCart) {
         setCartItems(JSON.parse(savedCart));
       }
@@ -26,7 +26,7 @@ export function CartProvider({ children }) {
   useEffect(() => {
     if (!isInitialized) return;
     try {
-      localStorage.setItem('sitespro_cart', JSON.stringify(cartItems));
+      localStorage.setItem('affsite_cart', JSON.stringify(cartItems));
     } catch (e) {
       console.error('Failed to save cart to localStorage', e);
     }
