@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import BrandWall from '@/components/common/brand-wall';
 import { formatPrice } from '@/lib/utils';
+import { ProductDetailPage as ClassicProductDetailPage, SinglePage as ClassicSinglePage } from './classic';
 
 // ============================================
 // 1. PRODUCT CARD (Exact Jackery Card Styling)
@@ -590,8 +591,6 @@ export function ProductListPage({ products = [], categories = [] }) {
     </div>
   );
 }
-
-import { ProductDetailPage as ClassicProductDetailPage, SinglePage as ClassicSinglePage } from './classic';
 
 export function ProductDetailPage(props) {
   return <ClassicProductDetailPage {...props} />;
