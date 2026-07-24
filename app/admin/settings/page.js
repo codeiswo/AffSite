@@ -413,6 +413,7 @@ export default function AdminSettingsPage() {
               className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-sm text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-accent/50"
             >
               <option value="apparel">{lang === 'zh' ? '服装美妆 (Apparel & Fashion) - 默认' : 'Apparel & Fashion (Default)'}</option>
+              <option value="power">{lang === 'zh' ? '⚡ 户外电源/储能设备 (Jackery Power Station)' : '⚡ Jackery Outdoor Power Station'}</option>
               <option value="home">{lang === 'zh' ? '家居生活 (Home & Living)' : 'Home & Living'}</option>
               <option value="digital">{lang === 'zh' ? '数码3C (Electronics & Digital)' : 'Electronics & Digital'}</option>
               <option value="services">{lang === 'zh' ? '软件服务 (Services & Subscriptions)' : 'Services & Subscriptions'}</option>
