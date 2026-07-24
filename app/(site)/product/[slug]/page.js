@@ -5,6 +5,7 @@ import * as ClassicTheme from '@/components/themes/classic';
 import * as MinimalistTheme from '@/components/themes/minimalist';
 import * as FuturisticTheme from '@/components/themes/futuristic';
 import * as LuxuryTheme from '@/components/themes/luxury';
+import * as PowerTheme from '@/components/themes/power';
 
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
@@ -230,6 +231,7 @@ export default async function ProductDetailPage({ params }) {
   if (archetype === 'minimalist') SelectedProductDetail = MinimalistTheme.ProductDetailPage;
   else if (archetype === 'futuristic') SelectedProductDetail = FuturisticTheme.ProductDetailPage;
   else if (archetype === 'luxury') SelectedProductDetail = LuxuryTheme.ProductDetailPage;
+  else if (archetype === 'power') SelectedProductDetail = PowerTheme.ProductDetailPage;
   else SelectedProductDetail = ClassicTheme.ProductDetailPage;
 
   return (

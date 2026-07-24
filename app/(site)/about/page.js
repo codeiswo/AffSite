@@ -6,6 +6,7 @@ import * as ClassicTheme from '@/components/themes/classic';
 import * as MinimalistTheme from '@/components/themes/minimalist';
 import * as FuturisticTheme from '@/components/themes/futuristic';
 import * as LuxuryTheme from '@/components/themes/luxury';
+import * as PowerTheme from '@/components/themes/power';
 
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
@@ -36,6 +37,7 @@ export default async function AboutPage() {
     if (archetype === 'minimalist') SelectedSinglePage = MinimalistTheme.SinglePage;
     else if (archetype === 'futuristic') SelectedSinglePage = FuturisticTheme.SinglePage;
     else if (archetype === 'luxury') SelectedSinglePage = LuxuryTheme.SinglePage;
+    else if (archetype === 'power') SelectedSinglePage = PowerTheme.SinglePage;
     else SelectedSinglePage = ClassicTheme.SinglePage;
 
     return <SelectedSinglePage page={page} />;
