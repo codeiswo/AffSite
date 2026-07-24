@@ -19,6 +19,7 @@ const defaultCategories = [
 export default function Footer({ settings = {}, categories: passedCategories }) {
   const currentYear = new Date().getFullYear();
   const [categoriesList, setCategoriesList] = useState(defaultCategories);
+  const [subscribed, setSubscribed] = useState(false);
 
   useEffect(() => {
     if (Array.isArray(passedCategories) && passedCategories.length > 0) {
@@ -85,17 +86,21 @@ export default function Footer({ settings = {}, categories: passedCategories }) 
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-stone-400 font-medium">
                 Stay informed with exclusive insights, energy guides, and power station updates.
               </p>
-              <form onSubmit={(e) => { e.preventDefault(); alert('Thank you for subscribing!'); }} className="mt-6 flex gap-2 max-w-md">
-                <input
-                  type="email"
-                  required
-                  placeholder="your@email.com"
-                  className="min-h-12 min-w-0 flex-1 rounded-xl border border-stone-700/60 bg-stone-900/50 px-4 text-xs font-semibold text-white placeholder:text-stone-600 transition focus:border-orange-500 focus:outline-none"
-                />
-                <button type="submit" className="shrink-0 rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 px-6 text-xs font-extrabold uppercase tracking-wider text-white transition hover:shadow-lg hover:scale-105 active:scale-95">
-                  Subscribe
-                </button>
-              </form>
+              {subscribed ? (
+                <p className="mt-6 text-xs font-bold text-orange-400">✓ Thank you for subscribing!</p>
+              ) : (
+                <form onSubmit={(e) => { e.preventDefault(); setSubscribed(true); }} className="mt-6 flex gap-2 max-w-md">
+                  <input
+                    type="email"
+                    required
+                    placeholder="your@email.com"
+                    className="min-h-12 min-w-0 flex-1 rounded-xl border border-stone-700/60 bg-stone-900/50 px-4 text-xs font-semibold text-white placeholder:text-stone-600 transition focus:border-orange-500 focus:outline-none"
+                  />
+                  <button type="submit" className="shrink-0 rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 px-6 text-xs font-extrabold uppercase tracking-wider text-white transition hover:shadow-lg hover:scale-105 active:scale-95">
+                    Subscribe
+                  </button>
+                </form>
+              )}
             </div>
 
             <div>
