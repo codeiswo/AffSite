@@ -591,5 +591,12 @@ export function ProductListPage({ products = [], categories = [] }) {
   );
 }
 
-// Re-export shared ProductDetailPage & SinglePage from classic
-export { ProductDetailPage, SinglePage } from './classic';
+import { ProductDetailPage as ClassicProductDetailPage, SinglePage as ClassicSinglePage } from './classic';
+
+export function ProductDetailPage(props) {
+  return <ClassicProductDetailPage {...props} />;
+}
+
+export function SinglePage(props) {
+  return <ClassicSinglePage {...props} />;
+}
