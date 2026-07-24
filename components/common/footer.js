@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ShoppingBag, Mail, Facebook, Twitter, Instagram, Youtube, ArrowRight, Tag } from 'lucide-react';
+import { ShoppingBag, Mail, Facebook, Twitter, Instagram, Youtube, ArrowRight, Tag, ShieldCheck, Zap } from 'lucide-react';
+import { getThemeArchetype } from '@/lib/theme';
 import siteSettings from "@/config/site-settings.json";
 
 const defaultCategories = [
@@ -61,7 +62,90 @@ export default function Footer({ settings = {}, categories: passedCategories }) 
     ],
   };
 
+  const theme = settings.site_theme || settings.theme || 'default';
+  const archetype = getThemeArchetype(theme);
   const contactEmail = settings.site_email || `info@${siteSettings.domain || 'affsite.com'}`;
+
+  if (archetype === 'power') {
+    return (
+      <footer className="border-t border-stone-800/60 bg-stone-950 text-stone-300 font-sans">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+          <div className="grid gap-12 md:grid-cols-5 lg:gap-16">
+            <div className="md:col-span-2">
+              <Link href="/" className="flex items-center gap-2">
+                {settings.site_logo ? (
+                  <img src={settings.site_logo} alt="Logo" className="h-10 w-auto brightness-0 invert object-contain" />
+                ) : (
+                  <span className="text-2xl font-black font-heading tracking-wider text-white uppercase flex items-center gap-2">
+                    <Zap className="w-6 h-6 text-orange-500 fill-orange-500" />
+                    {settings.site_name || 'JACKERY'}
+                  </span>
+                )}
+              </Link>
+              <p className="mt-4 max-w-sm text-sm leading-relaxed text-stone-400 font-medium">
+                Stay informed with exclusive insights, energy guides, and power station updates.
+              </p>
+              <form onSubmit={(e) => { e.preventDefault(); alert('Thank you for subscribing!'); }} className="mt-6 flex gap-2 max-w-md">
+                <input
+                  type="email"
+                  required
+                  placeholder="your@email.com"
+                  className="min-h-12 min-w-0 flex-1 rounded-xl border border-stone-700/60 bg-stone-900/50 px-4 text-xs font-semibold text-white placeholder:text-stone-600 transition focus:border-orange-500 focus:outline-none"
+                />
+                <button type="submit" className="shrink-0 rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 px-6 text-xs font-extrabold uppercase tracking-wider text-white transition hover:shadow-lg hover:scale-105 active:scale-95">
+                  Subscribe
+                </button>
+              </form>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-extrabold uppercase tracking-widest text-stone-200 mb-6">Products</h3>
+              <ul className="space-y-3 text-xs font-bold text-stone-400">
+                <li><Link href="/products" className="hover:text-white transition-colors">Explorer 300</Link></li>
+                <li><Link href="/products" className="hover:text-white transition-colors">Explorer 1000 V2</Link></li>
+                <li><Link href="/products" className="hover:text-white transition-colors">Explorer 2000 V2</Link></li>
+                <li><Link href="/products" className="hover:text-white transition-colors">Homepower 3600 Plus</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-extrabold uppercase tracking-widest text-stone-200 mb-6">Support</h3>
+              <ul className="space-y-3 text-xs font-bold text-stone-400">
+                <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition-colors">FAQ & Support</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
+                <li><Link href="/about" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/about" className="hover:text-white transition-colors">Terms of Service</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-extrabold uppercase tracking-widest text-stone-200 mb-6">Connect</h3>
+              <div className="flex items-center gap-3 mb-6">
+                {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
+                  <a key={i} href="#" className="rounded-xl bg-stone-800/60 p-2.5 text-stone-400 hover:bg-orange-500/20 hover:text-orange-400 transition-colors">
+                    <Icon className="w-4 h-4" />
+                  </a>
+                ))}
+              </div>
+              <p className="text-[11px] leading-relaxed text-stone-500 font-medium">
+                Official store deal directory & Amazon Associate partner. Direct outbound links to verified store offers.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-12 border-t border-stone-800/60 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-stone-500">
+            <p>Copyright © {currentYear} – {settings.site_name || 'Jackery'}, All rights reserved.</p>
+            <div className="flex items-center gap-6 text-stone-400">
+              <span className="flex items-center gap-1.5 text-orange-400 font-semibold">
+                <ShieldCheck className="w-4 h-4" /> Secure & Trusted Official Portal
+              </span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    );
+  }
 
   return (
     <footer id="site-footer" className="bg-gray-950 text-gray-300">
